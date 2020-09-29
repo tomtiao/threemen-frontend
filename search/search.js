@@ -32,20 +32,29 @@ function goBack() {
     go_back_btn.addEventListener('click', () => history.back());
 }
 
+function mobi() {
+    document.querySelector('.catagory_btn')
+    .addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        document.querySelector('.catagory_list.list')
+        .classList.toggle('show');
+    })
+    document.querySelector('.catagory_list')
+    .addEventListener('click', e => {
+        e.stopPropagation();
+    });
+    document.body.addEventListener('click', e => {
+        const list = document.querySelector('.catagory_list');
+        if (list.classList.contains('show')) {
+            list.classList.remove('show');
+        }
+    });
+}
+
 onload = () => {
     filterHandler();
     toTop();
     goBack();
-}
-
-function drag() {
-    let list_wrappers = document.querySelectorAll('.list_wrapper');
-
-    for (let wrapper of list_wrappers) {
-        wrapper.addEventListener('mousedown', e => {
-            if (e.target.tagName === 'UL') {
-                console.log('')
-            }
-        })
-    }
-}
+    mobi();
+};

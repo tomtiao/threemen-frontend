@@ -7,13 +7,15 @@
     <title>我要接单</title>
     <link rel="stylesheet" href="/style/normalize.css">
     <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="search_mobi.css">
     <script src="search.js"></script>
 </head>
 
 <body>
     <noscript>
         <p>
-            请打开Javascript以正常使用。<a href="https://support.microsoft.com/zh-cn/help/3135465/how-to-enable-javascript-in-windows">如何打开Javascript?</a>
+            请打开Javascript以正常使用。<a
+                href="https://support.microsoft.com/zh-cn/help/3135465/how-to-enable-javascript-in-windows">如何打开Javascript?</a>
         </p>
     </noscript>
     <h1 class="visually_hidden page_title">我要接单</h1>
@@ -28,38 +30,41 @@
             <h1 class="visually_hidden filter_title">筛选</h1>
             <div class="area filter_block">
                 <h2 class="area_title block_title">地区</h2>
-                <div class="list_wrapper">
-                    <ul class="area_list list">
-                        <li class="list_item"><button class="list_btn active">所有</button></li>
-                        <li class="list_item"><button class="list_btn">南苑</button></li>
-                        <li class="list_item"><button class="list_btn">北苑</button></li>
-                    </ul>
-                </div>
+                <ul class="area_list list">
+                    <li class="list_item"><button class="list_btn active">所有</button></li>
+                    <li class="list_item"><button class="list_btn">南苑</button></li>
+                    <li class="list_item"><button class="list_btn">北苑</button></li>
+                </ul>
             </div>
             <div class="catagory filter_block">
                 <h2 class="area_title block_title">类别</h2>
-                <div class="list_wrapper">
-                    <ul class="catagory_list list">
-                        <li class="list_item"><button class="list_btn active">所有</button></li>
-                        <li class="list_item"><button class="list_btn">饭堂送餐</button></li>
-                        <li class="list_item"><button class="list_btn">超市代购</button></li>
-                        <li class="list_item"><button class="list_btn">快递代取</button></li>
-                        <li class="list_item"><button class="list_btn">资料打印</button></li>
-                        <li class="list_item"><button class="list_btn">广金学工</button></li>
-                    </ul>
-                </div>
+                <ul class="catagory_list list">
+                    <li class="list_item"><button class="list_btn active">所有</button></li>
+                    <li class="list_item"><button class="list_btn">饭堂送餐</button></li>
+                    <li class="list_item"><button class="list_btn">超市代购</button></li>
+                    <li class="list_item"><button class="list_btn">快递代取</button></li>
+                    <li class="list_item"><button class="list_btn">资料打印</button></li>
+                    <li class="list_item"><button class="list_btn">广金学工</button></li>
+                </ul>
+                <button name="catagory_btn" class="catagory_btn btn">点我显示列表</button>
+                <!-- <select name="catagory" id="catagory-select">
+                    <option value="all">所有</option>
+                    <option value="food_deliv">饭堂送餐</option>
+                    <option value="all">超市代购</option>
+                    <option value="all">快递代取</option>
+                    <option value="all">资料打印</option>
+                    <option value="all">广金学工</option>
+                </select> -->
             </div>
         </section>
         <section class="sort">
             <h1 class="visually_hidden sort_title">排序</h1>
             <div class="sort_block">
-                <div class="list_wrapper">
-                    <ul class="sort_list list">
-                        <li class="list_item"><button class="list_btn active">最近发布</button></li>
-                        <li class="list_item"><button class="list_btn">积分最高</button></li>
-                        <li class="list_item"><button class="list_btn">关注最多</button></li>
-                    </ul>
-                </div>
+                <ul class="sort_list list">
+                    <li class="list_item"><button class="list_btn active">最近发布</button></li>
+                    <li class="list_item"><button class="list_btn">积分最高</button></li>
+                    <li class="list_item"><button class="list_btn">关注最多</button></li>
+                </ul>
             </div>
         </section>
 
@@ -76,6 +81,7 @@
                             <div class="revenue certified"><span class="num_decorated">666</span>积分</div>
                         </a>
                     </li>
+                    <li style="height: 1000px; width: 100%; background-color: aqua;"></li>
                 </ul>
             </div>
         </section>
