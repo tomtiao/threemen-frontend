@@ -1,0 +1,41 @@
+@media (max-width: 1200px) {
+    .side_slider {
+        width: 240px;
+    }
+
+    .login_panel {
+        margin-left: 240px;
+    }
+}
+
+@media (max-width: 1000px) {    
+    .logo {
+        position: relative;
+    }
+
+    .side_slider {
+        display: none;
+    }
+
+    .login_panel {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 580px) {
+    .login_panel {
+        width: 320px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login_panel {
+        padding: 50px;
+    }
+}
+
+@media (max-width: 380px) {
+    .login_panel {
+        padding: 50px 25px;
+    }
+}

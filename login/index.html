@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="/style/normalize.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="login_dynamic.css">
+</head>
+
+<body>
+    <a href="#" class="logo">
+        <img class="logo_img" src="/static/img/three_man.png" alt="Three men">
+    </a>
+    <div class="side_slider" style="background-image: url('/static/img/login/1.jpg');"></div>
+    <div class="login_panel">
+        <h1 class="page_title">欢迎登录平台</h1>
+        <h2 class="page_second_title">每一天，乐在服务。</h2>
+        <form method="POST" class="form">
+            <label for="account" class="account_label label">用户名
+                <input class="account_input input" type="text" name="account" id="account" autocomplete="username">
+            </label>
+            <label for="password" class="password_label label">密码
+                <input class="password_input input" type="password" name="password" id="password"
+                    autocomplete="new-password">
+            </label>
+            <input type="checkbox" id="autologin">
+            <label class="autologin_label" for="autologin">记住我</label>
+            <button type="submit" class="submit_btn">立即登录</button>
+            <a href="#" class="forget">忘记密码</a>
+        </form>
+        <a href="/register">注册账号</a>
+    </div>
+    <script src="slider.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

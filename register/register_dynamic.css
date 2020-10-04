@@ -1,0 +1,41 @@
+@media (max-width: 1200px) {
+    .side_slider {
+        width: 240px;
+    }
+
+    .register_panel {
+        margin-left: 240px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .logo {
+        position: relative;
+    }
+    
+    .side_slider {
+        display: none;
+    }
+
+    .register_panel {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 580px) {
+    .register_panel {
+        width: 320px;
+    }
+}
+
+@media (max-width: 480px) {
+    .register_panel {
+        padding: 50px;
+    }
+}
+
+@media (max-width: 380px) {
+    .register_panel {
+        padding: 50px 25px;
+    }
+}

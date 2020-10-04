@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="/style/normalize.css">
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="register_dynamic.css">
+</head>
+
+<body>
+    <a href="#" class="logo">
+        <img class="logo_img" src="/static/img/three_man.png" alt="Three men">
+    </a>
+    <div class="side_slider"></div>
+    <div class="register_panel">
+        <h1 class="page_title">欢迎注册平台</h1>
+        <h2 class="page_second_title">每一天，乐在服务。</h2>
+        <form method="POST" class="form">
+            <label for="account" class="account_label label">用户名
+                <input class="account_input input" type="text" name="account" id="account" autocomplete="username">
+            </label>
+            <label for="password" class="password_label label">密码
+                <input class="password_input input" type="password" name="password" id="password"
+                    autocomplete="new-password">
+            </label>
+            <label for="nickname" class="nickname_label label">昵称
+                <input class="nickname_input input" type="text" name="nickname" id="nickname" autocomplete="off">
+            </label>
+            <label for="email" class="email_label label">邮箱地址
+                <input class="email_input input" type="email" name="email" id="email" autocomplete="email">
+            </label>
+            <label for="authCode" class="authCode_label label">授权码
+                <input class="authCode_input input" type="text" name="authCode" id="authCode" autocomplete="off">
+            </label>
+            <button type="submit" class="submit_btn">立即注册</button>
+            <!-- <div class="agreement">
+                <input type="checkbox" id="agreement">
+                <label class="agreement_label" for="agreement">我已阅读并同意相关服务条款和隐私政策</label>
+                <button type="button" class="more_btn">展开</button>
+                <ul class="more_info_list">
+                    <li class="list_item">
+                        <a href="#" class="info_link">1</a></li>
+                    <li class="list_item">
+                        <a href="#" class="info_link">2</a></li>
+                    <li class="list_item">
+                        <a href="#" class="info_link">3</a></li>
+                </ul>
+            </div> -->
+        </form>
+        <a href="/login">登陆账号</a>
+    </div>
+    <script src="slider.js"></script>
+    <script src="register.js"></script>
+</body>
+
+</html>
