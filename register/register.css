@@ -105,8 +105,7 @@ body {
     line-height: 2;
 }
 
-.agreement_label {
-    color: #aaa;
-    font-size: 13px;
-    line-height: 30px;
+.securityCode_img {
+    height: 32px;
+    cursor: pointer;
 }
