@@ -34,16 +34,16 @@ function goBack() {
 
 function mobi() {
     document.querySelector('.catagory_btn')
-    .addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        document.querySelector('.catagory_list.list')
-        .classList.toggle('show');
-    })
+        .addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            document.querySelector('.catagory_list.list')
+                .classList.toggle('show');
+        })
     document.querySelector('.catagory_list')
-    .addEventListener('click', e => {
-        e.stopPropagation();
-    });
+        .addEventListener('click', e => {
+            e.stopPropagation();
+        });
     document.body.addEventListener('click', e => {
         const list = document.querySelector('.catagory_list');
         if (list.classList.contains('show')) {
@@ -52,9 +52,44 @@ function mobi() {
     });
 }
 
-onload = () => {
+function makeRequest() {
+    function requestQuest() {
+        const requestURL = '/workStudyServlet/showWorkStudy';
+        let request = {
+            currentPage: Math.random() * 10,
+            pageSize: 5
+        };
+
+        return fetch(requestURL, {
+            method: 'POST',
+            body: request
+        })
+            .then(res => res.json());
+    }
+    return requestQuest()
+        .catch(console.log);
+}
+
+function displayResult() {
+    // let response = makeRequest();
+    let response = {
+        currentPage: Math.random() * 10,
+        pageSize: 5,
+        totalPage: 10,
+        totalCount: 50,
+        WorkStudyInfo: {
+            // 'location': location,
+            fixSeat: Math.random() * 10,
+            temSeat: Math.random() * 10
+        }
+    };
+    
+}
+
+window.addEventListener('load', () => {
     filterHandler();
     toTop();
     goBack();
     mobi();
-};
+    makeRequest();
+});

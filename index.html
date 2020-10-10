@@ -72,7 +72,39 @@
         <h2 class="section_title visually_hidden">区域选择</h2>
         <button class="section_btn">功能</button>
         <button class="section_btn">订单</button>
-        <button class="section_btn">我</button>
+        <button class="section_btn me">我</button>
     </div>
+
+    <script>
+        function checkIfLogon() {
+            const requestURL = '/user/findUserCookie';
+            return fetch(requestURL, {
+                method: 'POST'
+            })
+            .then(res => res.json());
+        }
+        function goTo() {
+            let section = document.querySelector('.section');
+            section.addEventListener('click', e => {
+                if (e.target.tagName === 'BUTTON') {
+                    switch (e.target.className) {
+                        case 'section_btn':
+                            break;
+                        case 'section_btn me':
+                            location.assign('/me');
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            })
+        }
+        window.addEventListener('load', e => {
+            checkIfLogon()
+            .then(console.log)
+            .catch(console.log);
+            goTo();
+        });
+    </script>
 </body>
 </html>

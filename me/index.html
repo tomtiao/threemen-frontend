@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/normalize.css">
+    <title>我的</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            height: 32px;
+        }
+
+        .content {
+            margin-top: 32px;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <button class="go_back">返回</button>
+        占位符
+    </header>
+    <main class="content">
+        <div class="detail">
+            <div class="avatar">
+                <img src="#" alt="My avatar" class="avatar_img">
+                <div class="mask"></div>
+            </div>
+            <p class="nickname">你好，昵称占位符！<button class="edit">修改昵称</button></p>
+            <p class="level">等级X</p>
+            <p class="coin">金币X</p>
+        </div>
+        <div class="more_info">
+            <div class="info_wrapper">
+                <p class="username">账号占位符</p>
+                <p class="email">邮箱占位符</p>
+                <p class="college">院占位符</p>
+                <p class="dept">系占位符</p>
+                <p class="dorm">X苑X栋</p>
+            </div>
+        </div>
+        <div class="action">
+            <button type="button" class="reset_passwd">修改密码</button>
+            <button type="button" class="working_me">打工的我</button>
+            <button type="button" class="want_work">我要兼职</button>
+        </div>
+    </main>
+    <div class="reset_panel">
+        <h1 class="panel_title">修改密码</h1>
+        <form action="#" method="post" class="reset">
+            <label for="old">旧密码</label>
+            <input type="password" name="old" id="old">
+            <label for="new">新密码</label>
+            <input type="password" name="new" id="new">
+            <label for="new">重复新密码</label>
+            <input type="password" name="new" id="new">
+            <button type="submit" class="reset_passwd_btn">好</button>
+        </form>
+    </div>
+    <div class="working_me">
+        <div class="detail">
+            <div class="avatar">
+                <img src="#" alt="My avatar" class="avatar_img">
+                <div class="mask"></div>
+            </div>
+            <p class="nickname">你好，昵称占位符！<button class="edit">修改昵称</button></p>
+            <p class="rating">分数X</p>
+            <p class="medal">勋章X</p>
+        </div>
+        <div class="more_info">
+            <div class="info_wrapper">
+                <p class="username">账号占位符</p>
+                <p class="name">姓名占位符</p>
+                <p class="id">学号占位符</p>
+            </div>
+        </div>
+    </div>
+    <div class="want_work">
+        <div class="more_info">
+            <div class="info_wrapper">
+                <p class="name">姓名占位符</p>
+                <p class="id">学号占位符</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function goBack() {
+            let go_back_btn = document.querySelector('.go_back');
+            go_back_btn.addEventListener('click', () => history.back());
+        }
+
+        function resetPasswd() {
+            const show_reset_btn = document.querySelector('.reset_passwd');
+            show_reset_btn.addEventListener('click', e => {
+                // show reset panel
+            });
+            const reset_submit_btn = document.querySelector('.reset_passwd_btn');
+            reset_submit_btn.addEventListener('click', e => {
+                // submit reset passwd
+                e.preventDefault();
+            });
+        }
+
+        function checkIfLogon() {
+            
+        }
+
+        window.addEventListener('load', () => {
+            goBack();
+            resetPasswd();
+            checkIfLogon();
+        });
+    </script>
+</body>
+
+</html>
