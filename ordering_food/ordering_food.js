@@ -1,26 +1,26 @@
-function filterHandler() {
-    let lists = document.querySelectorAll('.list');
-    let btns = document.querySelectorAll('.list_btn');
-    // handle bubble from btn
-    for (let list of lists) {
-        list.addEventListener('click', e => {
-            e.preventDefault();
-            if (e.target.tagName === 'BUTTON') {
-                if (!e.target.classList.contains('active')) {
-                    e.target.classList.add('active');
-                }
-                for (let btn of btns) {
-                    // remove class 'active' from other buttons in the same group
-                    if (btn.classList.contains('active') &&
-                        btn !== e.target &&
-                        btn.parentNode.parentNode === e.target.parentNode.parentNode) {
-                        btn.classList.remove('active');
-                    }
-                }
-            }
-        });
-    }
-}
+// function filterHandler() {
+//     let lists = document.querySelectorAll('.list');
+//     let btns = document.querySelectorAll('.list_btn');
+//     // handle bubble from btn
+//     for (let list of lists) {
+//         list.addEventListener('click', e => {
+//             e.preventDefault();
+//             if (e.target.tagName === 'BUTTON') {
+//                 if (!e.target.classList.contains('active')) {
+//                     e.target.classList.add('active');
+//                 }
+//                 for (let btn of btns) {
+//                     // remove class 'active' from other buttons in the same group
+//                     if (btn.classList.contains('active') &&
+//                         btn !== e.target &&
+//                         btn.parentNode.parentNode === e.target.parentNode.parentNode) {
+//                         btn.classList.remove('active');
+//                     }
+//                 }
+//             }
+//         });
+//     }
+// }
 
 function toTop() {
     let to_top_btn = document.querySelector('.to_top');
@@ -33,7 +33,7 @@ function goBack() {
 }
 
 window.addEventListener('load', () => {
-    filterHandler();
+    // filterHandler();
     toTop();
     goBack();
 });

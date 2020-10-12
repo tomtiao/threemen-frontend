@@ -67,6 +67,13 @@ body {
     box-sizing: border-box;
 }
 
+.input:focus {
+    border-color: #549df8;
+}
+
+.input:invalid {
+    border-color: #ff5b5b;
+}
 
 .submit_btn {
     color: white;
@@ -79,7 +86,7 @@ body {
     border: 1px #3083ff solid;
     box-shadow: 0 5px 8px 0 rgba(24,95,255,.1);
     font-size: 24px;
-    font-weight: lighter;
+    font-weight: normal;
 }
 
 .submit_btn:hover, .submit_btn:focus {
@@ -106,6 +113,7 @@ body {
 }
 
 .securityCode_img {
+    margin: 1rem 0;
     height: 32px;
     cursor: pointer;
 }

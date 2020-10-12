@@ -16,7 +16,7 @@ function submitHandler() {
         if (e.target === submit_btn) {
             e.preventDefault();
             submit()
-                .then(console.log)
+                .then(console.log) // TODO: 处理返回值
                 .catch(console.log);
         }
     });
@@ -35,7 +35,7 @@ function verificationCodeHandler() {
     getVerificationCode(verificationCodeImg);
 }
 
-window.addEventListener('load', () => {
+addEventListener('load', () => {
     submitHandler();
     verificationCodeHandler();
 });

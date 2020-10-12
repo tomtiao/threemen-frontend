@@ -17,6 +17,7 @@ function filterHandler() {
                         btn.classList.remove('active');
                     }
                 }
+                // TODO: 发送过滤条件
             }
         });
     }
