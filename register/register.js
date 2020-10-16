@@ -10,14 +10,18 @@ function submitHandler() {
             method: 'POST',
             body: form_data
         })
-            .then(res => res.json());
+            .then(res => res.json())
+            .catch(console.log);
     };
     form_self.addEventListener('click', e => {
         if (e.target === submit_btn) {
             e.preventDefault();
             submit()
-                .then(console.log) // TODO: 处理返回值
-                .catch(console.log);
+                .then(data => {
+                    if (data['flag']) {
+                        history.replaceState('/');
+                    }
+                }); // TODO: 处理返回值
         }
     });
 }

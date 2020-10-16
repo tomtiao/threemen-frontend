@@ -20,20 +20,20 @@
         <h2 class="page_second_title">每一天，乐在服务。</h2>
         <form method="POST" class="form">
             <label for="account" class="account_label label">用户名
-                <input class="account_input input" type="text" name="account" id="account" autocomplete="username">
+                <input class="account_input input" type="text" name="account" id="account" autocomplete="username" required>
             </label>
             <label for="password" class="password_label label">密码
                 <input class="password_input input" type="password" name="password" id="password"
-                    autocomplete="new-password">
+                    autocomplete="new-password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8, 20}$" required>
             </label>
             <label for="nickname" class="nickname_label label">昵称
-                <input class="nickname_input input" type="text" name="nickname" id="nickname" autocomplete="off">
+                <input class="nickname_input input" type="text" name="nickname" id="nickname" autocomplete="nickname" required>
             </label>
             <label for="email" class="email_label label">邮箱地址
-                <input class="email_input input" type="email" name="email" id="email" autocomplete="email">
+                <input class="email_input input" type="email" name="email" id="email" autocomplete="email" required>
             </label>
             <label for="securityCode" class="securityCode_label label">验证码
-                <input maxlength="6" class="securityCode_input input" type="text" name="securityCode" id="securityCode" autocomplete="off">
+                <input maxlength="6" class="securityCode_input input" type="text" name="securityCode" id="securityCode" autocomplete="off" required>
                 <img src="#" alt="Verification Code" class="securityCode_img">
             </label>
             <button type="submit" class="submit_btn">立即注册</button>

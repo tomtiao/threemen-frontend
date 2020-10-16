@@ -20,7 +20,11 @@ function submitHandler() {
     form_self.addEventListener('click', e => {
         if (e.target === submit_btn) {
             e.preventDefault();
-            submit().then(console.log); // TODO: 处理返回值
+            submit().then(data => {
+                if (data['flag']) {
+                    history.replaceState('/');
+                }
+            }); // TODO: 处理返回值
         }
     });
 }
