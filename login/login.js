@@ -22,7 +22,7 @@ function submitHandler() {
             e.preventDefault();
             submit().then(data => {
                 if (data['flag']) {
-                    history.replaceState('/');
+                    location.replace('/');
                 }
             }); // TODO: 处理返回值
         }

@@ -1,41 +1,67 @@
-@media (max-width: 1200px) {
-    .side_slider {
-        width: 240px;
+@media (max-width: 1600px) {
+    .card {
+        max-width: 1300px;
+    }
+    
+    .register_panel {
+        padding: 64px 80px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .card {
+        max-width: 1000px;
     }
 
     .register_panel {
-        margin-left: 240px;
+        padding: 54px 72px;
     }
 }
 
 @media (max-width: 1000px) {
-    .logo {
-        position: relative;
-    }
-    
-    .side_slider {
-        display: none;
+    .card {
+        max-width: 800px;
+        font-size: 14px;
     }
 
     .register_panel {
-        margin-left: 0;
+        width: 65%;
+        padding: 24px 54px;
+    }
+
+    .slider_wrapper {
+        width: 35%;
     }
 }
 
-@media (max-width: 580px) {
+@media (max-width: 800px) {
+    .card {
+        max-width: 480px;
+        font-size: 12px;
+    }
+
     .register_panel {
-        width: 320px;
+        padding: 18px 40px;
+        width: 100%;
+    }
+
+    .slider_wrapper {
+        width: 0;
     }
 }
 
 @media (max-width: 480px) {
-    .register_panel {
-        padding: 50px;
+    .card {
+        max-width: 320px;
+        font-size: 8px;
     }
-}
 
-@media (max-width: 380px) {
     .register_panel {
-        padding: 50px 25px;
+        padding: 12px 20px;
+        width: 100%;
+    }
+
+    .slider_wrapper {
+        display: none;
     }
 }
