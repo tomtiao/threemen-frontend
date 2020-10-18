@@ -1,7 +1,7 @@
 function accountHandler() {
     // 已登录返回true，未登录返回false，错误返回undefined
     function checkIfLogon() {
-        const requestURL = '/user/saveLogin';
+        const requestURL = '/user/findUserCookie';
 
         return fetch(requestURL, {
             method: "POST"
