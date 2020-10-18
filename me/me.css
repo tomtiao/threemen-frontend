@@ -1,0 +1,21 @@
+.visually_hidden {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+body {
+    margin: 0;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 32px;
+}
+
+.content {
+    margin-top: 32px;
+    padding: 0.5rem;
+}

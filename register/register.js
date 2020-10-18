@@ -6,9 +6,15 @@ function submitHandler() {
         submitCheck();
         const requestURL = '/user/register';
         let form_data = new FormData(form_self);
+        let url_params = new URLSearchParams();
+
+        for (let pair of form_data) {
+            url_params.append(pair[0], pair[1]);
+        }
+
         return fetch(requestURL, {
             method: 'POST',
-            body: form_data
+            body: url_params
         })
             .then(res => res.json())
             .catch(console.log);

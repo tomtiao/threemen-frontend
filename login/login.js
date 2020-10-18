@@ -9,10 +9,15 @@ function submitHandler() {
         if (submitCheck()) {
             const requestURL = '/user/login';
             let form_data = new FormData(form_self);
+            let url_params = new URLSearchParams();
+
+            for (let pair of form_data) {
+                url_params.append(pair[0], pair[1]);
+            }
     
             return fetch(requestURL, {
                 method: 'POST',
-                body: form_data
+                body: url_params
             }).then(res => res.json()).catch(console.log);
         }
     }
@@ -23,6 +28,9 @@ function submitHandler() {
             submit().then(data => {
                 if (data['flag']) {
                     location.replace('/');
+                } else {
+                    // TODO: 重做提醒
+                    alert()
                 }
             }); // TODO: 处理返回值
         }

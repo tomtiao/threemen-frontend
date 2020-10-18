@@ -14,7 +14,7 @@ header {
     z-index: 2;
     position: fixed;
     top: 0;
-    height: 72px;
+    height: 64px;
     width: 100%;
     background-color: rgba(2,182,253,0.95);
     box-shadow: 0px 2px 20px 0px #666;
@@ -87,7 +87,7 @@ header {
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 8px;
+    height: 4px;
     background-color: #FD4902;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -96,7 +96,7 @@ header {
 .section_list .list_item .item_link:focus,
 .section_list .list_item .item_link:hover {
     color: #eee;
-    background-color: #02B6fd;
+    background-color: #01a5e6;
 }
 
 .section_list .list_item .item_link:focus::after,
@@ -107,6 +107,7 @@ header {
 .account_section {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-left: auto;
     width: 150px;
 }
@@ -123,8 +124,28 @@ header {
     font-size: 14px;
 }
 
+.account_section.hidden {
+    display: none;
+    /* display: flex; */
+}
+
+.account_section.with_avatar .account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 54px;
+    height: 54px;
+    border: 1px solid #666;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.account_section.with_avatar .account .avatar {
+    height: 100%;
+}
+
 .main_wrapper {
-    margin-top: 100px;
+    margin-top: 90px;
 }
 
 .slider {
