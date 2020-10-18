@@ -26,6 +26,10 @@ function submitHandler() {
                 .then(data => {
                     if (data['flag']) {
                         location.replace('/');
+                        // TODO 重写提醒
+                        alert('请打开邮箱进行账户验证。');
+                    } else {
+                        alert(data['errorMsg'] + " 请重试。")
                     }
                 }); // TODO: 处理返回值
         }

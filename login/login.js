@@ -30,7 +30,7 @@ function submitHandler() {
                     location.replace('/');
                 } else {
                     // TODO: 重做提醒
-                    alert()
+                    alert('账号或密码错误，请重新输入。');
                 }
             }); // TODO: 处理返回值
         }

@@ -119,6 +119,10 @@ a:focus, a:hover {
     background-image: linear-gradient(0deg,#3580eb,#2c79eb);
 }
 
+.securityCode_img {
+    margin: 0.5rem 0;
+}
+
 .autologin {
     margin-top: 1rem;
     display: flex;
