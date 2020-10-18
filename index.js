@@ -5,129 +5,182 @@ function checkIfLogon() {
     })
         .then(res => res.json());
 }
-// function goTo() {
-//     let section = document.querySelector('.section');
-//     section.addEventListener('click', e => {
-//         if (e.target.tagName === 'BUTTON') {
-//             switch (e.target.className) {
-//                 case 'section_btn':
-//                     break;
-//                 case 'section_btn me':
-//                     location.assign('/me');
-//                     break;
-//                 default:
-//                     break;
-//             }
-//         }
-//     })
-// }
-function sliderHandler() {
-    const slider_list = document.querySelector('.slider_list');
-    const list_item = document.querySelector('.slider_list .list_item');
 
-    let list_item_width = parseInt(getComputedStyle(list_item).width);
-    let pixel = 0;
-    let changePos = () => {
-        if (pixel <= list_item_width * -2) {
-            pixel = 0;
-        } else {
-            pixel -= list_item_width;
-        }
-        slider_list.style.transform = `translate(${pixel}px)`;
-    };
+function pageBehaviorHandler() {
 
-    let timer;
-    let interval = () => {
-        timer = setInterval(changePos, 5000);
-    };
-    interval();
+    function sliderHandler() {
+        const slider_list = document.querySelector('.slider_list');
+        const list_item = document.querySelector('.slider_list .list_item');
 
-    let timeout;
-    let pause = () => {
-        clearInterval(timer);
-        clearTimeout(timeout);
-    };
+        let list_item_width = parseInt(getComputedStyle(list_item).width);
+        let pixel = 0;
+        let changePos = () => {
+            if (pixel <= list_item_width * -2) {
+                pixel = 0;
+            } else {
+                pixel -= list_item_width;
+            }
+            slider_list.style.transform = `translate(${pixel}px)`;
+        };
 
-    let resume = () => {
-        timeout = setTimeout(() => {
-            interval();
-        }, 500);
-    };
+        let timer;
+        let interval = () => {
+            timer = setInterval(changePos, 5000);
+        };
+        interval();
 
-    const wrapper = document.querySelector('.slider_wrapper');
-    wrapper.addEventListener('mouseenter', pause);
-    wrapper.addEventListener('mouseleave', resume);
+        let timeout;
+        let pause = () => {
+            clearInterval(timer);
+            clearTimeout(timeout);
+        };
 
-    let go_back = () => {
-        if (pixel < 0) {
-            pixel += list_item_width;
-        } else {
-            pixel = list_item_width * -2;
-        }
-        slider_list.style.transform = `translate(${pixel}px)`;
-    };
+        let resume = () => {
+            timeout = setTimeout(() => {
+                interval();
+            }, 500);
+        };
 
-    wrapper.addEventListener('click', e => {
-        if (e.target.tagName === 'BUTTON') {
-            switch (e.target.className) {
-                case 'prev slider_btn':
-                    go_back();
+        const wrapper = document.querySelector('.slider_wrapper');
+        wrapper.addEventListener('mouseenter', pause);
+        wrapper.addEventListener('mouseleave', resume);
+
+        let go_back = () => {
+            if (pixel < 0) {
+                pixel += list_item_width;
+            } else {
+                pixel = list_item_width * -2;
+            }
+            slider_list.style.transform = `translate(${pixel}px)`;
+        };
+
+        wrapper.addEventListener('click', e => {
+            if (e.target.tagName === 'BUTTON') {
+                switch (e.target.className) {
+                    case 'prev slider_btn':
+                        go_back();
+                        break;
+                    case 'next slider_btn':
+                        changePos();
+                        break;
+                    default:
+                        console.log('invalid btn clicked');
+                        break;
+                }
+            }
+        });
+    }
+
+    function hover_main_animate() {
+        let on_hover = e => {
+            const item_img = e.target.parentElement.children[1].children[0];
+            const text_content = e.target.parentElement.children[2];
+            const item_title = e.target.parentElement.children[2].children[0];
+            const item_description = e.target.parentElement.children[2].children[1];
+            switch (e.type) {
+                case 'mouseenter':
+                    item_img.style.transform = 'scale(1.2)';
+                    text_content.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+                    item_title.style.transform = 'translate(0)';
+                    item_description.style.transform = 'translate(0)';
                     break;
-                case 'next slider_btn':
-                    changePos();
+                case 'mouseout':
+                    text_content.removeAttribute('style');
+                    item_img.removeAttribute('style');
+                    item_title.removeAttribute('style');
+                    item_description.removeAttribute('style');
                     break;
                 default:
-                    console.log('invalid btn clicked');
-                    break;
+                    throw `invalid parameter ${e.type}`;
             }
-        }
-    });
-}
+        };
 
-function hover_main_animate() {
-    let main_list_items = {
-        content_list_items: document.querySelectorAll('.content_list .list_item'),
-        aside_list_items: document.querySelectorAll('.aside_list .list_item')
-    };
+        const content_wrapper = document.querySelector('.content_wrapper');
+        // e.target 应该是 a.cover
+        content_wrapper.addEventListener('mouseenter', e => {
+            e.stopPropagation();
+            if (e.target.classList.contains('cover')) {
+                on_hover(e);
+            }
+        }, { capture: true }); // 捕获事件,非冒泡
+        content_wrapper.addEventListener('mouseout', e => {
+            if (e.target.classList.contains('cover')) {
+                on_hover(e);
+            }
+        });
+    }
 
-    function onHover(e) {
-        const item_img = e.currentTarget.children[1].children[0];
-        const item_title = e.currentTarget.children[2].children[0];
-        const item_description = e.currentTarget.children[2].children[1];
-        console.log(e.type);
-        console.log(e.currentTarget);
-        console.log(e.target);
-        switch (e.type) {
-            case 'mouseenter':
-                item_img.style.transform = 'scale(1.2)';
-                item_title.style.transform = 'translate(0)';
-                item_description.style.transform = 'translate(0)';
-                break;
-            case 'mouseout':
-                console.log('should remove style')
-                item_img.removeAttribute('style');
-                item_title.removeAttribute('style');
-                item_description.removeAttribute('style');
-                break;
-            default:
-                throw `invalid parameter ${e.type}`;
-        }
-    };
+    function hover_nav_handler() {
+        const nav = document.querySelector('.aside_info');
+        const header = document.querySelector('header');
+        let nav_offset = nav.offsetTop;
 
-    let obj_keys = Object.keys(main_list_items);
-    obj_keys.forEach((key) => {
-        for (let item of main_list_items[key]) {
-            item.addEventListener('mouseenter', onHover);
-            item.addEventListener('mouseout', onHover);
-        }
-    });
+        let change_nav_style = (scroll_pos) => {
+            if (scroll_pos > nav_offset - parseInt(window.getComputedStyle(header)['height'])) {
+                // nav.style.willChange = 'position, top, right';
+                nav.classList.add('fixed');
+                nav.style.right = nav.parentElement.offsetLeft + 'px';
+            } else {
+                nav.classList.remove('fixed');
+                nav.removeAttribute('style');
+            }
+        };
+
+        let last_known_scroll_position = 0;
+        let ticking = false;
+        let change_by_animation = e => {
+            last_known_scroll_position = window.scrollY;
+
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    change_nav_style(last_known_scroll_position);
+                    ticking = false;
+                });
+
+                ticking = true;
+            }
+        };
+        window.addEventListener('resize', change_by_animation)
+        window.addEventListener('scroll', change_by_animation);
+    }
+
+    function jump_to_section_handler() {
+        const sections = document.querySelectorAll('.section');
+        const header = document.querySelector('header');
+        let tops = [];
+
+        const nav_items = document.querySelectorAll('.aside_list .list_item');
+        sections.forEach((ele, i) => {
+            console.log(ele.offsetTop);
+            nav_items[i].dataset.pos = ele.offsetTop - parseInt(window.getComputedStyle(header)['height']);
+        });
+
+        const content_wrapper = document.querySelector('.content_wrapper');
+        let data_top;
+        // e.target 应是 aside_list 中元素的 a.cover
+        let clicked = e => {
+            if (e.target.parentElement.parentElement.classList.contains('aside_list')) {
+                e.preventDefault();
+                data_top = e.target.parentElement.dataset.pos;
+                console.log(data_top);
+                scrollTo({
+                    top: data_top,
+                    behavior: 'smooth'
+                });
+            }
+        };
+
+        content_wrapper.addEventListener('click', clicked);
+    }
+    sliderHandler();
+    hover_main_animate();
+    hover_nav_handler();
+    jump_to_section_handler();
 }
 
 window.addEventListener('load', e => {
     checkIfLogon()
         .then(console.log)
         .catch(console.log);
-    // goTo();
-    sliderHandler();
-    hover_main_animate();
+    pageBehaviorHandler();
 });
