@@ -63,7 +63,7 @@ function makeRequest() {
 
         return fetch(requestURL, {
             method: 'POST',
-            body: request
+            body: JSON.stringify(request)
         })
             .then(res => res.json());
     }
