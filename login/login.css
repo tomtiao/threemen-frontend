@@ -85,10 +85,18 @@ a:focus, a:hover {
 }
 
 .inline_text {
+    display: flex;
+    align-items: center;
     position: absolute;
     top: 0;
     padding-left: 0.5em;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    line-height: 40px;
+    height: 40px;
+}
+
+.inline_text .text_icon {
+    height: 40%;
 }
 
 .input {
@@ -104,7 +112,7 @@ a:focus, a:hover {
 }
 
 .input:focus {
-    border-color: #549df8;
+    border-color: #328dfc;
 }
 .input + .inline_text {
     transform: translateY(-75%);

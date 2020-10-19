@@ -22,24 +22,39 @@
                 <form method="POST" class="form">
                     <label for="account" class="account_label label">
                         <input class="account_input input" type="text" name="account" id="account" autocomplete="username" required>
-                        <div class="inline_text">账号</div>
+                        <div class="inline_text">
+                            <img src="/static/img/login_register_shared/username.png" alt="username" class="text_icon">
+                            账号
+                        </div>
                     </label>
                     <label for="password" class="password_label label">
                         <input class="password_input input" type="password" name="password" id="password"
-                            autocomplete="new-password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8, 20}$" required>
-                            <div class="inline_text">密码</div>    
+                            autocomplete="new-password" pattern="$^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8, 20}$" title="密码需满足8-20位，且包含大写字母、小写字母以及数字。" required>
+                            <div class="inline_text">
+                                <img src="/static/img/login_register_shared/password.png" alt="password" class="text_icon">
+                                密码
+                            </div>    
                     </label>
                     <label for="nickname" class="nickname_label label">
                         <input class="nickname_input input" type="text" name="nickname" id="nickname" autocomplete="nickname" required>
-                        <div class="inline_text">昵称</div>
+                        <div class="inline_text">
+                            <img src="/static/img/login_register_shared/nickname.png" alt="nickname" class="text_icon">
+                            昵称
+                        </div>
                     </label>
                     <label for="email" class="email_label label">
                         <input class="email_input input" type="email" name="email" id="email" autocomplete="email" required>
-                        <div class="inline_text">邮箱</div>
+                        <div class="inline_text">
+                            <img src="/static/img/login_register_shared/email.png" alt="email" class="text_icon extra_small">
+                            邮箱
+                        </div>
                     </label>
                     <label for="securityCode" class="securityCode_label label">
                         <input maxlength="6" class="securityCode_input input" type="text" name="securityCode" id="securityCode" autocomplete="off" required>
-                        <div class="inline_text">验证码</div>
+                        <div class="inline_text">
+                            <img src="/static/img/login_register_shared/verification_code.png" alt="verification_code" class="text_icon">
+                            验证码
+                        </div>
                     </label>
                     <img src="#" alt="Verification Code" class="securityCode_img">
                     <button type="submit" class="submit_btn">立即注册</button>
