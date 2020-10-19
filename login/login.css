@@ -76,29 +76,47 @@ a:focus, a:hover {
 }
 
 .label {
+    position: relative;
     display: block;
-    margin: 10px 0;
+    margin: 32px 0 16px 0;
     line-height: 40px;
+    height: 40px;
+    
+}
+
+.inline_text {
+    position: absolute;
+    top: 0;
+    padding-left: 0.5em;
+    transition: transform 0.3s ease;
 }
 
 .input {
-    height: 40px;
+    height: 32px;
     width: 100%;
-    padding: 0.5em 1em;
-    border-radius: 4px;
-    border: 1px solid #666;
+    padding: 0.5em 0.5em;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 2px solid #666;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
+    outline: none;
 }
 
 .input:focus {
     border-color: #549df8;
 }
-
-.input:invalid {
-    border-color: #ff5b5b;
+.input + .inline_text {
+    transform: translateY(-75%);
 }
 
+.input:invalid + .inline_text {
+    transform: translateY(0);
+}
+
+.input:invalid:focus + .inline_text {
+    transform: translateY(-75%);
+}
 .submit_btn {
     color: white;
     width: 100%;

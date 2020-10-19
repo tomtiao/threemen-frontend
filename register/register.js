@@ -49,7 +49,22 @@ function verificationCodeHandler() {
     getVerificationCode(verificationCodeImg);
 }
 
+function fixEmailAnimation() {
+    const input = document.querySelector('.email_input');
+    const text = document.querySelector('.email_label .inline_text');
+    input.addEventListener('focus', e => {
+        text.classList.add('active');
+    });
+
+    input.addEventListener('blur', e => {
+        if (input.value === '') {
+            text.classList.remove('active');
+        }
+    });
+}
+
 addEventListener('load', () => {
     submitHandler();
     verificationCodeHandler();
+    fixEmailAnimation();
 });
