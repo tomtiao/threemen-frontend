@@ -2,7 +2,7 @@
 function accountHandler() {
     // 已登录返回true，未登录返回false，错误返回undefined
     function checkIfLogon() {
-        const requestURL = '/user/findUserCookie';
+        const requestURL = '/user/findUser';
 
         return fetch(requestURL, {
             method: "POST",
