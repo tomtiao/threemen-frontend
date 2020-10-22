@@ -2,158 +2,13 @@
     box-sizing: border-box;
 }
 
-a, a:visited {
-    text-decoration: none;
-    color: black;
-}
-
 body {
     background-color: #e1f5f6;
 }
 
-.visually_hidden {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-}
-
-header {
-    position: relative;
-    z-index: 2;
-    position: fixed;
-    top: 0;
-    height: 64px;
-    width: 100%;
-    background-color: rgba(2,182,253,0.95);
-    box-shadow: 0px 2px 20px 0px #666;
-}
-
-.header_wrapper {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    padding: 0 5%;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-.page_title {
-    margin: 0;
-}
-
-.logo {
-    height: 100%;
-    margin-right: auto;
-}
-
-.logo .logo_link {
-    display: block;
-    height: 100%;
-}
-
-.logo_img {
-    height: 100%;
-}
-
-.section_list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    width: 60%;
-    height: 100%;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.section_list .list_item {
-    height: 100%;
-    width: 20%;
-    text-align: center;
-    font-size: 18px;
-}
-
-.section_list .list_item .item_link {
-    color: #333;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    transition: background-color 0.1s ease;
-    font-weight: bold;
-}
-
-.section_list .list_item .item_link::after {
-    content: "";
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 4px;
-    background-color: #FD4902;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.section_list .list_item .item_link:focus,
-.section_list .list_item .item_link:hover {
-    color: #eee;
-    background-color: #01a5e6;
-}
-
-.section_list .list_item .item_link:focus::after,
-.section_list .list_item .item_link:hover::after {
-    opacity: 1;
-}
-
-.account_section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: auto;
-    width: 150px;
-}
-
-.account_section .account_func {
-    color: #02B6FD;
-    display: block;
-    width: 60px;
-    height: 36px;
-    line-height: 36px;
-    text-align: center;
-    border-radius: 16px;
-    background-color: #333;
-    font-size: 14px;
-}
-
-.account_section.hidden {
-    display: none;
-    /* display: flex; */
-}
-
-.account_section.with_avatar .account {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 54px;
-    height: 54px;
-    border: 1px solid #666;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.account_section.with_avatar .account .avatar {
-    height: 100%;
-}
 
 main {
-    margin-top: 80px;
+    margin-top: 64px;
     display: flex;
     justify-content: center;
 }
@@ -162,8 +17,12 @@ main {
     width: 1200px;
     padding: 0.5rem;
     background-color: white;
-    height: calc(100vh - 64px - 80px);
+    height: calc(100vh - 64px - 64px);
     margin-bottom: 64px;
+}
+
+.wrapper form {
+    box-shadow: 0 0 5px 0 #ccc;
 }
 
 .info_wrapper {
@@ -174,8 +33,8 @@ main {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 10px 15px;
-    box-shadow: 0 -5px 15px 0 #ccc;
+    padding: 20px 15px 0;
+    
 }
 
 .address_section .detail_address {
@@ -185,23 +44,35 @@ main {
 }
 
 .additional_info {
-    padding: 0.5rem;
+    padding: 0.5rem 1.5rem;
     flex: 1 0 auto;
+    margin-right: 32px;
 }
 
 .info_item {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
+    height: 60px;
     width: 100%;
+    margin: 0 0.5em;
 }
 
 .note_wrapper {
     display: flex;
     flex-direction: column;
-    flex: 1 0 auto;
-    padding: 0.5rem;
+    flex: 2 0 auto;
+    padding: 0.5rem 1.5rem;
+}
+
+.info_item .label_wrapper {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0 0.25em;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), color 0.3s ease;
 }
 
 .note_wrapper .note_label_wrapper {
@@ -214,7 +85,18 @@ main {
 
 .note_wrapper textarea {
     resize: none;
-    height: 100px;
+    height: 104px;
+    padding: 0.5em;
+    outline: none;
+    border: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.note_wrapper textarea:focus {
+    border-color: #71c9ce;
 }
 
 .info_item:last-child {
@@ -224,7 +106,7 @@ main {
 .info_label {
     display: block;
     margin-right: auto;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .item_img {
@@ -240,8 +122,35 @@ main {
     padding: 0.5em 0.5em;
     border-radius: 0;
     border: 0;
+    border-bottom: 2px solid #eee;
     box-sizing: border-box;
     outline: none;
+    transition: border-bottom-color 0.3s ease, color 0.3s ease;
+}
+
+.info_item input[type = text]:invalid + .label_wrapper,
+.info_item input[type = tel]:invalid + .label_wrapper {
+    transform: translateY(0);
+}
+
+.info_item input[type = text]:focus, .info_item input[type = tel]:focus {
+    border-bottom-color: #71c9ce;
+}
+
+.info_item input[type = text] + .label_wrapper,
+.info_item input[type = tel] + .label_wrapper {
+    transform: translateY(-45%);
+}
+
+.info_item input[type = text]:invalid:focus + .label_wrapper,
+.info_item input[type = tel]:invalid:focus + .label_wrapper {
+    transform: translateY(-45%);
+    color: #71c9ce;
+}
+
+.info_item input[type = text]:focus + .label_wrapper,
+.info_item input[type = tel]:focus + .label_wrapper {
+    color: #71c9ce;
 }
 
 .info_item input[type = radio] {
@@ -251,12 +160,13 @@ main {
 .func {
     width: 100%;
     padding: 0 0.5em;
+    margin-top: 0.5em;
 }
 
 .func_item {
     height: 50px;
     width: 100%;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #eee;
 }
 
 .func_item .link_block {
@@ -283,8 +193,7 @@ main {
 .action_bar .counter {
     display: flex;
     align-items: center;
-    margin-right: auto;
-    margin-left: 0.5em;
+    margin-right: 1em;
 }
 
 .action_bar .counter .counter_label {
@@ -300,4 +209,14 @@ main {
     font-size: 16px;
     box-shadow: 0 5px 5px 0 #ccc;
     margin-right: 0.5em;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.action_bar .checkin .checkin_btn:hover {
+    background-color: #52A4B1;
+}
+
+.action_bar .checkin .checkin_btn:focus {
+    background-color: #388094;
 }

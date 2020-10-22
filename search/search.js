@@ -82,14 +82,14 @@ function displayResult() {
 
     function changePage(info_array) {
         const info_list = document.querySelector('.info_list');
-        // expected info array
+        // expected info object
         function updateList(info_o) {
             let new_info_item = document.createElement('li');
             new_info_item.classList.add('list_item');
 
             let new_info_title = document.createElement('h1');
             new_info_title.classList.add('item_title');
-            new_info_title.textContent = info_o['position'];
+            new_info_title.textContent = info_o['location'];
 
             let new_second_list = document.createElement('ul');
             new_second_list.classList.add('item_brief');
@@ -100,8 +100,10 @@ function displayResult() {
 
             new_second_list.append(new_second_list_item);
 
-            new_second_list_item.textContent = info_o['temSeat'];
-            new_second_list.append(new_second_list_item);
+            let new_second_list_item_copied = new_second_list_item.cloneNode(true);
+            new_second_list_item_copied.textContent = info_o['temSeat'];
+
+            new_second_list.append(new_second_list_item_copied);
 
             new_info_item.append(new_info_title, new_second_list);
 
@@ -116,13 +118,13 @@ function displayResult() {
 
         clearList();
         for (let info_o of info_array) {
-            updateList(info_o);
+            updateList(info_o['workStudyInfo']);
         }
     }
 
     let currentPage = 1;
     let totalPage;
-    function clickBtnHandler(info_array) {
+    function clickBtnHandler() {
         function listenPageList() {
             // param expects li
             let activeBtn = (list_item) => {
@@ -137,32 +139,49 @@ function displayResult() {
                 }
             };
 
+            let findSpecificPageBtn = (page) => {
+                let res;
+                for (let ele of list.children) {
+                    if (ele.tagName === 'LI' && parseInt(ele.firstElementChild.dataset.page) === page) {
+                        res = ele;
+                        break;
+                    }
+                }
+
+                return res;
+            }
+
             list.addEventListener('click', e => {
                 if (e.target.tagName === 'BUTTON') {
                     switch (e.target.parentNode.className) {
                         case 'list_item prev_page':
                             if (currentPage !== 1) {
                                 currentPage--;
-                                console.log(currentPage);
-                                changePage(info_array);
+                                activeBtn(findSpecificPageBtn(currentPage));
+                                makeRequest().then(data_obj => {
+                                    changePage(data_obj['WorkStudyInfo']);
+                                });
                             } else {
-                                console.log('已经是首页了！');
+                                setTimeout(alert('已经是首页了！'));
                             }
                             break;
                         case 'list_item next_page':
                             if (currentPage != totalPage) {
                                 currentPage++;
-                                console.log(currentPage);
-                                changePage(info_array);
+                                activeBtn(findSpecificPageBtn(currentPage));
+                                makeRequest().then(data_obj => {
+                                    changePage(data_obj['WorkStudyInfo']);
+                                });
                             } else {
-                                console.log('已经是尾页了！');
+                                setTimeout(alert('已经是尾页了！'));
                             }
                             break;
                         default:
                             currentPage = e.target.dataset.page;
-                            console.log(currentPage);
                             activeBtn(e.target.parentNode);
-                            changePage(info_array);
+                            makeRequest().then(data_obj => {
+                                changePage(data_obj['WorkStudyInfo']);
+                            });
                             break;
                     }
                 }
@@ -181,15 +200,15 @@ function displayResult() {
             content: ""
         };
 
-        let form_data = new FormData();
+        let urlParams = new URLSearchParams();
         let key = Object.keys(request);
         key.forEach((key) => {
-            form_data.append(key, request[key]);
+            urlParams.append(key, request[key]);
         })
 
         return fetch(requestURL, {
             method: 'POST',
-            body: form_data,
+            body: urlParams,
             credentials: "same-origin"
         })
             .then(res => res.json()).catch(console.log);
@@ -197,29 +216,29 @@ function displayResult() {
 
     let data = makeRequest();
     data.then(data_obj => {
-        let obj = data_obj;
-        // initPageList(obj['totalPage']);
-        totalPage = obj['totalPage'];
-        initPageList(10);
-        currentPage = obj['currentPage'];
+        totalPage = data_obj['totalPage'];
+        initPageList(totalPage);
+        // initPageList(10);
+        currentPage = data_obj['currentPage'];
+        changePage(data_obj['WorkStudyInfo']);
         // 设置第一页按钮样式
         document.querySelector('.select_page_list .list_item:not(.prev_page) .list_btn')
             .classList.add('active');
-        clickBtnHandler(obj['WorkStudyInfo']);
+        clickBtnHandler();
     });
 
 
 }
 
-function displayResult() {
-    makeRequest();
-    totalPage;
-    initPageList();
-    currentPage;
-    listenPageList();
-    changePage();
-    updateList();
-}
+// function displayResult() {
+//     obj = makeRequest();
+//     totalPage;
+//     initPageList();
+//     currentPage;
+//     listenPageList();
+//     changePage();
+//     updateList();
+// }
 
 window.addEventListener('load', () => {
     // filterHandler();

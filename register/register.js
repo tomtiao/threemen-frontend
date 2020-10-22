@@ -1,9 +1,18 @@
+"use strict";
 function submitHandler() {
     const form_self = document.querySelector('.form');
     const submit_btn = document.querySelector('.submit_btn');
-    function submitCheck() { }
+    function submitCheck() {
+        if (document.getElementById('account').value != ''
+            && document.getElementById('password').value != '') {
+            return true;
+        } else {
+            setTimeout(alert('账号和密码不能为空！'));
+            return false;
+        }
+    }
+
     function submit() {
-        submitCheck();
         const requestURL = '/user/register';
         let form_data = new FormData(form_self);
         let url_params = new URLSearchParams();
@@ -14,7 +23,8 @@ function submitHandler() {
 
         return fetch(requestURL, {
             method: 'POST',
-            body: url_params
+            body: url_params,
+            credentials: "same-origin"
         })
             .then(res => res.json())
             .catch(console.log);
@@ -22,16 +32,18 @@ function submitHandler() {
     form_self.addEventListener('click', e => {
         if (e.target === submit_btn) {
             e.preventDefault();
-            submit()
+            if (submitCheck()) {
+                submit()
                 .then(data => {
                     if (data['flag']) {
                         location.replace('/');
                         // TODO 重写提醒
-                        alert('请打开邮箱进行账户验证。');
+                        setTimeout(alert('注册成功！请登录邮箱进行账户验证。'));
                     } else {
-                        alert(data['errorMsg'] + " 请重试。")
+                        setTimeout(alert(data['errorMsg'] + " 请重试。"));
                     }
                 }); // TODO: 处理返回值
+            }
         }
     });
 }

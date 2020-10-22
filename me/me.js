@@ -1,15 +1,9 @@
-function makeRequest(url, custom) {
-    if (custom) {
-        return fetch(url, custom);
-    } else {
-        return fetch(url, {
-            method: 'POST'
-        });
-    }
-}
-
+"use strict";
 function getUserInfo(url) {
-    return makeRequest(url).then(res => res.json()).catch(console.log);
+    return fetch(url, {
+        method: "POST",
+        credentials: "same-origin"
+    }).then(res => res.json()).catch(console.log);
 }
 
 // 获取指定信息并修改DOM
@@ -147,9 +141,10 @@ function uploadAvatar() {
         let form_data = new FormData(form_self);
 
         const uploadURL = '/userInfo/saveImg';
-        makeRequest(uploadURL, {
+        fetch(uploadURL, {
             method: 'POST',
-            body: form_data
+            body: form_data,
+            credentials: "same-origin"
         })
             .then(res => res.json())
             .catch(console.log);

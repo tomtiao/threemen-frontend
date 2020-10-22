@@ -1,4 +1,4 @@
-a, a:focus, a:visited {
+/* a, a:focus, a:visited {
     color: black;
     text-decoration: none;
 }
@@ -9,6 +9,10 @@ a, a:focus, a:visited {
     left: -9999px;
 }
 
+body {
+    background-color: #E1F5F6;
+}
+
 header {
     position: relative;
     z-index: 2;
@@ -16,7 +20,7 @@ header {
     top: 0;
     height: 64px;
     width: 100%;
-    background-color: rgba(2,182,253,0.95);
+    background-color: #71c9ce;
     box-shadow: 0px 2px 20px 0px #666;
 }
 
@@ -88,19 +92,21 @@ header {
     bottom: 0;
     left: 0;
     height: 4px;
-    background-color: #FD4902;
+    background-color: #388094;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .section_list .list_item .item_link:focus,
-.section_list .list_item .item_link:hover {
+.section_list .list_item .item_link:hover,
+.section_list .list_item .item_link.active {
     color: #eee;
-    background-color: #01a5e6;
+    background-color: #52A4B1;
 }
 
 .section_list .list_item .item_link:focus::after,
-.section_list .list_item .item_link:hover::after {
+.section_list .list_item .item_link:hover::after,
+.section_list .list_item .item_link.active::after {
     opacity: 1;
 }
 
@@ -113,7 +119,7 @@ header {
 }
 
 .account_section .account_func {
-    color: #02B6FD;
+    color: #71c9ce;
     display: block;
     width: 60px;
     height: 36px;
@@ -126,7 +132,6 @@ header {
 
 .account_section.hidden {
     display: none;
-    /* display: flex; */
 }
 
 .account_section.with_avatar .account {
@@ -142,7 +147,7 @@ header {
 
 .account_section.with_avatar .account .avatar {
     height: 100%;
-}
+} */
 
 .main_wrapper {
     margin-top: 90px;
@@ -194,6 +199,10 @@ header {
 
 .slider_list .list_item .item_img {
     width: 100%;
+    object-fit: cover;
+    object-position: bottom center;
+    position: relative;
+    top: -35%;
 }
 
 .main_content {
@@ -214,10 +223,14 @@ header {
 
 .content_flow {
     flex: 0 0 72.5%;
+    margin: 20px 0;
 }
 
 .content_flow .section {
     margin-top: 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px 0 #333;
+    padding: 10px 15px 15px;
 }
 
 .content_flow .section:first-child {
@@ -237,8 +250,8 @@ header {
 
 .content_flow .content_list .list_item {
     display: block;
-    width: 30%;
-    flex: 0 0 30%;
+    width: 32%;
+    flex: 0 0 32%;
     height: 200px;
     background-color: #66ccff;
     border-radius: 16px;
@@ -345,7 +358,7 @@ header {
     flex: 0 0 22.5%;
     width: 90%;
     background-color: lightcyan;
-    border-radius: 16px;
+    border-radius: 8px;
     box-shadow: 0 4px 20px 0 #999;
     box-sizing: border-box;
 }

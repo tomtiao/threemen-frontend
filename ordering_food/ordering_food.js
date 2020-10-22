@@ -1,3 +1,4 @@
+"use strict";
 // function filterHandler() {
 //     let lists = document.querySelectorAll('.list');
 //     let btns = document.querySelectorAll('.list_btn');

@@ -4,7 +4,7 @@
     }
     
     .register_panel {
-        padding: 64px 80px;
+        padding: 12px 80px;
     }
 }
 
@@ -14,7 +14,7 @@
     }
 
     .register_panel {
-        padding: 54px 72px;
+        padding: 10px 72px;
     }
 }
 
@@ -26,7 +26,7 @@
 
     .register_panel {
         width: 65%;
-        padding: 24px 54px;
+        padding: 8px 54px;
     }
 
     .slider_wrapper {
@@ -41,7 +41,7 @@
     }
 
     .register_panel {
-        padding: 18px 40px;
+        padding: 6px 40px;
         width: 100%;
     }
 
@@ -57,7 +57,7 @@
     }
 
     .register_panel {
-        padding: 12px 20px;
+        padding: 4px 20px;
         width: 100%;
     }
 

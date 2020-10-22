@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/normalize.css">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="style.css">
     <title>确认订单</title>
 </head>
@@ -12,7 +13,7 @@
 <body>
     <header>
         <div class="header_wrapper">
-            <div class="logo"><a href="/" class="logo_link"><img src="/static/img/three_man.png" alt="Three men logo"
+            <div class="logo"><a href="/" class="logo_link"><img src="/static/img/three_men.png" alt="Three men logo"
                         class="logo_img"></a></div>
             <ul class="section_list">
                 <h1 class="visually_hidden list_title">区域</h1>
@@ -20,7 +21,7 @@
                 <li class="list_item"><a href="/search" class="item_link">兼职</a></li>
                 <li class="list_item"><a href="/ordering_food" class="item_link">食堂订餐</a></li>
                 <li class="list_item"><a href="/shopping" class="item_link">超市代购</a></li>
-                <li class="list_item"><a href="/logistic" class="item_link">快递帮拿</a></li>
+                <li class="list_item"><a href="/logistic" class="item_link active">快递帮拿</a></li>
             </ul>
             <section class="account_section login_and_register">
                 <a href="/login" class="login account_func">登录</a>
@@ -40,19 +41,27 @@
                 <div class="address_section">
                     <div class="detail_address">
                         <div class="name info_item">
-                            <img src="/static/img/buy/name.png" alt="name" class="item_img name">
-                            <input type="text" name="name" id="name" autocomplete="name">
-                            <label for="name" class="info_label name_label">姓名</label>
+                            <input type="text" name="name" id="name" autocomplete="name" required>
+                            <div class="label_wrapper">
+                                <img src="/static/img/buy/name.png" alt="name" class="item_img name">
+                                <label for="name" class="info_label name_label">姓名</label>
+                            </div>
                         </div>
                         <div class="tel info_item">
-                            <img src="/static/img/buy/tel.png" alt="tel" class="item_img tel">
-                            <input type="tel" name="phone" id="phone" autocomplete="tel">
-                            <label for="phone" class="info_label tel_label">手机号</label>
+                            <input type="tel" name="phone" id="phone" autocomplete="tel" required>
+                            <div class="label_wrapper">
+
+                                <img src="/static/img/buy/tel.png" alt="tel" class="item_img tel">
+                                <label for="phone" class="info_label tel_label">手机号</label>
+                            </div>
                         </div>
                         <div class="address info_item">
-                            <img src="/static/img/buy/address.png" alt="address" class="item_img address">
-                            <input type="text" name="address" id="address" autocomplete="address-line1">
-                            <label for="address" class="info_label address_label">地址</label>
+                            <input type="text" name="address" id="address" autocomplete="address-line1" required>
+                            <div class="label_wrapper">
+
+                                <img src="/static/img/buy/address.png" alt="address" class="item_img address">
+                                <label for="address" class="info_label address_label">地址</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,13 +94,16 @@
                             </div>
                         </div>
                         <div class="info_item">
-                            <img src="/static/img/buy/code.png" alt="code" class="item_img code">
-                            <label for="code" class="info_label code_label">取件码</label>
                             <input type="text" name="code" id="code" required>
+                            <div class="label_wrapper">
+
+                                <img src="/static/img/buy/code.png" alt="code" class="item_img code">
+                                <label for="code" class="info_label code_label">取件码</label>
+                            </div>
                         </div>
                     </div>
                     <div class="note_wrapper">
-                        <div class="note_label_wrapper">
+                        <div class="info_item">
                             <img src="/static/img/buy/note.png" alt="note" class="item_img note">
                             <label for="note" class="info_label note_label">备注</label>
                         </div>
@@ -121,6 +133,7 @@
         </div>
     </main>
     <script src="script.js"></script>
+    <script src="/static/js/account.js"></script>
 </body>
 
 </html>

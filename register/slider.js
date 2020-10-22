@@ -1,3 +1,4 @@
+"use strict";
 function slider() {
     const SLIDE = document.querySelector('.side_slider');
     const IMG_LIST_LEN = 3;
