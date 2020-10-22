@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/style/normalize.css">
     <link rel="stylesheet" href="search.css">
     <link rel="stylesheet" href="search_mobi.css">
-    <script src="search.js"></script>
 </head>
 
 <body>
@@ -26,7 +25,7 @@
         <button class="go_back">返回◀</button>
     </header>
     <main>
-        <section class="filter">
+        <!-- <section class="filter">
             <h1 class="visually_hidden filter_title">筛选</h1>
             <div class="area filter_block">
                 <h2 class="area_title block_title">地区</h2>
@@ -47,14 +46,6 @@
                     <li class="list_item"><button class="list_btn">广金学工</button></li>
                 </ul>
                 <button name="catagory_btn" class="catagory_btn btn">点我显示列表</button>
-                <!-- <select name="catagory" id="catagory-select">
-                    <option value="all">所有</option>
-                    <option value="food_deliv">饭堂送餐</option>
-                    <option value="all">超市代购</option>
-                    <option value="all">快递代取</option>
-                    <option value="all">资料打印</option>
-                    <option value="all">广金学工</option>
-                </select> -->
             </div>
         </section>
         <section class="sort">
@@ -66,26 +57,31 @@
                     <li class="list_item"><button class="list_btn">关注最多</button></li>
                 </ul>
             </div>
-        </section>
+        </section> -->
 
         <section class="info">
             <div class="info_flow">
                 <ul class="info_list">
                     <li class="list_item">
                         <a href="#" class="item_link">
-                            <h1 class="item_title hot">【靠谱】这是一个超长的标题看看会不会溢出</h1>
+                            <h1 class="item_title">教务处</h1>
                             <ul class="item_brief">
-                                <li class="brief_item">南苑</li>
-                                <li class="brief_item">超市代购</li>
+                                <li class="brief_item">整理资料，统计数据</li>
+                                <li class="brief_item">考场布置，课表粘贴</li>
                             </ul>
-                            <div class="revenue certified"><span class="num_decorated">666</span>积分</div>
+                            <!-- <div class="revenue certified"><span class="num_decorated">666</span>金子</div> -->
                         </a>
                     </li>
-                    <li style="height: 1000px; width: 100%; background-color: aqua;"></li>
                 </ul>
             </div>
         </section>
+        <ul class="select_page_list">
+            <h1 class="visually_hidden page_list_title">翻页</h1>
+            <li class="list_item prev_page"><button class="list_btn"><span class="visually_hidden label">前一页</span>←</button></li>
+            <li class="list_item next_page"><button class="list_btn"><span class="visually_hidden label">后一页</span>→</button></li>
+        </ul>
     </main>
+    <script src="search.js"></script>
 </body>
 
 </html>
