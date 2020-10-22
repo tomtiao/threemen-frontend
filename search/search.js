@@ -118,7 +118,7 @@ function displayResult() {
 
         clearList();
         for (let info_o of info_array) {
-            updateList(info_o['workStudyInfo']);
+            updateList(info_o);
         }
     }
 
@@ -159,7 +159,7 @@ function displayResult() {
                                 currentPage--;
                                 activeBtn(findSpecificPageBtn(currentPage));
                                 makeRequest().then(data_obj => {
-                                    changePage(data_obj['WorkStudyInfo']);
+                                    changePage(data_obj['list']);
                                 });
                             } else {
                                 setTimeout(alert('已经是首页了！'));
@@ -170,7 +170,7 @@ function displayResult() {
                                 currentPage++;
                                 activeBtn(findSpecificPageBtn(currentPage));
                                 makeRequest().then(data_obj => {
-                                    changePage(data_obj['WorkStudyInfo']);
+                                    changePage(data_obj['list']);
                                 });
                             } else {
                                 setTimeout(alert('已经是尾页了！'));
@@ -180,7 +180,7 @@ function displayResult() {
                             currentPage = e.target.dataset.page;
                             activeBtn(e.target.parentNode);
                             makeRequest().then(data_obj => {
-                                changePage(data_obj['WorkStudyInfo']);
+                                changePage(data_obj['list']);
                             });
                             break;
                     }
@@ -220,7 +220,7 @@ function displayResult() {
         initPageList(totalPage);
         // initPageList(10);
         currentPage = data_obj['currentPage'];
-        changePage(data_obj['WorkStudyInfo']);
+        changePage(data_obj['list']);
         // 设置第一页按钮样式
         document.querySelector('.select_page_list .list_item:not(.prev_page) .list_btn')
             .classList.add('active');
