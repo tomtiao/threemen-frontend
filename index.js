@@ -136,10 +136,10 @@ function pageBehaviorHandler() {
         window.addEventListener('scroll', change_by_animation);
     }
 
+    // can be rewritten using scrollIntoView()
     function jump_to_section_handler() {
         const sections = document.querySelectorAll('.section');
         const header = document.querySelector('header');
-        let tops = [];
 
         const nav_items = document.querySelectorAll('.aside_list .list_item');
         sections.forEach((ele, i) => {

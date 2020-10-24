@@ -60,21 +60,6 @@ function setUserInfo(target, url) {
                     badCount: document.querySelector('.bad_count')
                 };
                 obj_name = 'workerInfo';
-                // ONLY FOR TESTING PURPOSE
-                // DO NOT USE THIS IN PRODUCTION ENV
-
-                user_info = JSON.parse(`{
-            "workerInfo": {
-                "account": "NrsaH",
-                "realName": "&3^jn",
-                "stuId": "mLRYaQ",
-                "mark": 2947456174871664,
-                "totalCount": 1096629050746072,
-                "goodCount": 7570472144287696,
-                "badCount": 6754223190597432
-            }
-        }`);
-                // END
                 break;
             case '.want_work':
                 doms = {
@@ -82,17 +67,6 @@ function setUserInfo(target, url) {
                     realName: document.querySelector(target + ' ' + '.name')
                 };
                 obj_name = 'workerInfo';
-                user_info = JSON.parse(`{
-                    "workerInfo": {
-                        "account": "NrsaH",
-                        "realName": "&3^jn",
-                        "stuId": "mLRYaQ",
-                        "mark": 2947456174871664,
-                        "totalCount": 1096629050746072,
-                        "goodCount": 7570472144287696,
-                        "badCount": 6754223190597432
-                    }
-                }`);
                 break;
         }
         changeDom(user_info, doms, obj_name);
