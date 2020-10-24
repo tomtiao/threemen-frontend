@@ -26,17 +26,37 @@ function accountHandler() {
     }
 
     let swap_img = () => {
+        const default_dir = '/static/img/default_avatar.png';
         return getUserImg().then(res => {
             let data;
             const avatar = document.querySelector('.avatar');
             if (res) {
                 data = btoa(res['dataObj']); // 二进制数据转Base64
+                avatar.src = 'data:image/png;base64,' + data;
             } else { // fallback img
-                data = 'iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAAADJ/2KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABbSURBVGhD7c6hAYAwEMDAh2U6ZkcHwwZEVNyZ2FzPXnO2++vBLBYsFiwWLBYsFiwWLBYsFiwWLBYsFiwWLBYsFiwWLBYsFiwWLBYsFiwWLBYsFiwWLBYs/jfzAu93AhFuA80CAAAAAElFTkSuQmCC';
+                avatar.src = default_dir;
             }
-            avatar.src = 'data:image/png;base64,' + data;
         });
     };
+
+    let avatar_panel_handler = () => {
+        const avatar_panel = document.querySelector('.avatar_panel');
+        const avatar = document.querySelector('.account');
+
+        // TODO: fix hover on avatar
+        avatar.addEventListener('mouseenter', e => {
+            avatar.classList.add('hide');
+            avatar_panel.classList.add('show');
+        });
+
+        avatar_panel.addEventListener('mouseleave', e => {
+            e.stopPropagation();
+            avatar.classList.remove('hide');
+            avatar_panel.classList.remove('show');
+        });
+    };
+
+    avatar_panel_handler();
 
     function setLogoutBtn() {
         const logout_btn = document.querySelector('.logout');
