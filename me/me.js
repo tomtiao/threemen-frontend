@@ -15,7 +15,7 @@ function setUserInfo(target, url) {
             doms[key].textContent = info[obj_name][key];
         });
     }
-    
+
     getUserInfo(url).then(data => {
         let user_info = data;
         let doms;
@@ -79,6 +79,7 @@ function userInfoHandler() {
                 }
             });
     })();
+
     (() => {
         let clicked = false;
         document.querySelector('.want_work')
@@ -91,35 +92,41 @@ function userInfoHandler() {
     })();
 }
 
-function uploadAvatar() {
-    const form_self = document.querySelector('.upload_form');
-    form_self.addEventListener('submit', e => {
-        e.preventDefault();
+function uploadAvatarHandler() {
+    function uploadAvatar() {
+        const form_self = document.querySelector('.upload_form');
+        form_self.addEventListener('submit', e => {
+            e.preventDefault();
+    
+            let form_data = new FormData(form_self);
+    
+            const uploadURL = '/userInfo/saveImg';
+            fetch(uploadURL, {
+                method: 'POST',
+                body: form_data,
+                credentials: 'same-origin'
+            })
+                .then(res => res.json())
+                .then(obj => {
+                    if (obj['flag']) {
+                        alert('上传成功！');
+                    } else {
+                        alert('发生错误');
+                    }
+                })
+                .catch(console.log);
+        });
+    }
 
-        let form_data = new FormData(form_self);
-
-        const uploadURL = '/userInfo/saveImg';
-        fetch(uploadURL, {
-            method: 'POST',
-            body: form_data,
-            credentials: "include"
-        })
-            .then(res => res.json())
-            .catch(console.log);
-    })
+    uploadAvatar();
 }
 
-addEventListener('load', () => {
+window.addEventListener('load', () => {
     userInfoHandler();
+    uploadAvatarHandler();
 });
 
-
-function goBack() {
-    let go_back_btn = document.querySelector('.go_back');
-    go_back_btn.addEventListener('click', () => history.back());
-}
-
-function resetPasswd() {
+function changePassword() {
     const show_reset_btn = document.querySelector('.reset_passwd');
     show_reset_btn.addEventListener('click', e => {
         // TODO: show reset panel
@@ -133,12 +140,6 @@ function resetPasswd() {
     });
 }
 
-function checkIfLogon() {
-
-}
-
 window.addEventListener('load', () => {
-    goBack();
-    resetPasswd();
-    checkIfLogon();
+    changePassword();
 });
