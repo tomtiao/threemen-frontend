@@ -46,21 +46,21 @@ function pageBehaviorHandler() {
             slider_list.style.transform = `translate(${pixel}px)`;
         };
 
-        // wrapper.addEventListener('click', e => {
-        //     if (e.target.tagName === 'BUTTON') {
-        //         switch (e.target.className) {
-        //             case 'prev slider_btn':
-        //                 go_back();
-        //                 break;
-        //             case 'next slider_btn':
-        //                 changePos();
-        //                 break;
-        //             default:
-        //                 console.log('invalid btn clicked');
-        //                 break;
-        //         }
-        //     }
-        // });
+        wrapper.addEventListener('click', e => {
+            if (e.target.tagName === 'BUTTON') {
+                switch (e.target.className) {
+                    case 'prev slider_btn':
+                        go_back();
+                        break;
+                    case 'next slider_btn':
+                        changePos();
+                        break;
+                    default:
+                        console.log('invalid btn clicked');
+                        break;
+                }
+            }
+        });
     }
 
     function hover_main_animate() {
@@ -170,6 +170,5 @@ function pageBehaviorHandler() {
 }
 
 window.addEventListener('load', e => {
-    // accountHandler();
     pageBehaviorHandler();
 });
