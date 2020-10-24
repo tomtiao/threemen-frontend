@@ -25,7 +25,7 @@ function submitHandler() {
         return fetch(requestURL, {
             method: 'POST',
             body: url_params,
-            credentials: "include"
+            credentials: "same-origin"
         }).then(res => res.json()).catch(console.log);
     }
 
@@ -37,7 +37,7 @@ function submitHandler() {
                     if (data['flag']) {
                         setTimeout(alert(data['errorMsg']));
                         if (document.getElementById('autologin').checked) {
-                            fetch('/user/saveLogin', { method: "POST", credentials: "include" });
+                            fetch('/user/saveLogin', { method: "POST", credentials: "same-origin" });
                         }
                         location.replace('/');
                     } else {

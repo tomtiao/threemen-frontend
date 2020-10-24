@@ -4,13 +4,9 @@ function accountHandler() {
     function checkIfLogon() {
         const requestURL = '/user/findUser';
 
-        let cookie_str = document.cookie.split('; ').find(row => row.startsWith('adminId')).split('=')[1];
         return fetch(requestURL, {
             method: "POST",
-            credentials: "include",
-            headers: {
-                'Cookie': cookie_str
-            }
+            credentials: "same-origin"
         })
             .then(res => res.json())
             .then(data => {
@@ -25,11 +21,8 @@ function accountHandler() {
 
         return fetch(requestURL, {
             method: "POST",
-            credentials: "include",
-            headers: {
-                'Cookie': cookie_str
-            }
-        }).then(res => res.blob()).catch(console.log);
+            credentials: "same-origin"
+        }).then(res => res.json()).catch(console.log);
     }
 
     let swap_img = () => {
@@ -73,10 +66,7 @@ function accountHandler() {
 
             return fetch(requestURL, {
                 method: "POST",
-                credentials: "include",
-                headers: {
-                    'Cookie': cookie_str
-                }
+                credentials: "same-origin"
             })
                 .then(res => res.json())
                 .catch(console.log);
@@ -86,7 +76,7 @@ function accountHandler() {
             e.preventDefault();
             sendLogoutRequest().then(obj => {
                 if (obj['flag']) {
-                    history.replaceState('/');
+                    location.replace('/');
                 } else {
                     console.log('something went wrong');
                     console.log(obj);
