@@ -5,14 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="me.css">
     <title>我的</title>
 </head>
 
 <body>
-    <header class="header">
-        <button class="go_back">返回</button>
-        <h1 class="page_title">我的</h1>
+    <header>
+        <div class="header_wrapper">
+            <div class="logo"><a href="/" class="logo_link"><img src="/static/img/three_men_transparent.png" alt="Three men logo"
+                        class="logo_img"></a></div>
+            <ul class="section_list">
+                <h1 class="visually_hidden list_title">区域</h1>
+                <li class="list_item"><a href="/" class="item_link active">首页</a></li>
+                <li class="list_item"><a href="/search" class="item_link">兼职</a></li>
+                <li class="list_item"><a href="/ordering_food" class="item_link">食堂订餐</a></li>
+                <li class="list_item"><a href="/shopping" class="item_link">超市代购</a></li>
+                <li class="list_item"><a href="/logistic" class="item_link">快递帮拿</a></li>
+            </ul>
+            <section class="account_section login_and_register">
+            <!-- <section class="account_section login_and_register hidden"> -->
+                <a href="/login" class="login account_func">登录</a>
+                <a href="/register" class="register account_func">注册</a>
+            </section>
+            <section class="account_section with_avatar hidden">
+            <!-- <section class="account_section with_avatar"> -->
+                <a href="/me" class="account">
+                    <img src="/static/img/1.gif" alt="User avatar" class="avatar">
+                </a>
+                <div class="avatar_panel">
+                    <div class="avatar_name_wrapper">
+                        <a href="/me" class="avatar">
+                            <img src="/static/img/1.gif" alt="User avatar" class="avatar_img">
+                        </a>
+                        <h1 class="nickname">用户名</h1>
+                    </div>
+                    <div class="func_list_wrapper">
+                        <ul class="func_list">
+                            <li class="list_item"><a href="#" class="item_link">金子余额：100</a></li>
+                            <li class="list_item"><a href="#" class="item_link">金子充值</a></li>
+                            <li class="list_item"><a href="#" class="item_link">金子提现</a></li>
+                            <li class="list_item"><a href="#" class="item_link">我的订单</a></li>
+                            <li class="list_item"><a href="#" class="item_link">兼职认证</a></li>
+                            <li class="list_item"><a href="#" class="item_link logout">退出登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <a href="#" class="logout account_func">注销</a> -->
+            </section>
+        </div>
     </header>
     <main class="content">
         <section class="brief">

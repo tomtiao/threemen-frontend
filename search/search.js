@@ -29,11 +29,6 @@ function toTop() {
     to_top_btn.addEventListener('click', () => window.scroll({ top: 0, behavior: 'smooth' }));
 }
 
-function goBack() {
-    let go_back_btn = document.querySelector('.go_back');
-    go_back_btn.addEventListener('click', () => history.back());
-}
-
 function mobi() {
     document.querySelector('.catagory_btn')
         .addEventListener('click', e => {
@@ -243,7 +238,6 @@ function displayResult() {
 window.addEventListener('load', () => {
     // filterHandler();
     toTop();
-    goBack();
     // mobi();
     displayResult();
 });

@@ -15,6 +15,7 @@ function setUserInfo(target, url) {
             doms[key].textContent = info[obj_name][key];
         });
     }
+    
     getUserInfo(url).then(data => {
         let user_info = data;
         let doms;
@@ -64,7 +65,6 @@ function userInfoHandler() {
         userURL: '/userInfo/showUserInfo',
         workerURL: '/workerInfo/showInfo'
     };
-
 
     // 页面加载即获取并显示信息
     setUserInfo('.content', urls['userURL']);
