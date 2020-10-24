@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="/static/css/normalize.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="style.css">
-    <title>首页</title>
+    <title>食堂点餐</title>
 </head>
 
 <body>
+    <div class="go_dark"></div>
     <header>
         <div class="header_wrapper">
-            <div class="logo"><a href="/" class="logo_link"><img src="/static/img/three_men.png" alt="Three men logo"
+            <div class="logo"><a href="/" class="logo_link"><img src="/static/img/three_men_transparent.png" alt="Three men logo"
                         class="logo_img"></a></div>
             <ul class="section_list">
                 <h1 class="visually_hidden list_title">区域</h1>
@@ -21,7 +22,7 @@
                 <li class="list_item"><a href="/search" class="item_link">兼职</a></li>
                 <li class="list_item"><a href="/ordering_food" class="item_link active">食堂订餐</a></li>
                 <li class="list_item"><a href="/shopping" class="item_link">超市代购</a></li>
-                <li class="list_item"><a href="#" class="item_link">快递帮拿</a></li>
+                <li class="list_item"><a href="/logistic" class="item_link">快递帮拿</a></li>
             </ul>
             <section class="account_section login_and_register">
                 <a href="/login" class="login account_func">登录</a>
@@ -36,19 +37,271 @@
         </div>
     </header>
     <div class="main_wrapper">
+        <aside class="show">
+            <div class="aside_wrapper">
+                <div class="stall_avatar_wrapper no_shrink stall_wrapper">
+                    <img src="/static/img/ordering_food/niu.png" alt="stall_avatar" class="stall_avatar">
+                </div>
+                <div class="tab_wrapper no_shrink stall_wrapper">
+                    <ul class="tab_list">
+                        <li class="list_item active" data-panel="order"><a href="#" class="item_link">点餐</a></li>
+                        <li class="list_item" data-panel="info"><a href="#" class="item_link">店铺</a></li>
+                    </ul>
+                </div>
+                <div class="stall_content_wrapper no_shrink stall_wrapper">
+                    <div class="side_nav_wrapper">
+                        <ul class="side_nav_list">
+                            <li class="list_item active"><a href="#0" class="item_link" data-index="0">主食</a></li>
+                            <li class="list_item"><a href="#1" class="item_link" data-index="1">小吃</a></li>
+                            <li class="list_item"><a href="#" class="item_link" data-index="2">套餐</a></li>
+                            <li class="list_item"><a href="#" class="item_link" data-index="3">特价</a></li>
+                            <li class="list_item"><a href="#" class="item_link" data-index="4">双人餐</a></li>
+                            <li class="list_item"><a href="#" class="item_link" data-index="5">休闲餐</a></li>
+                            <li class="list_item"><a href="#" class="item_link" data-index="6">韩式炸鸡</a></li>
+                        </ul>
+                    </div>
+                    <div class="main_content_wrapper">
+                        <dl class="dishes_list">
+                            <dt class="dishes_section_title" data-index="0" id="0">主食</dt>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">乡村牛肉堡</h1>
+                                    <p class="dishes_price">80金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">乡村牛肉堡</h1>
+                                    <p class="dishes_price">80金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">乡村牛肉堡</h1>
+                                    <p class="dishes_price">80金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">乡村牛肉堡</h1>
+                                    <p class="dishes_price">80金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">乡村牛肉堡</h1>
+                                    <p class="dishes_price">80金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">乡村牛肉堡</h1>
+                                    <p class="dishes_price">80金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                            <dt class="dishes_section_title" data-index="1" id="1">小吃</dt>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">开心鸡排</h1>
+                                    <p class="dishes_price">110金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">开心鸡排</h1>
+                                    <p class="dishes_price">110金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">开心鸡排</h1>
+                                    <p class="dishes_price">110金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                            <dd class="dishes_item">
+                                <div class="dishes_img_wrapper">
+                                    <img src="#" alt="dishes" class="dishes_img">
+                                </div>
+                                <div class="dishes_desc">
+                                    <h1 class="dishes_name">开心鸡排</h1>
+                                    <p class="dishes_price">110金子</p>
+                                </div>
+                                <div class="dishes_add">
+                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                                    <span class="counter invisible">1</span>
+                                    <button type="button" class="add_dishes dishes_btn">+</button>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="stall_info_wrapper no_shrink stall_wrapper hide">
+                    <ul class="contact_list">
+                        <li class="list_item"><span class="item_label">店铺电话</span><a href="tel:+8613507535905" class="item_content">13507535905</a></li>
+                        <li class="list_item"><span class="item_label">店铺地址</span><span class="item_content">广东金融学院</span></li>
+                        <li class="list_item"><span class="item_label">经营场所</span><span class="item_content">北苑食堂三楼</span></li>
+                        <li class="list_item"><span class="item_label">营业时间</span><span class="item_content">10:30-13:00; 17:00-19:00</span></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
         <main>
             <div class="main_content">
                 <div class="content_wrapper">
+                    <ul class="position_selection_list selection_list">
+                        <li class="list_item current_active" data-position="all"><a href="#" class="item_link">全部</a></li>
+                        <li class="list_item" data-position="south"><a href="#" class="item_link">南苑</a></li>
+                        <li class="list_item" data-position="north"><a href="#" class="item_link">北苑</a></li>
+                    </ul>
                     <section class="content_flow">
-                        
-                        
+                        <ul class="floor_selection_list selection_list">
+                            <li class="list_item current_active all" data-position="all"><a href="#" class="item_link">全部</a></li>
+                            <li class="list_item south" data-position="south" data-floor="4"><a href="#" class="item_link">南苑四楼</a></li>
+                            <li class="list_item south" data-position="south" data-floor="5"><a href="#" class="item_link">南苑五楼</a></li>
+                            <li class="list_item north" data-position="north" data-floor="1"><a href="#" class="item_link">北苑一楼</a></li>
+                            <li class="list_item north" data-position="north" data-floor="2"><a href="#" class="item_link">北苑二楼</a></li>
+                            <li class="list_item north" data-position="north" data-floor="3"><a href="#" class="item_link">北苑三楼</a></li>
+                        </ul>
+                        <div class="stall section">
+                            <h1 class="visually_hidden section_title">店铺列表</h1>
+                            <ul class="content_list">
+                                <li class="list_item" data-position="south" data-floor="4">
+                                    <!-- cover覆盖在上触发事件 -->
+                                    <a href="#" class="cover"></a>
+                                    <div class="bg_block">
+                                        <img src="/static/img/order_food.jpg" alt="1" class="bg_img">
+                                    </div>
+                                    <div class="text_content">
+                                        <h1 class="item_title">店铺名称南4</h1>
+                                        <p class="description">店铺描述</p>
+                                    </div>
+                                </li>
+                                <li class="list_item" data-position="north" data-floor="1">
+                                    <!-- cover覆盖在上触发事件 -->
+                                    <a href="#" class="cover"></a>
+                                    <div class="bg_block">
+                                        <img src="/static/img/order_food.jpg" alt="1" class="bg_img">
+                                    </div>
+                                    <div class="text_content">
+                                        <h1 class="item_title">店铺名称北1</h1>
+                                        <p class="description">店铺描述</p>
+                                    </div>
+                                </li>
+                                <li class="list_item" data-position="north" data-floor="2">
+                                    <!-- cover覆盖在上触发事件 -->
+                                    <a href="#" class="cover"></a>
+                                    <div class="bg_block">
+                                        <img src="/static/img/order_food.jpg" alt="1" class="bg_img">
+                                    </div>
+                                    <div class="text_content">
+                                        <h1 class="item_title">店铺名称北2</h1>
+                                        <p class="description">店铺描述</p>
+                                    </div>
+                                </li>
+                                <li class="list_item" data-position="north" data-floor="3">
+                                    <!-- cover覆盖在上触发事件 -->
+                                    <a href="#" class="cover"></a>
+                                    <div class="bg_block">
+                                        <img src="/static/img/order_food.jpg" alt="1" class="bg_img">
+                                    </div>
+                                    <div class="text_content">
+                                        <h1 class="item_title">店铺名称北3</h1>
+                                        <p class="description">店铺描述</p>
+                                    </div>
+                                </li>
+                                <li class="list_item" data-position="south" data-floor="5">
+                                    <!-- cover覆盖在上触发事件 -->
+                                    <a href="#" class="cover"></a>
+                                    <div class="bg_block">
+                                        <img src="/static/img/order_food.jpg" alt="1" class="bg_img">
+                                    </div>
+                                    <div class="text_content">
+                                        <h1 class="item_title">店铺名称南5</h1>
+                                        <p class="description">店铺描述</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
                 </div>
             </div>
         </main>
     </div>
     <footer>
         <div class="footer_wrapper">
-            
+
         </div>
     </footer>
     <script src="index.js"></script>
