@@ -1,15 +1,22 @@
 "use strict";
 function slider() {
-    const SLIDE = document.querySelector('.side_slider');
-    const IMG_LIST_LEN = 3;
+    const slider_items = document.querySelectorAll('.slider_item');
+    const IMG_LIST_LEN = slider_items.length;
     let index = 0;
-    let img_name;
-    img_name = index % IMG_LIST_LEN;
-    SLIDE.style.backgroundImage = `url(\"/static/img/login/${img_name}.jpg\")`;
+
+    let setActive = (i) => {
+        for (let item of slider_items) {
+            item.classList.remove('show');
+        }
+
+        slider_items[i].classList.add('show');
+    };
+    index = index % IMG_LIST_LEN;
+    setActive(index);
     index++;
     setInterval(() => {
-        img_name = index % IMG_LIST_LEN;
-        SLIDE.style.backgroundImage = `url(\"/static/img/login/${img_name}.jpg\")`;
+        index = index % IMG_LIST_LEN;
+        setActive(index);
         index++;
     }, 5000);
 }
