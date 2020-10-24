@@ -39,9 +39,28 @@ function accountHandler() {
         });
     };
 
-    let avatar_panel_handler = () => {
+    function avatar_panel_handler() {
+        let get_user_info = () => {
+            const requestURL = '/userInfo/showUserInfo';
+
+            return fetch(requestURL, {
+                method: 'POST',
+                credentials: 'same-origin'
+            }).then(res => res.json()).catch(console.log);
+        };
+
         const avatar_panel = document.querySelector('.avatar_panel');
         const avatar = document.querySelector('.account');
+
+        const nickname = document.querySelector('.nickname');
+        let data = get_user_info();
+        data.then(user_obj => {
+            if (user_obj['flag']) {
+                nickname.textContent = user_obj['dataObj'][1]['nickname'];
+            } else { // fallback
+                nickname.textContent = '噢，名字走丢了';
+            }
+        });
 
         // TODO: fix hover on avatar
         avatar.addEventListener('mouseenter', e => {
@@ -55,8 +74,6 @@ function accountHandler() {
             avatar_panel.classList.remove('show');
         });
     };
-
-    avatar_panel_handler();
 
     function setLogoutBtn() {
         const logout_btn = document.querySelector('.logout');
@@ -93,6 +110,7 @@ function accountHandler() {
                 login_register.classList.add('hidden');
                 with_avatar.classList.remove('hidden');
                 setLogoutBtn();
+                avatar_panel_handler();
             });
         } else {
             login_register.classList.remove('hidden');
