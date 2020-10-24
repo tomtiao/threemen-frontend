@@ -89,19 +89,19 @@ function displayResult() {
 
             let new_info_title = document.createElement('h1');
             new_info_title.classList.add('item_title');
-            new_info_title.textContent = info_o['location'];
+            new_info_title.textContent = info_o['position'];
 
             let new_second_list = document.createElement('ul');
             new_second_list.classList.add('item_brief');
 
             let new_second_list_item = document.createElement('li');
             new_second_list_item.classList.add('brief_item');
-            new_second_list_item.textContent = info_o['fixSeat'];
+            new_second_list_item.textContent = "固定岗位：" + info_o['fixSeat'];
 
             new_second_list.append(new_second_list_item);
 
             let new_second_list_item_copied = new_second_list_item.cloneNode(true);
-            new_second_list_item_copied.textContent = info_o['temSeat'];
+            new_second_list_item_copied.textContent = "临时岗位：" + info_o['temSeat'];
 
             new_second_list.append(new_second_list_item_copied);
 
