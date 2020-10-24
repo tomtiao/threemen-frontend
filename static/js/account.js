@@ -6,7 +6,13 @@ function accountHandler() {
 
         return fetch(requestURL, {
             method: "POST",
-            credentials: "include"
+            credentials: "include",
+            headers: {
+                'Cookie': document.cookie
+                .split('; ')
+                .find(row => row.startsWith('adminId'))
+                .split('=')[1]
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -21,7 +27,13 @@ function accountHandler() {
 
         return fetch(requestURL, {
             method: "POST",
-            credentials: "include"
+            credentials: "include",
+            headers: {
+                'Cookie': document.cookie
+                .split('; ')
+                .find(row => row.startsWith('adminId'))
+                .split('=')[1]
+            }
         }).then(res => res.blob()).catch(console.log);
     }
 
@@ -66,7 +78,13 @@ function accountHandler() {
 
             return fetch(requestURL, {
                 method: "POST",
-                credentials: "include"
+                credentials: "include",
+                headers: {
+                    'Cookie': document.cookie
+                    .split('; ')
+                    .find(row => row.startsWith('adminId'))
+                    .split('=')[1]
+                }
             })
                 .then(res => res.json())
                 .catch(console.log);
