@@ -32,22 +32,6 @@ function setUserInfo(target, url) {
                     address: document.querySelector('.dorm')
                 };
                 obj_name = 'userInfo';
-                // ONLY FOR TESTING PURPOSE
-                // DO NOT USE THIS IN PRODUCTION ENV
-
-                user_info = JSON.parse(`{
-            "userInfo": {
-                "account": "*Tso",
-                "email": "WJ4H",
-                "nickname": "t^oyMl",
-                "department": "Wm]Bx",
-                "master": "Wg#W",
-                "address": "vQ^Y%C",
-                "level": 96,
-                "coin": 5198869592642580
-            }
-        }`);
-                // END
                 break;
             case '.working_me':
                 doms = {
