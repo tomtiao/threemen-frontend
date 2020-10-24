@@ -4,7 +4,7 @@ function autoCompleteUserInfo() {
 
         return fetch(requestURL, {
             method: "POST",
-            credentials: "same-origin"
+            credentials: "include"
         }).then(res => res.json()).catch(console.log);
     }
 

@@ -6,7 +6,7 @@ function accountHandler() {
 
         return fetch(requestURL, {
             method: "POST",
-            credentials: "same-origin"
+            credentials: "include"
         })
             .then(res => res.json())
             .then(data => {
@@ -21,8 +21,8 @@ function accountHandler() {
 
         return fetch(requestURL, {
             method: "POST",
-            credentials: "same-origin"
-        }).then(res => res.json()).catch(console.log);
+            credentials: "include"
+        }).then(res => res.blob()).catch(console.log);
     }
 
     let swap_img = () => {
@@ -66,7 +66,7 @@ function accountHandler() {
 
             return fetch(requestURL, {
                 method: "POST",
-                credentials: "same-origin"
+                credentials: "include"
             })
                 .then(res => res.json())
                 .catch(console.log);
@@ -74,7 +74,14 @@ function accountHandler() {
 
         logout_btn.addEventListener('click', e => {
             e.preventDefault();
-            sendLogoutRequest();
+            sendLogoutRequest().then(obj => {
+                if (obj['flag']) {
+                    history.replaceState('/');
+                } else {
+                    console.log('something went wrong');
+                    console.log(obj);
+                }
+            });
         });
     }
 

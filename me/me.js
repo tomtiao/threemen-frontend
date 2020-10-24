@@ -2,7 +2,7 @@
 function getUserInfo(url) {
     return fetch(url, {
         method: "POST",
-        credentials: "same-origin"
+        credentials: "include"
     }).then(res => res.json()).catch(console.log);
 }
 
@@ -102,7 +102,7 @@ function uploadAvatar() {
         fetch(uploadURL, {
             method: 'POST',
             body: form_data,
-            credentials: "same-origin"
+            credentials: "include"
         })
             .then(res => res.json())
             .catch(console.log);
