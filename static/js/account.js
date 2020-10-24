@@ -4,14 +4,12 @@ function accountHandler() {
     function checkIfLogon() {
         const requestURL = '/user/findUser';
 
+        let cookie_str = document.cookie.split('; ').find(row => row.startsWith('adminId')).split('=')[1];
         return fetch(requestURL, {
             method: "POST",
             credentials: "include",
             headers: {
-                'Cookie': document.cookie
-                .split('; ')
-                .find(row => row.startsWith('adminId'))
-                .split('=')[1]
+                'Cookie': cookie_str
             }
         })
             .then(res => res.json())
@@ -29,10 +27,7 @@ function accountHandler() {
             method: "POST",
             credentials: "include",
             headers: {
-                'Cookie': document.cookie
-                .split('; ')
-                .find(row => row.startsWith('adminId'))
-                .split('=')[1]
+                'Cookie': cookie_str
             }
         }).then(res => res.blob()).catch(console.log);
     }
@@ -80,10 +75,7 @@ function accountHandler() {
                 method: "POST",
                 credentials: "include",
                 headers: {
-                    'Cookie': document.cookie
-                    .split('; ')
-                    .find(row => row.startsWith('adminId'))
-                    .split('=')[1]
+                    'Cookie': cookie_str
                 }
             })
                 .then(res => res.json())
