@@ -79,7 +79,7 @@ function accountHandler() {
         let balance_data = get_user_balance_obj();
         balance_data.then(balance_obj => {
             if (balance_obj['flag']) {
-                balance.textContent = balance_obj['dataObj']['nickname'];
+                balance.textContent = balance_obj['dataObj']['balance'];
             } else { // fallback
                 balance.textContent = '噢，金子走丢了';
             }
