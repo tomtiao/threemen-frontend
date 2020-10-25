@@ -16,7 +16,7 @@ function accountHandler() {
             }).catch(console.log);
     }
 
-    function getUserImg() {
+    function getUserImgObj() {
         const requestURL = '/userInfo/showImg';
 
         return fetch(requestURL, {
@@ -27,11 +27,11 @@ function accountHandler() {
 
     let swap_img = () => {
         const default_dir = '/static/img/default_avatar.png';
-        return getUserImg().then(res => {
+        return getUserImgObj().then(res => {
             let data;
             const avatar = document.querySelector('.avatar');
             if (res) {
-                data = btoa(res['dataObj']); // 二进制数据转Base64
+                data = res['dataObj']; // Base64
                 avatar.src = 'data:image/png;base64,' + data;
             } else { // fallback img
                 avatar.src = default_dir;
