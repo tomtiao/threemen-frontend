@@ -76,12 +76,20 @@
                             </div>
                         </div>
                         <div class="address info_item">
-                            <input type="text" name="address" id="address" autocomplete="address-line1" required>
-                            <div class="label_wrapper">
-
-                                <img src="/static/img/buy/address.png" alt="address" class="item_img address">
-                                <label for="address" class="info_label address_label">地址</label>
-                            </div>
+                            <label class="address_wrapper" for="section">
+                                <input type="text" name="yuan" id="section" autocomplete="address-line1" required>
+                                <div class="label_wrapper">
+                                    <img src="/static/img/buy/address.png" alt="address" class="item_img address">
+                                    <label for="section" class="info_label address_label">苑</label>
+                                </div>
+                            </label>
+                            <label class="address_wrapper">
+                                <input type="text" name="dong" id="building" autocomplete="address-line2" required>
+                                <label class="label_wrapper" for="building">
+                                    <img src="/static/img/buy/address.png" alt="address" class="item_img address">
+                                    <label class="info_label address_label">栋</label>
+                                </label>
+                            </label>
                         </div>
                     </div>
                 </div>
