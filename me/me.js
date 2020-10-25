@@ -93,53 +93,125 @@ function userInfoHandler() {
 }
 
 function uploadAvatarHandler() {
+    function listenUploadImg() {
+        const preview = document.getElementById('preview');
+        const input = document.getElementById('upload');
+
+        input.addEventListener('change', e => {
+            preview.src = URL.createObjectURL(input.files[0]);
+        });
+    }
+
+    listenUploadImg();
+
     function uploadAvatar() {
         const form_self = document.querySelector('.upload_form');
         form_self.addEventListener('submit', e => {
             e.preventDefault();
-    
-            let form_data = new FormData(form_self);
-    
+
             const uploadURL = '/userInfo/saveImg';
-            fetch(uploadURL, {
-                method: 'POST',
-                body: form_data,
-                credentials: 'same-origin'
-            })
-                .then(res => res.json())
-                .then(obj => {
-                    if (obj['flag']) {
-                        alert('上传成功！');
-                    } else {
-                        alert('发生错误');
-                    }
+            let form_data = new FormData(form_self);
+            if (form_data.get('upload') !== '') {
+                return fetch(uploadURL, {
+                    method: 'POST',
+                    body: form_data,
+                    credentials: 'same-origin'
                 })
-                .catch(console.log);
+                    .then(res => res.json())
+                    .then(obj => {
+                        if (obj['flag']) {
+                            alert('上传成功！');
+                            location.replace(location.href);
+                        } else {
+                            alert('发生错误');
+                        }
+                    })
+                    .catch(console.log);
+            } else {
+                alert('没有选择图片！');
+            }
+        });
+
+        const change_img_link = document.querySelector('.mask');
+        const chanage_img_panel = document.querySelector('.upload_avatar');
+
+        change_img_link.addEventListener('click', e => {
+            e.preventDefault();
+            chanage_img_panel.classList.toggle('show');
+        });
+
+        chanage_img_panel.addEventListener('click', e => {
+            e.stopPropagation();
+        })
+
+        document.body.addEventListener('click', e => {
+            if (e.target !== change_img_link && chanage_img_panel.classList.contains('show')) {
+                chanage_img_panel.classList.remove('show');
+            }
         });
     }
 
     uploadAvatar();
 }
 
-window.addEventListener('load', () => {
-    userInfoHandler();
-    uploadAvatarHandler();
-});
-
-function changePassword() {
-    const show_reset_btn = document.querySelector('.reset_passwd');
-    show_reset_btn.addEventListener('click', e => {
-        // TODO: show reset panel
-        console.log(e.target)
+function changePasswordHandler() {
+    const show_change_btn = document.querySelector('.reset_passwd');
+    const change_pw_panel = document.querySelector('.change_pw_panel');
+    show_change_btn.addEventListener('click', e => {
+        change_pw_panel.classList.toggle('show');
     });
-    const reset_submit_btn = document.querySelector('.reset_passwd_btn');
-    reset_submit_btn.addEventListener('click', e => {
-        // TODO: submit reset passwd
+
+    change_pw_panel.addEventListener('click', e => {
+        e.stopPropagation();
+    });
+
+    document.body.addEventListener('click', e => {
+        if (e.target !== show_change_btn && change_pw_panel.classList.contains('show')) {
+            change_pw_panel.classList.remove('show');
+        }
+    });
+
+    const change_pw_form = document.getElementById('change_pw');
+    const new_pw_input = document.getElementById('new');
+    const new_pw_repeat_input = document.getElementById('new_repeat');
+
+    function makeRequest() {
+        const requestURL = '/userInfo/updatePassword';
+
+        let form_data = new FormData(change_pw_form);
+        let urlParams = new URLSearchParams();
+        for (let data of form_data) {
+            if (data[0] === 'old' || data[0] === 'new') {
+                urlParams.append(data[0], data[1]);
+            }
+        }
+
+        return fetch(requestURL, {
+            method: 'POST',
+            body: urlParams,
+            credentials: 'same-origin'
+        }).then(res => res.json()).catch(console.log);
+    }
+
+    change_pw_form.addEventListener('submit', e => {
         e.preventDefault();
-        console.log(e.target)
+        if (new_pw_input.value !== new_pw_repeat_input.value) {
+            alert('两次输入的密码不相同！');
+        } else {
+            makeRequest().then(obj => {
+                if (obj['flag']) {
+                    alert(data['errorMsg']);
+                    location.replace(location.pathname);
+                } else {
+                    alert(data['errorMsg']);
+                }
+            });
+        }
     });
 }
 
 window.addEventListener('load', () => {
-    changePassword();
+    // userInfoHandler();
+    uploadAvatarHandler();
+    changePasswordHandler();
 });

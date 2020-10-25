@@ -1,9 +1,3 @@
-.visually_hidden {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-}
-
 noscript {
     position: fixed;
     top: 0;
@@ -30,15 +24,25 @@ a:active {
 }
 
 .side_func .to_top {
-    box-shadow: 0px 0px 10px 0px #3dc0e7;
-    font-size: 0;
-    width: 32px;
-    height: 32px;
+    box-shadow: 0px 0px 10px 0px #71c9ce;
+    font-size: 32px;
+    width: 48px;
+    height: 48px;
     border: 0;
     background-color: white;
     border-radius: 8px;
     outline: none;
     cursor: pointer;
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+.side_func .to_top:hover,
+.side_func .to_top:focus {
+    box-shadow: 0px 0px 10px 0px #43A5B0;
+}
+
+.side_func .to_top:active {
+    box-shadow: 0px 0px 10px 0px #278193;
 }
 
 main {
@@ -47,6 +51,45 @@ main {
     align-items: center;
     padding-top: 1rem;
     padding: 1rem;
+    margin-top: 64px;
+}
+
+.search .search_bar {
+    padding: 0.25em;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid #666;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.search .search_bar:focus {
+    border-bottom: 2px solid #71c9ce;
+}
+
+.search .search_btn {
+    color: #eee;
+    display: block;
+    width: 60px;
+    height: 28px;
+    border: 0;
+    padding: 0;
+    margin-left: 1rem;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 16px;
+    background-color: #333;
+    font-size: 14px;
+    outline: none;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.search .search_btn:hover {
+    background-color: #666;
+}
+
+.search .search_btn:active {
+    background-color: #999;
 }
 
 .filter {
@@ -67,16 +110,11 @@ main {
     width: 100%;
 }
 
-.filter_block,
-.sort_block {
-    border-bottom: 1px solid #eee;
-}
-
-.filter_block .block_title {
+.block_title {
     color: #999;
     margin: 1rem;
     min-width: 3em;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: normal;
 }
 
@@ -94,7 +132,7 @@ main {
     padding: 0;
     width: auto;
     list-style-type: none;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .list .list_item {
@@ -102,27 +140,248 @@ main {
 }
 
 .list .list_item .list_btn {
-    padding: 0.25rem 1rem;
-    border-radius: 1rem;
-    background-color: transparent;
+    position: relative;
+    padding: 0;
     border: 0;
+    background-color: transparent;
     outline: none;
     cursor: pointer;
 }
 
+.list .list_item .list_btn::after {
+    position: absolute;
+    bottom: -0.25em;
+    left: 0;
+    display: block;
+    content: "";
+    height: 2px;
+    width: 100%;
+    background-color: #71c9ce;
+    border-radius: 4px;
+    transform: scaleX(0);
+    transition: transform 0.15s ease-in-out;
+}
+
+.list .list_item .list_btn.active,
 .list .list_item .list_btn:hover,
 .list .list_item .list_btn:focus {
-    color: #3dc0e7;
+    color: #71c9ce;
+}
+
+.list .list_item .list_btn.active::after,
+.list .list_item .list_btn:hover::after,
+.list .list_item .list_btn:focus::after {
+    color: #71c9ce;
+    transform: scaleX(1);
 }
 
 .list .list_item .list_btn.active {
-    color: white;
-    background-color: #3dc0e7;
+    color: #71c9ce;
 }
 
 .info {
-    margin-top: 80px;
+    width: 70%;
+}
+
+.info_wrapper {
+    display: flex;
+    align-items: stretch;
     width: 100%;
+    height: 450px;
+    margin-top: 1rem;
+}
+
+.info_detail {
+    color: #333;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #95E1DF;
+    width: 22.5%;
+    margin-left: 32px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.info_detail .hide {
+    display: none !important;
+}
+
+.info_detail .customer_wrapper_empty {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-bottom: 48px;
+}
+
+.info_detail .customer_wrapper_empty .note {
+    font-size: 24px;
+}
+
+.info_detail .customer_wrapper {
+    flex: 0 0 25%;
+}
+
+.info_detail .common_wrapper {
+    flex-grow: 1;
+    margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info_detail .customer_wrapper .customer_info_list {
+    padding: 0 1em;
+    list-style-type: none;
+}
+
+.logistic_info_wrapper .logistic_info_list,
+.shopping_info_wrapper .shopping_info_list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.logistic_info_wrapper .logistic_info_list .list_item,
+.customer_wrapper .customer_info_list .list_item,
+.shopping_info_wrapper .shopping_info_list .list_item {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 32px;
+}
+
+.shopping_info_wrapper .shopping_info_list .list_item.large_block {
+    flex-direction: column;
+    flex-grow: 1;
+    height: auto;
+    padding: 0.5em 0 0;
+    justify-content: flex-start;
+}
+
+.shopping_info_wrapper .shopping_info_list .list_item.large_block .shopping_info_content_wrapper {
+    align-self: stretch;
+}
+
+.customer_wrapper .customer_info_list .list_item .item_label,
+.logistic_info_wrapper .logistic_info_list .list_item .item_label,
+.shopping_info_wrapper .shopping_info_list .list_item .item_label {
+    margin-right: auto;
+}
+
+.info_detail .logistic_info_wrapper .logistic_info_list,
+.info_detail .shopping_info_wrapper .shopping_info_list {
+    color: #333;
+}
+
+.info_detail .common_wrapper .note_wrapper {
+    flex: 0 0 35%;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.info_detail .common_wrapper .order_wrapper {
+    flex-grow: 1;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.info_detail .logistic_info_wrapper,
+.info_detail .shopping_info_wrapper {
+    background-color: white;
+    flex-grow: 1;
+}
+
+.info_detail .common_wrapper.order_food_wrapper .order_list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info_detail .common_wrapper.order_food_wrapper .order_list .list_item {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0.5em;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+}
+
+.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_reward {
+    margin-left: auto;
+}
+
+.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_number {
+    margin-left: 1em;
+}
+
+.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_number::before {
+    content: "x";
+}
+
+.info_detail .common_wrapper .note_wrapper .note_label {
+    margin: 0 0 0.5em;
+}
+
+.info_detail .common_wrapper .note_wrapper .note_content {
+    margin: 0 0 0.5em;
+}
+
+.info_detail .pick_bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    box-sizing: border-box;
+    box-shadow: 0 -5px 5px 0 rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.info_detail .pick_bar .counter {
+    color: #333;
+    display: flex;
+    align-items: center;
+    flex: 2 0 auto;
+    padding-left: 0.5rem;
+    box-sizing: border-box;
+}
+
+.info_detail .pick_bar .counter .item_label::after {
+    content: "：";
+}
+
+.info_detail .pick_bar .pick_btn {
+    color: #333;
+    flex: 1 0 auto;
+    border: 0;
+    background-color: #71c9ce;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    outline: none;
+}
+
+.info_detail .pick_bar .pick_btn:hover {
+    background-color: #52A4B1;
+}
+
+.info_detail .pick_bar .pick_btn:active {
+    color: white;
+    background-color: #388094;
+}
+
+.info_flow {
+    overflow: hidden scroll;
+    height: 100%;
+    background-color: white;
 }
 
 .info_list {
@@ -133,7 +392,6 @@ main {
 
 .info_list .list_item {
     position: relative;
-    padding: 0.25rem;
     border-bottom: 1px solid #eee;
     transition: background-color 0.1s ease;
 }
@@ -142,7 +400,13 @@ main {
     display: block;
     width: 100%;
     height: 100%;
+    padding: 0.5rem;
     outline: none;
+}
+
+/* 阻止子元素响应事件 */
+.info_list .list_item .item_link * {
+    pointer-events: none;
 }
 
 .info_list .list_item:hover,
@@ -189,6 +453,10 @@ main {
 
 .info_list .list_item .item_brief .brief_item:last-child::after {
     content: none;
+}
+
+.info_list .list_item .item_brief .brief_item .item_label::after {
+    content: "：";
 }
 
 .info_list .list_item .revenue {

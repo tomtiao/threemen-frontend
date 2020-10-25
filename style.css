@@ -69,7 +69,20 @@
 }
 
 .section_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-weight: normal;
+}
+
+.section_title .more {
+    color: #71C9CE;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.section_title .more:hover {
+    color: #52A4B1;
 }
 
 .content_wrapper {

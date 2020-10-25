@@ -24,30 +24,30 @@ function filterHandler() {
     }
 }
 
-function toTop() {
-    let to_top_btn = document.querySelector('.to_top');
-    to_top_btn.addEventListener('click', () => window.scroll({ top: 0, behavior: 'smooth' }));
-}
+// function toTop() {
+//     let to_top_btn = document.querySelector('.to_top');
+//     to_top_btn.addEventListener('click', () => window.scroll({ top: 0, behavior: 'smooth' }));
+// }
 
-function mobi() {
-    document.querySelector('.catagory_btn')
-        .addEventListener('click', e => {
-            e.preventDefault();
-            e.stopPropagation();
-            document.querySelector('.catagory_list.list')
-                .classList.toggle('show');
-        })
-    document.querySelector('.catagory_list')
-        .addEventListener('click', e => {
-            e.stopPropagation();
-        });
-    document.body.addEventListener('click', e => {
-        const list = document.querySelector('.catagory_list');
-        if (list.classList.contains('show')) {
-            list.classList.remove('show');
-        }
-    });
-}
+// function mobi() {
+//     document.querySelector('.catagory_btn')
+//         .addEventListener('click', e => {
+//             e.preventDefault();
+//             e.stopPropagation();
+//             document.querySelector('.catagory_list.list')
+//                 .classList.toggle('show');
+//         })
+//     document.querySelector('.catagory_list')
+//         .addEventListener('click', e => {
+//             e.stopPropagation();
+//         });
+//     document.body.addEventListener('click', e => {
+//         const list = document.querySelector('.catagory_list');
+//         if (list.classList.contains('show')) {
+//             list.classList.remove('show');
+//         }
+//     });
+// }
 
 
 function displayResult() {
@@ -91,12 +91,33 @@ function displayResult() {
 
             let new_second_list_item = document.createElement('li');
             new_second_list_item.classList.add('brief_item');
-            new_second_list_item.textContent = "固定岗位：" + info_o['fixSeat'];
+
+            let new_second_item_label = document.createElement('span');
+            new_second_item_label.classList.add('item_label');
+            new_second_item_label.textContent = '固定岗位';
+
+            new_second_list_item.append(new_second_item_label);
+            
+            if (info_o['fixSeat'] !== null) {
+                new_second_list_item.textContent += info_o['fixSeat'];
+            } else {
+                new_second_list_item.textContent += '空';
+            }
 
             new_second_list.append(new_second_list_item);
 
             let new_second_list_item_copied = new_second_list_item.cloneNode(true);
-            new_second_list_item_copied.textContent = "临时岗位：" + info_o['temSeat'];
+            
+            let new_second_item_label_copied = new_second_item_label.cloneNode(true)
+            new_second_item_label_copied.textContent = '临时岗位';
+
+            new_second_list_item_copied.append(new_second_item_label);
+
+            if (info_o['temSeat'] !== null) {
+                new_second_list_item_copied.textContent += info_o['temSeat'];
+            } else {
+                new_second_list_item_copied.textContent += '空';
+            }
 
             new_second_list.append(new_second_list_item_copied);
 
@@ -146,16 +167,25 @@ function displayResult() {
                 return res;
             }
 
+            function resetList(list_item, keyword) {
+                activeBtn(list_item);
+                makeRequest(keyword).then(data_obj => {
+                    if (keyword !== '') {
+                        initPageList(data_obj['totalPage']);
+                    }
+                    changePage(data_obj['list']);
+                });
+            }
+
+            let keyword;
             list.addEventListener('click', e => {
+                keyword = getKeyword();
                 if (e.target.tagName === 'BUTTON') {
                     switch (e.target.parentNode.className) {
                         case 'list_item prev_page':
                             if (currentPage !== 1) {
                                 currentPage--;
-                                activeBtn(findSpecificPageBtn(currentPage));
-                                makeRequest().then(data_obj => {
-                                    changePage(data_obj['list']);
-                                });
+                                resetList(findSpecificPageBtn(currentPage), keyword);
                             } else {
                                 setTimeout(alert('已经是首页了！'));
                             }
@@ -163,20 +193,14 @@ function displayResult() {
                         case 'list_item next_page':
                             if (currentPage != totalPage) {
                                 currentPage++;
-                                activeBtn(findSpecificPageBtn(currentPage));
-                                makeRequest().then(data_obj => {
-                                    changePage(data_obj['list']);
-                                });
+                                resetList(findSpecificPageBtn(currentPage), keyword);
                             } else {
                                 setTimeout(alert('已经是尾页了！'));
                             }
                             break;
                         default:
                             currentPage = e.target.dataset.page;
-                            activeBtn(e.target.parentNode);
-                            makeRequest().then(data_obj => {
-                                changePage(data_obj['list']);
-                            });
+                            resetList(e.target.parentNode, keyword);
                             break;
                     }
                 }
@@ -187,12 +211,12 @@ function displayResult() {
     }
 
 
-    function makeRequest() {
+    function makeRequest(keyword) {
         const requestURL = '/workStudyServlet/showWorkStudy';
         let request = {
             currentPage: currentPage,
             pageSize: 5,
-            content: ""
+            content: keyword || ""
         };
 
         let urlParams = new URLSearchParams();
@@ -209,6 +233,12 @@ function displayResult() {
             .then(res => res.json()).catch(console.log);
     }
 
+    function getKeyword() {
+        const search_bar = document.querySelector('.search_bar');
+
+        return search_bar.value;
+    }
+
     let data = makeRequest();
     data.then(data_obj => {
         totalPage = data_obj['totalPage'];
@@ -221,8 +251,14 @@ function displayResult() {
             .classList.add('active');
         clickBtnHandler();
     });
+}
 
+function clickResultHandler() {
+    const info_list = document.querySelector('.info_list');
 
+    info_list.addEventListener('click', e => {
+        console.log(e.target.children);
+    });
 }
 
 // function displayResult() {
@@ -236,8 +272,9 @@ function displayResult() {
 // }
 
 window.addEventListener('load', () => {
-    // filterHandler();
-    toTop();
+    filterHandler();
+    // toTop();
     // mobi();
     displayResult();
+    clickResultHandler();
 });
