@@ -29,19 +29,31 @@ function accountHandler() {
         const default_dir = '/static/img/default_avatar.png';
         return getUserImgObj().then(res => {
             let data;
-            const avatar = document.querySelector('.avatar');
+            const avatar_header = document.querySelector('.avatar');
+            const avatar_panel = document.querySelector('.avatar_img');
             if (res) {
                 data = res['dataObj']; // Base64
-                avatar.src = 'data:image/png;base64,' + data;
+                avatar_header.src = 'data:image/png;base64,' + data;
+                avatar_panel.src = 'data:image/png;base64,' + data;
             } else { // fallback img
-                avatar.src = default_dir;
+                avatar_header.src = default_dir;
+                avatar_panel.src = default_dir;
             }
         });
     };
 
     function avatar_panel_handler() {
-        let get_user_info = () => {
+        let get_user_info_obj = () => {
             const requestURL = '/userInfo/showUserInfo';
+
+            return fetch(requestURL, {
+                method: 'POST',
+                credentials: 'same-origin'
+            }).then(res => res.json()).catch(console.log);
+        };
+
+        let get_user_balance_obj = () => {
+            const requestURL = '/userSelf/showUserSelf';
 
             return fetch(requestURL, {
                 method: 'POST',
@@ -53,12 +65,23 @@ function accountHandler() {
         const avatar = document.querySelector('.account');
 
         const nickname = document.querySelector('.nickname');
-        let data = get_user_info();
-        data.then(user_obj => {
+        let user_data = get_user_info_obj();
+        user_data.then(user_obj => {
             if (user_obj['flag']) {
                 nickname.textContent = user_obj['dataObj'][1]['nickname'];
             } else { // fallback
                 nickname.textContent = '噢，名字走丢了';
+            }
+        });
+
+        const balance = document.querySelector('.balance');
+
+        let balance_data = get_user_balance_obj();
+        balance_data.then(balance_obj => {
+            if (balance_obj['flag']) {
+                balance.textContent = balance_obj['dataObj']['nickname'];
+            } else { // fallback
+                balance.textContent = '噢，金子走丢了';
             }
         });
 
