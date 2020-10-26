@@ -284,7 +284,65 @@ function pageBehaviorHandler() {
     asidePanelHandler();
 }
 
+function updateListHandler() {
+    function makeRequest() {
+        const stallData = '/static/json/data.json';
+
+        return fetch(stallData).then(res => res.json()).catch(console.log);
+    }
+
+    function createListItem(stall_img_src, stall_name, stall_desc, stall_position, stall_floor) {
+        let cover = document.createElement('a');
+        cover.classList.add('cover');
+        
+        let bg_block = document.createElement('div');
+        bg_block.classList.add('bg_block');
+        
+        let bg_img = new Image();
+        bg_img.classList.add('bg_img');
+        bg_img.src = stall_img_src;
+        bg_img.alt = stall_name;
+
+        bg_block.append(bg_img);
+
+        let text_content = document.createElement('div');
+        text_content.classList.add('text_content');
+
+        let item_title = document.createElement('h1');
+        item_title.classList.add('item_title');
+        item_title.textContent = stall_name;
+
+        let desc = document.createElement('p');
+        desc.classList.add('description');
+        desc.textContent = stall_desc;
+
+        text_content.append(item_title, desc);
+
+        let list_item = document.createElement('li');
+        list_item.classList.add('list_item');
+        list_item.dataset.position = stall_position;
+        list_item.dataset.floor = stall_floor;
+
+        list_item.append(cover, bg_block, text_content);
+
+        return list_item;
+    }
+
+    function fillStallList() {
+        const content_list = document.querySelector('.content_list');
+
+        return makeRequest().then(data => {
+            data.forEach((stall_obj) => {
+                content_list.append(createListItem('/static/img/order_food.jpg', stall_obj['name'], stall_obj['time'], stall_obj['location'], stall_obj['floor']));
+            });
+        });
+    }
+    
+    fillStallList().then(() => {
+        pageBehaviorHandler();
+    });
+}
 
 window.addEventListener('load', e => {
-    pageBehaviorHandler();
+    updateListHandler();
 });

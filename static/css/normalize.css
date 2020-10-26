@@ -373,6 +373,6 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-.info_item input[type=number] {
+input[type=number] {
     -moz-appearance: textfield;
 }

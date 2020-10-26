@@ -105,6 +105,7 @@ a.verify:hover {
     color: #52A4B1;
 }
 
+.verify_wrapper,
 .change_pw_panel,
 .upload_avatar {
     position: fixed;
@@ -123,6 +124,7 @@ a.verify:hover {
     pointer-events: none;
 }
 
+.verify_wrapper.show,
 .upload_avatar.show,
 .change_pw_panel.show {
     opacity: 1;
@@ -163,6 +165,7 @@ a.verify:hover {
     box-sizing: border-box;
     border-bottom: 2px solid #eee;
     transition: border-bottom 0.3s ease-in-out;
+    outline: none;
 }
 
 .change_pw_panel .item input[type = password]:focus {
@@ -205,6 +208,7 @@ a.verify:hover {
     background-color: #71c9ce;
     font-size: 14px;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    outline: none;
 }
 
 .change_pw_panel .change_pw_btn:hover {
@@ -254,6 +258,7 @@ a.verify:hover {
     background-color: #71c9ce;
     font-size: 14px;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    outline: none;
 }
 
 .upload_avatar .item button[type = submit]:hover {
@@ -261,10 +266,87 @@ a.verify:hover {
 }
 
 .upload_avatar .item button[type = submit]:active {
+    color: #eee;
     background-color: #388094;
 }
 
 .upload_avatar .item .preview img {
     width: 64px;
     height: 64px;
+}
+
+.verify_wrapper {
+    padding-top: 4em;
+}
+
+.verify_wrapper .item {
+    position: relative;
+    height: 32px;
+    margin: 2em 0;
+}
+
+.item:first-child {
+    margin-top: 0;
+}
+
+.item input {
+    box-sizing: border-box;
+    padding: 0.5em;
+    height: 100%;
+    border: 0;
+    border-bottom: 2px solid #eee;
+    transition: border-color 0.3s ease-in-out;
+    outline: none;
+}
+
+.item input + label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    margin: 0.5em;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.item input:focus {
+    border-color: #71c9ce;
+}
+
+.item input:focus + label {
+    color: #71c9ce;
+    transform: translateY(-100%);
+}
+
+.item input:invalid + label {
+    transform: translateY(0);
+}
+
+.item input:invalid:focus + label {
+    transform: translateY(-100%);
+}
+
+.submit_btn {
+    color: #333;
+    display: block;
+    width: 80px;
+    height: 28px;
+    margin-top: 0.5em;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 16px;
+    border: 0;
+    background-color: #71c9ce;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    outline: none;
+}
+
+.submit_btn:hover {
+    background-color: #52A4B1;
+}
+
+.submit_btn:active {
+    color: #eee;
+    background-color: #388094;
 }

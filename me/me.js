@@ -1,95 +1,76 @@
 "use strict";
-function getUserInfo(url) {
-    return fetch(url, {
-        method: "POST",
-        credentials: "include"
-    }).then(res => res.json()).catch(console.log);
-}
 
 // 获取指定信息并修改DOM
-function setUserInfo(target, url) {
-    function changeDom(info, doms, obj_name) {
-        const keys = Object.keys(doms);
+function setUserInfo() {
+    function getUserInfo() {
+        const requestURL = '/userInfo/showUserInfo';
 
-        keys.forEach((key, index) => {
-            doms[key].textContent = info[obj_name][key];
-        });
+        return fetch(requestURL, {
+            method: "POST",
+            credentials: "same-origin"
+        }).then(res => res.json()).catch(console.log);
     }
 
-    getUserInfo(url).then(data => {
-        let user_info = data;
-        let doms;
-        let obj_name;
-        switch (target) {
-            case '.content':
-                doms = {
-                    nickname: document.querySelector(target + ' ' + '.nickname'),
-                    level: document.querySelector('.level'),
-                    coin: document.querySelector('.coin'),
-                    account: document.querySelector(target + ' ' + '.username'),
-                    email: document.querySelector('.email'),
-                    department: document.querySelector('.college'),
-                    master: document.querySelector('.dept'),
-                    address: document.querySelector('.dorm')
-                };
-                obj_name = 'userInfo';
-                break;
-            case '.working_me':
-                doms = {
-                    mark: document.querySelector('.rating'),
-                    goodCount: document.querySelector('.medal'),
-                    account: document.querySelector(target + ' ' + '.username'),
-                    stuId: document.querySelector('.id'),
-                    realName: document.querySelector('.name'),
-                    totalCount: document.querySelector('.total_count'),
-                    badCount: document.querySelector('.bad_count')
-                };
-                obj_name = 'workerInfo';
-                break;
-            case '.want_work':
-                doms = {
-                    stuId: document.querySelector(target + ' ' + '.id'),
-                    realName: document.querySelector(target + ' ' + '.name')
-                };
-                obj_name = 'workerInfo';
-                break;
-        }
-        changeDom(user_info, doms, obj_name);
-    }).catch(console.log);
+    function getWorkerInfo() {
+        const requestURL = '/workerInfo/showInfo';
 
+        return fetch(requestURL, {
+            method: 'POST',
+            credentials: 'same-origin',
+        }).then(res => res.json()).catch(console.log);
+    }
+
+    getUserInfo().then(data => {
+        const user_contact_o = data['dataObj'][0];
+        const user_account_o = data['dataObj'][1];
+        const doms = {
+            nickname: [ document.getElementById('nickname_avatar'), document.getElementById('nickname_detail') ],
+            phone: document.getElementById('phone'),
+            account: document.getElementById('account'),
+            email: document.getElementById('email'),
+            address: document.getElementById('address')
+        };
+
+        const keys = Object.keys(doms);
+        keys.forEach((value) => {
+            if (doms[value] instanceof Array) {
+                doms[value].forEach((value) => value.textContent = user_contact_o[value]);
+            } else {
+                switch (value) {
+                    case 'phone':
+                    case 'address':
+                        doms[value].textContent = user_account_o[value];
+                        break;
+                    case 'account':
+                    case 'email':
+                        doms[value].textContent = user_contact_o[value];
+                        break;
+                    default:
+                        console.log(`unexpected value ${value}`);
+                        break;
+                }
+            }
+        });
+    });
+
+    getWorkerInfo(data => {
+        const worker_obj = data['workderInfo'];
+
+        const doms = {
+            stuId: document.getElementById('id'),
+            realName: document.getElementById('real_name')
+        };
+
+        const keys = Object.keys(worker_obj);
+        keys.forEach((value) => {
+            doms[value].textContent = worker_obj[value];
+        });
+    });
 }
 
 // 进行信息的获取和DOM修改
 function userInfoHandler() {
-    const urls = {
-        userURL: '/userInfo/showUserInfo',
-        workerURL: '/workerInfo/showInfo'
-    };
-
-    // 页面加载即获取并显示信息
-    setUserInfo('.content', urls['userURL']);
-
-    (() => {
-        let clicked = false;
-        document.querySelector('.working_me')
-            .addEventListener('click', () => {
-                if (!clicked) {
-                    setUserInfo('.working_me', urls['workerURL']);
-                    clicked = true;
-                }
-            });
-    })();
-
-    (() => {
-        let clicked = false;
-        document.querySelector('.want_work')
-            .addEventListener('click', () => {
-                if (!clicked) {
-                    setUserInfo('.want_work', urls['workerURL']);
-                    clicked = true;
-                }
-            });
-    })();
+    setUserInfo();
 }
 
 function uploadAvatarHandler() {
@@ -210,8 +191,67 @@ function changePasswordHandler() {
     });
 }
 
+function verificationHandler() {
+    function makeRequest() {
+        const requestURL = '/workerInfo/workerRealize';
+        
+        const form_self = document.querySelector('.verify_form');
+    
+        const form_data = new FormData(form_self);
+    
+        let urlParams = new URLSearchParams();
+        form_data.forEach((value, key) => {
+            urlParams.append(key, value);
+        });
+    
+        return fetch(requestURL, {
+            method: 'POST',
+            body: urlParams,
+            credentials: 'same-origin'
+        }).then(res => res.json()).catch(console.log);
+    }
+    
+    function sendRequestHandler() {
+        const verify_link = document.getElementById('verify_link');
+        const verification_panel = document.querySelector('.verify_wrapper');
+
+        verify_link.addEventListener('click', e => {
+            e.preventDefault();
+            verification_panel.classList.toggle('show');
+        });
+
+        verification_panel.addEventListener('click', e => {
+            e.stopPropagation();
+        });
+
+        document.body.addEventListener('click', e => {
+            if (e.target !== verify_link && verification_panel.classList.contains('show')) {
+                verification_panel.classList.remove('show');
+            }
+        });
+
+        const form_self = document.querySelector('.verify_form');
+
+        form_self.addEventListener('submit', e => {
+            e.preventDefault();
+            makeRequest().then(data => {
+                if (data['flag']) {
+                    alert('认证成功');
+                    location.replace('/me');
+                } else {
+                    alert('出现了错误！');
+                    console.log(data['errorMsg']);
+                }
+            });
+        });
+    }
+
+    sendRequestHandler();
+}
+
 window.addEventListener('load', () => {
     // userInfoHandler();
     uploadAvatarHandler();
     changePasswordHandler();
+    verificationHandler();
 });

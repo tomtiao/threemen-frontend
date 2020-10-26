@@ -169,6 +169,10 @@ function pageBehaviorHandler() {
     jump_to_section_handler();
 }
 
+function updateListItem() {
+    
+}
+
 window.addEventListener('load', e => {
     pageBehaviorHandler();
 });

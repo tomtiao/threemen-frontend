@@ -256,20 +256,12 @@ function displayResult() {
 function clickResultHandler() {
     const info_list = document.querySelector('.info_list');
 
+
+    // TODO
     info_list.addEventListener('click', e => {
         console.log(e.target.children);
     });
 }
-
-// function displayResult() {
-//     obj = makeRequest();
-//     totalPage;
-//     initPageList();
-//     currentPage;
-//     listenPageList();
-//     changePage();
-//     updateList();
-// }
 
 window.addEventListener('load', () => {
     filterHandler();

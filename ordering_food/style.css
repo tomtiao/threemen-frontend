@@ -429,6 +429,7 @@ aside.show {
     width: 100%;
     height: 100%;
     z-index: 1;
+    cursor: pointer;
 }
 
 .list_item .bg_block {
@@ -468,7 +469,7 @@ aside.show {
 .list_item .text_content .item_title {
     margin: 0;
     font-weight: normal;
-    font-size: 24px;
+    font-size: 18px;
     height: 28px;
     line-height: 28px;
     margin: 0.5rem 0;

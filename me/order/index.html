@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="style.css">
+    <title>订单</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="order_wrapper">
+            <div class="list_swapper">
+                <ul class="swapper_list">
+                    <li class="list_item"><a href="#" class="item_link">我下的单</a></li>
+                    <li class="list_item"><a href="#" class="item_link">我接的单</a></li>
+                </ul>
+            </div>
+            <div class="order_list_wrapper">
+                <ul class="my_order_list order_flow">
+                    <!-- <li class="list_item">
+                        <a href="#" class="item_link">
+                            <h1 class="item_title">顺客隆</h1>
+                            <ul class="item_brief">
+                                <li class="brief_item"><span class="item_label">送达地址</span>南苑11栋</li>
+                                <li class="brief_item indicator">待接单</li>
+                            </ul>
+                        </a>
+                    </li> -->
+                </ul>
+                <ul class="picked_order_list order_flow">
+                    <!-- <li class="list_item">
+                        <a href="#" class="item_link">
+                            <h1 class="item_title">顺客隆</h1>
+                            <ul class="item_brief">
+                                <li class="brief_item"><span class="item_label">送达地址</span>南苑11栋</li>
+                                <li class="brief_item indicator">待接单</li>
+                            </ul>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="order_detail_wrapper">
+            <section class="info_detail">
+                <div class="customer_wrapper_empty hide">
+                    <p class="note">还没有选择项目</p>
+                </div>
+                <div class="customer_wrapper">
+                    <ul class="customer_info_list">
+                        <li class="list_item">
+                            <span class="item_label">昵称</span>
+                            <span class="item_content">小明</span>
+                        </li>
+                        <li class="list_item">
+                            <span class="item_label">手机号</span>
+                            <span class="item_content">10086</span>
+                        </li>
+                        <li class="list_item">
+                            <span class="item_label">送达地址</span>
+                            <span class="item_content">北京路</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="order_food_wrapper common_wrapper hide">
+                    <div class="order_wrapper">
+                        <ul class="order_list">
+                            <li class="list_item">
+                                <span class="order_content">黑椒鸡排</span>
+                                <span class="order_number">1</span>
+                                <span class="order_reward">100金子</span>
+                            </li>
+                            <li class="list_item">
+                                <span class="order_content">黑椒鸡排</span>
+                                <span class="order_number">1</span>
+                                <span class="order_reward">100金子</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="note_wrapper">
+                        <span class="note_label">备注</span>
+                        <p class="note_content">多加辣椒</p>
+                    </div>
+                </div>
+                <div class="shopping_wrapper common_wrapper hide">
+                    <div class="shopping_info_wrapper">
+                        <ul class="shopping_info_list">
+                            <li class="list_item"><span class="item_label">购买地址</span>顺客隆</li>
+                            <li class="list_item large_block">
+                                <span class="item_label">商品信息</span>
+                                <div class="shopping_info_content_wrapper">
+                                    <p class="shopping_info_content">我要买下整个超市</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="logistic_wrapper common_wrapper">
+                    <div class="logistic_info_wrapper">
+                        <ul class="logistic_info_list">
+                            <li class="list_item">
+                                <span class="item_label">取件地址</span>
+                                <span class="item_content">北苑18栋负一层</span>
+                            </li>
+                            <li class="list_item">
+                                <span class="item_label">取件码</span>
+                                <span class="item_content">10086</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="note_wrapper">
+                        <span class="note_label">备注</span>
+                        <p class="note_content">尽快送达</p>
+                    </div>
+                </div>
+                <div class="pick_bar">
+                    <div class="counter"><span class="item_label">跑腿费</span><span class="counter_content">30</span> 金子</div>
+                    <button class="pick_btn">接单</button>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

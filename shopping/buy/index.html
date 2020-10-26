@@ -61,7 +61,7 @@
                 <div class="address_section">
                     <div class="detail_address">
                         <div class="name info_item">
-                            <input type="text" name="name" id="name" autocomplete="name" required>
+                            <input type="text" name="nickname" id="name" autocomplete="name" required>
                             <div class="label_wrapper">
                                 <img src="/static/img/buy/name.png" alt="name" class="item_img name">
                                 <label for="name" class="info_label name_label">姓名</label>
@@ -99,7 +99,7 @@
                             <img src="/static/img/buy/note.png" alt="note" class="item_img note">
                             <label for="note" class="info_label note_label bold">请填写想要代购的商品</label>
                         </div>
-                        <textarea name="note" id="note" cols="30" rows="10" placeholder="点击输入你的商品要求，如某品牌珍珠奶茶，大杯，热，半糖"
+                        <textarea name="commInfo" id="note" cols="30" rows="10" placeholder="点击输入你的商品要求，如某品牌珍珠奶茶，大杯，热，半糖"
                             required></textarea>
                         <div class="suggestion">
                             <ul class="suggestion_list">
@@ -128,21 +128,21 @@
                             <span class="info_label site_label">购买地址</span>
                             <div class="site_custom_choice_wrapper">
                                 <label class="site_custom_choice_label"><input type="radio" name="site_custom_choice"
-                                        id="specific_address" value="specific_address" checked>指定地址</label>
+                                        id="specific_address" checked>指定地址</label>
                                 <label class="site_custom_choice_label"><input type="radio" name="site_custom_choice"
-                                        id="nearby" value="nearby">就近购买</label>
+                                        id="nearby" value="就近购买">就近购买</label>
                             </div>
                         </div>
                         <div class="info_item site_choice">
                             <div class="site_choice_wrapper">
-                                <input type="text" name="buy_address" id="buy_address" placeholder="请输入购买地址">
+                                <input type="text" name="commAddress" id="buy_address" placeholder="请输入购买地址">
                             </div>
                         </div>
                         <div class="info_item">
                             <img src="/static/img/buy/item.png" alt="item" class="item_img item">
                             <label for="estimated_price" class="info_label estimated_price_label">预估商品费</label>
                             <div class="estimated_price_choice_wrapper">
-                                <input type="number" name="estimated_price" id="estimated_price" min="0" step="0.5"
+                                <input type="number" name="commCostReal" id="estimated_price" min="0" step="0.5"
                                     required>
                             </div>
                         </div>
@@ -161,7 +161,7 @@
         <div class="action_bar">
             <div class="counter">
                 <span class="counter_label">待支付:</span>
-                <p class="total">666金子</p>
+                <p class="total"><span class="total_content">0</span>金子</p>
             </div>
             <div class="checkin">
                 <button class="checkin_btn" type="submit">提交订单</button>
