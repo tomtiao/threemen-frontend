@@ -132,8 +132,8 @@ function getNewOrder(isUser, requestStatus) {
                     return;
                 }
                 getUserOrder(isUser, value).then(data_obj => {
-                    if (data_obj['info']['flag']) {
-                        updateList(data_obj['info'], target_list, false); // TODO
+                    if (data_obj['flag']) {
+                        updateList(data_obj, target_list, false); // TODO
                     } else {
                         console.log(`获取${value}类型订单信息失败！`);
                         console.log(data_obj);
@@ -148,8 +148,8 @@ function getNewOrder(isUser, requestStatus) {
         case 4:
         case 5:
             getUserOrder(isUser, requestStatus).then(data_obj => {
-                if (data_obj['info']['flag']) {
-                    updateList(data_obj['info'], target_list, true);
+                if (data_obj['flag']) {
+                    updateList(data_obj, target_list, true);
                 } else {
                     console.log(`获取${value}类型订单信息失败！`);
                     console.log(data_obj);
@@ -360,8 +360,8 @@ function listenClickListItem() {
                 setPickBar(cancelable, e.target.dataset.id);
 
                 requestOrderDetail(e.target.dataset.id).then(data_obj => {
-                    if (data_obj['info']['flag']) {
-                        let info_array = data_obj['info']['dataObj'];
+                    if (data_obj['flag']) {
+                        let info_array = data_obj['dataObj'];
                         setDetailPanelContent(e.target, info_array[0]);
                     } else {
                         console.log('获取订单内容失败');
@@ -370,8 +370,8 @@ function listenClickListItem() {
                 });
 
                 requestOrderContact(e.target.dataset.id).then(data_obj => {
-                    if (data_obj['info']['flag']) {
-                        let info_o = data_obj['info']['dataObj'];
+                    if (data_obj['flag']) {
+                        let info_o = data_obj['dataObj'];
                         setDetailPanelContact(e.target, info_o);
                     } else {
                         console.log('获取订单内容失败');
@@ -411,7 +411,7 @@ function listenOrderSubmit() {
                         "errorMsg": "cHwMK"
                     }
                 };
-                if (data_obj['info']['flag']) {
+                if (data_obj['flag']) {
                     alert('取消订单成功。');
                     location.replace('/me/order');
                 } else {

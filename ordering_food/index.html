@@ -14,28 +14,28 @@
     <div class="go_dark"></div>
     <header>
         <div class="header_wrapper">
-            <div class="logo"><a href="/" class="logo_link"><img src="/static/img/three_men_transparent.png" alt="Three men logo"
-                        class="logo_img"></a></div>
+            <div class="logo"><a href="/" class="logo_link"><img src="/static/img/three_men_transparent.png"
+                        alt="Three men logo" class="logo_img"></a></div>
             <ul class="section_list">
                 <h1 class="visually_hidden list_title">区域</h1>
-                <li class="list_item"><a href="/" class="item_link active">首页</a></li>
+                <li class="list_item"><a href="/" class="item_link">首页</a></li>
                 <li class="list_item"><a href="/search" class="item_link">兼职</a></li>
-                <li class="list_item"><a href="/ordering_food" class="item_link">食堂订餐</a></li>
+                <li class="list_item"><a href="/ordering_food" class="item_link active">食堂订餐</a></li>
                 <li class="list_item"><a href="/shopping" class="item_link">超市代购</a></li>
                 <li class="list_item"><a href="/logistic" class="item_link">快递帮拿</a></li>
             </ul>
             <section class="account_section login_and_register">
-            <!-- <section class="account_section login_and_register hidden"> -->
+                <!-- <section class="account_section login_and_register hidden"> -->
                 <a href="/login" class="login account_func">登录</a>
                 <a href="/register" class="register account_func">注册</a>
             </section>
             <section class="account_section with_avatar hidden">
-            <!-- <section class="account_section with_avatar"> -->
+                <!-- <section class="account_section with_avatar"> -->
                 <a href="/me" class="account">
                     <img src="/static/img/default_avatar.png" alt="User avatar" class="avatar">
                 </a>
                 <div class="avatar_panel">
-                <!-- <div class="avatar_panel" style="opacity: 1; pointer-events: all;"> -->
+                    <!-- <div class="avatar_panel" style="opacity: 1; pointer-events: all;"> -->
                     <div class="avatar_name_wrapper">
                         <a href="/me" class="avatar">
                             <img src="/static/img/default_avatar.png" alt="User avatar" class="avatar_img">
@@ -44,7 +44,8 @@
                     </div>
                     <div class="func_list_wrapper">
                         <ul class="func_list">
-                            <li class="list_item"><a href="#" class="item_link" id="balance">金子余额<span class="balance">0</span></a></li>
+                            <li class="list_item"><a href="#" class="item_link" id="balance">金子余额<span
+                                        class="balance">0</span></a></li>
                             <li class="list_item"><a href="#" class="item_link" id="recharge">金子充值</a></li>
                             <li class="list_item"><a href="#" class="item_link" id="withdraw">金子提现</a></li>
                             <li class="list_item"><a href="/me/order" class="item_link" id="order">我的订单</a></li>
@@ -57,11 +58,11 @@
         </div>
     </header>
     <div class="main_wrapper">
-        <!-- <aside class="show"> -->
-        <aside>
+        <aside class="show">
+        <!-- <aside> -->
             <div class="aside_wrapper">
                 <div class="stall_avatar_wrapper no_shrink stall_wrapper">
-                    <img src="/static/img/ordering_food/niu.png" alt="stall_avatar" class="stall_avatar">
+                    <img src="/static/img/three_men_transparent.png" alt="stall_avatar" class="stall_avatar">
                 </div>
                 <div class="tab_wrapper no_shrink stall_wrapper">
                     <ul class="tab_list">
@@ -72,19 +73,19 @@
                 <div class="stall_content_wrapper no_shrink stall_wrapper">
                     <div class="side_nav_wrapper">
                         <ul class="side_nav_list">
-                            <li class="list_item active"><a href="#0" class="item_link" data-index="0">默认分类</a></li>
+                            <li class="list_item active"><a href="#0" class="item_link" data-index="0">默认</a></li>
                         </ul>
                     </div>
                     <div class="main_content_wrapper">
                         <dl class="dishes_list">
-                            <dt class="dishes_section_title" data-index="0" id="0">默认分类</dt>
+                            <dt class="dishes_section_title" data-index="0" id="0">默认</dt>
                             <dd class="dishes_item">
                                 <div class="dishes_img_wrapper">
                                     <img src="#" alt="dishes" class="dishes_img">
                                 </div>
                                 <div class="dishes_desc">
                                     <h1 class="dishes_name">名字</h1>
-                                    <p class="dishes_price">¥0</p>
+                                    <p class="dishes_price"><span class="price_content">0</span></p>
                                 </div>
                                 <div class="dishes_add">
                                     <button type="button" class="remove_dishes dishes_btn invisible">-</button>
@@ -97,10 +98,14 @@
                 </div>
                 <div class="stall_info_wrapper no_shrink stall_wrapper hide">
                     <ul class="contact_list">
-                        <li class="list_item"><span class="item_label">店铺电话</span><a href="tel:" class="item_content" id="phone"></a></li>
-                        <li class="list_item"><span class="item_label">店铺地址</span><span class="item_content">广东金融学院</span></li>
-                        <li class="list_item"><span class="item_label">经营场所</span><span class="item_content" id="position"></span></li>
-                        <li class="list_item"><span class="item_label">营业时间</span><span class="item_content">10:30-13:00; 17:00-19:00</span></li>
+                        <li class="list_item"><span class="item_label">店铺电话</span><a href="tel:" class="item_content"
+                                id="phone"></a></li>
+                        <li class="list_item"><span class="item_label">店铺地址</span><span
+                                class="item_content">广东金融学院</span></li>
+                        <li class="list_item"><span class="item_label">经营场所</span><span class="item_content"
+                                id="position"></span></li>
+                        <li class="list_item"><span class="item_label">营业时间</span><span
+                                class="item_content">10:30-13:00; 17:00-19:00</span></li>
                     </ul>
                 </div>
             </div>
@@ -109,23 +114,38 @@
             <div class="main_content">
                 <div class="content_wrapper">
                     <ul class="position_selection_list selection_list">
-                        <li class="list_item current_active" data-position="all"><a href="#" class="item_link">全部</a></li>
+                        <li class="list_item current_active" data-position="all"><a href="#" class="item_link">全部</a>
+                        </li>
                         <li class="list_item" data-position="南苑食堂"><a href="#" class="item_link">南苑</a></li>
                         <li class="list_item" data-position="北苑食堂"><a href="#" class="item_link">北苑</a></li>
                     </ul>
                     <section class="content_flow">
                         <ul class="floor_selection_list selection_list">
-                            <li class="list_item current_active all" data-position="all"><a href="#" class="item_link">全部</a></li>
-                            <li class="list_item south" data-position="南苑食堂" data-floor="4"><a href="#" class="item_link">南苑四楼</a></li>
-                            <li class="list_item south" data-position="南苑食堂" data-floor="5"><a href="#" class="item_link">南苑五楼</a></li>
-                            <li class="list_item north" data-position="北苑食堂" data-floor="1"><a href="#" class="item_link">北苑一楼</a></li>
-                            <li class="list_item north" data-position="北苑食堂" data-floor="2"><a href="#" class="item_link">北苑二楼</a></li>
-                            <li class="list_item north" data-position="北苑食堂" data-floor="3"><a href="#" class="item_link">北苑三楼</a></li>
+                            <li class="list_item current_active all" data-position="all"><a href="#"
+                                    class="item_link">全部</a></li>
+                            <li class="list_item south" data-position="南苑食堂" data-floor="4"><a href="#"
+                                    class="item_link">南苑四楼</a></li>
+                            <li class="list_item south" data-position="南苑食堂" data-floor="5"><a href="#"
+                                    class="item_link">南苑五楼</a></li>
+                            <li class="list_item north" data-position="北苑食堂" data-floor="1"><a href="#"
+                                    class="item_link">北苑一楼</a></li>
+                            <li class="list_item north" data-position="北苑食堂" data-floor="2"><a href="#"
+                                    class="item_link">北苑二楼</a></li>
+                            <li class="list_item north" data-position="北苑食堂" data-floor="3"><a href="#"
+                                    class="item_link">北苑三楼</a></li>
                         </ul>
                         <div class="stall section">
                             <h1 class="visually_hidden section_title">店铺列表</h1>
                             <ul class="content_list">
-
+                                <li class="list_item" data-position="南苑食堂" data-floor="1">
+                                    <a class="cover"></a>
+                                    <div class="bg_block"><img class="bg_img"
+                                            src="/static/img/ordering_food.png" alt="默认"></div>
+                                    <div class="text_content">
+                                        <h1 class="item_title">默认</h1>
+                                        <p class="description"></p>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </section>

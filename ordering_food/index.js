@@ -218,6 +218,9 @@ function pageBehaviorHandler() {
                 price_content.textContent = dishes_price;
 
                 price.append(price_content);
+
+                desc.append(name ,price);
+
             }
 
             function updateDishesList(shop_name) {
@@ -226,7 +229,7 @@ function pageBehaviorHandler() {
                 cleanList();
 
                 makeRequest(shop_name).then(data_obj => {
-                    let dishes_array = data_obj['info']['dataObj'];
+                    let dishes_array = data_obj['dataObj'];
 
                     dishes_array.forEach(o => {
                         dishes_list.append(createListItem());
@@ -424,7 +427,7 @@ function updateListHandler() {
 
         keys.forEach((value) => {
             makeRequest(value).then(res_obj => {
-                let data_obj = res_obj['info'];
+                let data_obj = res_obj;
                 let info_array = data_obj['dataObj'];
                 info_array.forEach(o => {
                     content_list.append(createListItem(o['img'], o['shopName'], '', location_list[value], value));

@@ -250,7 +250,7 @@ function verificationHandler() {
 }
 
 window.addEventListener('load', () => {
-    // userInfoHandler();
+    userInfoHandler();
     uploadAvatarHandler();
     changePasswordHandler();
     verificationHandler();

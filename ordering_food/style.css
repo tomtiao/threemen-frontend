@@ -218,6 +218,10 @@ aside.show {
     margin-top: auto;
 }
 
+.dishes_list .dishes_item .dishes_desc .dishes_price .price_content::before {
+    content: '¥';
+}
+
 .main_content_wrapper .dishes_list .dishes_item .dishes_add {
     display: flex;
     justify-content: space-between;

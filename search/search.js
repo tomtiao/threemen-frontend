@@ -166,8 +166,8 @@ function pageBehaviourHandler() {
     function updateListAndPageSelection(catagory, content, isInitial) {
         requestPageAndInfo(catagory, currentPage, null, content)
             .then(page_and_info_o => {
-                let totalPage = page_and_info_o['info']['dataObj']['totalPage'];
-                let info_array = page_and_info_o['info']['dataObj']['list'];
+                let totalPage = page_and_info_o['dataObj']['totalPage'];
+                let info_array = page_and_info_o['dataObj']['list'];
 
                 initPageList(totalPage);
                 updateList(info_array, catagory);
@@ -423,8 +423,8 @@ function clickResultHandler() {
             }
 
             requestOrderDetail(e.target.dataset.id).then(data_obj => {
-                if (data_obj['info']['flag']) {
-                    let info_array = data_obj['info']['dataObj'];
+                if (data_obj['flag']) {
+                    let info_array = data_obj['dataObj'];
                     setDetailPanelContent(e.target, info_array[0]);
                 } else {
                     console.log('获取订单内容失败');
@@ -433,8 +433,8 @@ function clickResultHandler() {
             });
 
             requestOrderContact(e.target.dataset.id).then(data_obj => {
-                if (data_obj['info']['flag']) {
-                    let info_o = data_obj['info']['dataObj'];
+                if (data_obj['flag']) {
+                    let info_o = data_obj['dataObj'];
                     setDetailPanelContact(e.target, info_o);
                 } else {
                     console.log('获取订单内容失败');
@@ -466,7 +466,7 @@ function listenOrderSubmit() {
         e.preventDefault();
         sendPickRequest(e.target.dataset.bindid)
         .then(data_obj => {
-            if (data_obj['info']['flag']) {
+            if (data_obj['flag']) {
                 if (window.confirm('接单成功。是否想要前往个人订单界面？')) {
                     location.assign('/me/order');
                 } else {
