@@ -18,9 +18,9 @@
                         class="logo_img"></a></div>
             <ul class="section_list">
                 <h1 class="visually_hidden list_title">区域</h1>
-                <li class="list_item"><a href="/" class="item_link">首页</a></li>
+                <li class="list_item"><a href="/" class="item_link active">首页</a></li>
                 <li class="list_item"><a href="/search" class="item_link">兼职</a></li>
-                <li class="list_item"><a href="/ordering_food" class="item_link active">食堂订餐</a></li>
+                <li class="list_item"><a href="/ordering_food" class="item_link">食堂订餐</a></li>
                 <li class="list_item"><a href="/shopping" class="item_link">超市代购</a></li>
                 <li class="list_item"><a href="/logistic" class="item_link">快递帮拿</a></li>
             </ul>
@@ -32,27 +32,27 @@
             <section class="account_section with_avatar hidden">
             <!-- <section class="account_section with_avatar"> -->
                 <a href="/me" class="account">
-                    <img src="/static/img/1.gif" alt="User avatar" class="avatar">
+                    <img src="/static/img/default_avatar.png" alt="User avatar" class="avatar">
                 </a>
                 <div class="avatar_panel">
+                <!-- <div class="avatar_panel" style="opacity: 1; pointer-events: all;"> -->
                     <div class="avatar_name_wrapper">
                         <a href="/me" class="avatar">
-                            <img src="/static/img/1.gif" alt="User avatar" class="avatar_img">
+                            <img src="/static/img/default_avatar.png" alt="User avatar" class="avatar_img">
                         </a>
                         <h1 class="nickname">用户名</h1>
                     </div>
                     <div class="func_list_wrapper">
                         <ul class="func_list">
-                            <li class="list_item"><a href="#" class="item_link" id="balance">金子余额：<span class="balance">$</span></a></li>
+                            <li class="list_item"><a href="#" class="item_link" id="balance">金子余额<span class="balance">0</span></a></li>
                             <li class="list_item"><a href="#" class="item_link" id="recharge">金子充值</a></li>
                             <li class="list_item"><a href="#" class="item_link" id="withdraw">金子提现</a></li>
-                            <li class="list_item"><a href="#" class="item_link" id="order">我的订单</a></li>
-                            <li class="list_item"><a href="#" class="item_link" id="verify">兼职认证</a></li>
+                            <li class="list_item"><a href="/me/order" class="item_link" id="order">我的订单</a></li>
+                            <li class="list_item"><a href="/me" class="item_link" id="verify">兼职认证</a></li>
                             <li class="list_item"><a href="#" class="item_link logout" id="logout">退出登录</a></li>
                         </ul>
                     </div>
                 </div>
-                <!-- <a href="#" class="logout account_func">注销</a> -->
             </section>
         </div>
     </header>
@@ -72,152 +72,19 @@
                 <div class="stall_content_wrapper no_shrink stall_wrapper">
                     <div class="side_nav_wrapper">
                         <ul class="side_nav_list">
-                            <li class="list_item active"><a href="#0" class="item_link" data-index="0">主食</a></li>
-                            <li class="list_item"><a href="#1" class="item_link" data-index="1">小吃</a></li>
-                            <li class="list_item"><a href="#" class="item_link" data-index="2">套餐</a></li>
-                            <li class="list_item"><a href="#" class="item_link" data-index="3">特价</a></li>
-                            <li class="list_item"><a href="#" class="item_link" data-index="4">双人餐</a></li>
-                            <li class="list_item"><a href="#" class="item_link" data-index="5">休闲餐</a></li>
-                            <li class="list_item"><a href="#" class="item_link" data-index="6">韩式炸鸡</a></li>
+                            <li class="list_item active"><a href="#0" class="item_link" data-index="0">默认分类</a></li>
                         </ul>
                     </div>
                     <div class="main_content_wrapper">
                         <dl class="dishes_list">
-                            <dt class="dishes_section_title" data-index="0" id="0">主食</dt>
+                            <dt class="dishes_section_title" data-index="0" id="0">默认分类</dt>
                             <dd class="dishes_item">
                                 <div class="dishes_img_wrapper">
                                     <img src="#" alt="dishes" class="dishes_img">
                                 </div>
                                 <div class="dishes_desc">
-                                    <h1 class="dishes_name">乡村牛肉堡</h1>
-                                    <p class="dishes_price">80金子</p>
-                                </div>
-                                <div class="dishes_add">
-                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                                    <span class="counter invisible">1</span>
-                                    <button type="button" class="add_dishes dishes_btn">+</button>
-                                </div>
-                            </dd>
-                            <dd class="dishes_item">
-                                <div class="dishes_img_wrapper">
-                                    <img src="#" alt="dishes" class="dishes_img">
-                                </div>
-                                <div class="dishes_desc">
-                                    <h1 class="dishes_name">乡村牛肉堡</h1>
-                                    <p class="dishes_price">80金子</p>
-                                </div>
-                                <div class="dishes_add">
-                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                                    <span class="counter invisible">1</span>
-                                    <button type="button" class="add_dishes dishes_btn">+</button>
-                                </div>
-                            </dd>
-                            <dd class="dishes_item">
-                                <div class="dishes_img_wrapper">
-                                    <img src="#" alt="dishes" class="dishes_img">
-                                </div>
-                                <div class="dishes_desc">
-                                    <h1 class="dishes_name">乡村牛肉堡</h1>
-                                    <p class="dishes_price">80金子</p>
-                                </div>
-                                <div class="dishes_add">
-                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                                    <span class="counter invisible">1</span>
-                                    <button type="button" class="add_dishes dishes_btn">+</button>
-                                </div>
-                            </dd>
-                            <dd class="dishes_item">
-                                <div class="dishes_img_wrapper">
-                                    <img src="#" alt="dishes" class="dishes_img">
-                                </div>
-                                <div class="dishes_desc">
-                                    <h1 class="dishes_name">乡村牛肉堡</h1>
-                                    <p class="dishes_price">80金子</p>
-                                </div>
-                                <div class="dishes_add">
-                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                                    <span class="counter invisible">1</span>
-                                    <button type="button" class="add_dishes dishes_btn">+</button>
-                                </div>
-                            </dd>
-                            <dd class="dishes_item">
-                                <div class="dishes_img_wrapper">
-                                    <img src="#" alt="dishes" class="dishes_img">
-                                </div>
-                                <div class="dishes_desc">
-                                    <h1 class="dishes_name">乡村牛肉堡</h1>
-                                    <p class="dishes_price">80金子</p>
-                                </div>
-                                <div class="dishes_add">
-                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                                    <span class="counter invisible">1</span>
-                                    <button type="button" class="add_dishes dishes_btn">+</button>
-                                </div>
-                            </dd>
-                            <dd class="dishes_item">
-                                <div class="dishes_img_wrapper">
-                                    <img src="#" alt="dishes" class="dishes_img">
-                                </div>
-                                <div class="dishes_desc">
-                                    <h1 class="dishes_name">乡村牛肉堡</h1>
-                                    <p class="dishes_price">80金子</p>
-                                </div>
-                                <div class="dishes_add">
-                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                                    <span class="counter invisible">1</span>
-                                    <button type="button" class="add_dishes dishes_btn">+</button>
-                                </div>
-                            </dd>
-                            <dt class="dishes_section_title" data-index="1" id="1">小吃</dt>
-                            <dd class="dishes_item">
-                                <div class="dishes_img_wrapper">
-                                    <img src="#" alt="dishes" class="dishes_img">
-                                </div>
-                                <div class="dishes_desc">
-                                    <h1 class="dishes_name">开心鸡排</h1>
-                                    <p class="dishes_price">110金子</p>
-                                </div>
-                                <div class="dishes_add">
-                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                                    <span class="counter invisible">1</span>
-                                    <button type="button" class="add_dishes dishes_btn">+</button>
-                                </div>
-                            </dd>
-                            <dd class="dishes_item">
-                                <div class="dishes_img_wrapper">
-                                    <img src="#" alt="dishes" class="dishes_img">
-                                </div>
-                                <div class="dishes_desc">
-                                    <h1 class="dishes_name">开心鸡排</h1>
-                                    <p class="dishes_price">110金子</p>
-                                </div>
-                                <div class="dishes_add">
-                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                                    <span class="counter invisible">1</span>
-                                    <button type="button" class="add_dishes dishes_btn">+</button>
-                                </div>
-                            </dd>
-                            <dd class="dishes_item">
-                                <div class="dishes_img_wrapper">
-                                    <img src="#" alt="dishes" class="dishes_img">
-                                </div>
-                                <div class="dishes_desc">
-                                    <h1 class="dishes_name">开心鸡排</h1>
-                                    <p class="dishes_price">110金子</p>
-                                </div>
-                                <div class="dishes_add">
-                                    <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                                    <span class="counter invisible">1</span>
-                                    <button type="button" class="add_dishes dishes_btn">+</button>
-                                </div>
-                            </dd>
-                            <dd class="dishes_item">
-                                <div class="dishes_img_wrapper">
-                                    <img src="#" alt="dishes" class="dishes_img">
-                                </div>
-                                <div class="dishes_desc">
-                                    <h1 class="dishes_name">开心鸡排</h1>
-                                    <p class="dishes_price">110金子</p>
+                                    <h1 class="dishes_name">名字</h1>
+                                    <p class="dishes_price">¥0</p>
                                 </div>
                                 <div class="dishes_add">
                                     <button type="button" class="remove_dishes dishes_btn invisible">-</button>
@@ -230,9 +97,9 @@
                 </div>
                 <div class="stall_info_wrapper no_shrink stall_wrapper hide">
                     <ul class="contact_list">
-                        <li class="list_item"><span class="item_label">店铺电话</span><a href="tel:+8613507535905" class="item_content">13507535905</a></li>
+                        <li class="list_item"><span class="item_label">店铺电话</span><a href="tel:" class="item_content" id="phone"></a></li>
                         <li class="list_item"><span class="item_label">店铺地址</span><span class="item_content">广东金融学院</span></li>
-                        <li class="list_item"><span class="item_label">经营场所</span><span class="item_content">北苑食堂三楼</span></li>
+                        <li class="list_item"><span class="item_label">经营场所</span><span class="item_content" id="position"></span></li>
                         <li class="list_item"><span class="item_label">营业时间</span><span class="item_content">10:30-13:00; 17:00-19:00</span></li>
                     </ul>
                 </div>
