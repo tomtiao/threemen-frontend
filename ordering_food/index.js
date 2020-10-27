@@ -166,6 +166,75 @@ function pageBehaviorHandler() {
             listenList(floor_list);
         }
 
+        function getStallDishes(shop_name) {
+            function makeRequest(shop_name) {
+                const requestURL = '/restaurantInfo/showDishByShop';
+        
+                let urlParams = new URLSearchParams();
+        
+                urlParams.append('shopName', shop_name);
+        
+                return fetch(requestURL, {
+                    method: 'POST',
+                    body: urlParams,
+                    credentials: 'same-origin'
+                }).then(res => res.json()).catch(console.log);
+            }
+
+            function cleanList() {
+                const dishes_list = document.querySelector('.dishes_list');
+
+                while (dishes_list.childElementCount > 1) {
+                    dishes_list.removeChild(dishes_list.firstElementChild.nextElementSibling);
+                }
+            }
+
+            // expected base64 string
+            function createListItem(dishes_name, dishes_price, dishes_img_src) {
+                let list_item = document.createElement('dd');
+                list_item.classList.add('dishes_item');
+
+                let img_wrapper = document.createElement('div');
+                img_wrapper.classList.add('dishes_img_wrapper');
+
+                let dishes_img = new Image();
+                dishes_img.classList.add('dishes_img');
+                dishes_img.src = 'data:image/png;base64,' + dishes_img_src;
+
+                img_wrapper.append(dishes_img);
+
+                let desc = document.createElement('div');
+                desc.classList.add('dishes_desc');
+
+                let name = document.createElement('h1');
+                name.classList.add('dishes_name');
+                name.textContent = dishes_name;
+
+                let price = document.createElement('p');
+                price.classList.add('dishes_price');
+
+                let price_content = document.createElement('span');
+                price_content.classList.add('price_content');
+                price_content.textContent = dishes_price;
+
+                price.append(price_content);
+            }
+
+            function updateDishesList(shop_name) {
+                const dishes_list = document.querySelector('.dishes_list');
+
+                cleanList();
+
+                makeRequest(shop_name).then(data_obj => {
+                    let dishes_array = data_obj['info']['dataObj'];
+
+                    dishes_array.forEach(o => {
+                        dishes_list.append(createListItem());
+                    });
+                });
+            }
+        }
+
 
         function listenItemHandler() {
             const content_list = document.querySelector('.content_list');
@@ -175,6 +244,8 @@ function pageBehaviorHandler() {
                     e.preventDefault();
                     console.log(e.target.parentElement.dataset.position + " " + e.target.parentElement.dataset.floor);
                     console.log(e.target.parentElement.children[2].children[0].textContent);
+                    let shop_name = e.target.parentElement.children[2].children[0].textContent;
+                    getStallDishes(shop_name);
                 }
             });
         }
@@ -318,7 +389,7 @@ function updateListHandler() {
         
         let bg_img = new Image();
         bg_img.classList.add('bg_img');
-        bg_img.src = 'data:image/png,base64,' + stall_img_src;
+        bg_img.src = 'data:image/png;base64,' + stall_img_src;
         bg_img.alt = stall_name;
 
         bg_block.append(bg_img);
@@ -332,7 +403,7 @@ function updateListHandler() {
 
         let desc = document.createElement('p');
         desc.classList.add('description');
-        desc.textContent = stall_desc;
+        desc.textContent = stall_desc || '10:30-13:00; 17:00-19:00';
 
         text_content.append(item_title, desc);
 
@@ -373,9 +444,7 @@ function updateListHandler() {
     });
 }
 
-function getStallDishes() {
-    
-}
+
 
 window.addEventListener('load', e => {
     updateListHandler();
