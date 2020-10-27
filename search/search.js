@@ -539,7 +539,7 @@ function requestOrderDetail(order_id) {
 
     urlParams.append('commNum', order_id);
 
-    let getURL = new URL(requestURL + '?' + urlParams.toString(), location.origin);
+    let getURL = requestURL + '?' + urlParams.toString();
     return fetch(getURL, {
         method: 'GET',
         credentials: 'same-origin'
