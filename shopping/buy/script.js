@@ -50,10 +50,14 @@ function sendOrderHandler() {
         });
         
         // delete radio group value
+        if (urlParams.get('site_custom_choice') === '就近购买') {
+            urlParams.set('commAddress', '就近购买');
+        }
         urlParams.delete('site_custom_choice');
+
     
         // add estimated gold
-        urlParams.append('commCostCoin', parseInt(estimatedPriceInput.value) * 10);
+        urlParams.append('commCostCoin', (parseInt(estimatedPriceInput.value) || 0) * 10);
     
         return fetch(requestURL, {
             method: 'POST',
