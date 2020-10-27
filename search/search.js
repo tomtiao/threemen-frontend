@@ -134,40 +134,6 @@ function pageBehaviourHandler() {
     function updateListAndPageSelection(catagory, content, isInitial) {
         requestPageAndInfo(catagory, currentPage, null, content)
             .then(page_and_info_o => {
-                // FOR TESTING BEGINS
-                page_and_info_o = {
-                    "info": {
-                        "flag": true,
-                        "errorMsg": "C@IH",
-                        "dataObj": {
-                            "currentPage": 1,
-                            "pageSize": 5,
-                            "totalPage": 10,
-                            "totalCount": 49,
-                            "list": [
-                                {
-                                    "commCostReal": 3848640217912097,
-                                    "commAddress": "bqiJpX",
-                                    "address": "o0mI",
-                                    "commNum": "114514"
-                                },
-                                {
-                                    "commCostReal": -1421611053252940.5,
-                                    "commAddress": "Qz25",
-                                    "address": "S#3bQ",
-                                    "commNum": "114514"
-                                },
-                                {
-                                    "commCostReal": -1875752327338940.5,
-                                    "commAddress": "69RsC",
-                                    "address": "LVw",
-                                    "commNum": "114514"
-                                }
-                            ]
-                        }
-                    }
-                };
-                // FOR TESTING ENDS
                 let totalPage = page_and_info_o['info']['dataObj']['totalPage'];
                 let info_array = page_and_info_o['info']['dataObj']['list'];
 
@@ -600,9 +566,9 @@ function clickResultHandler() {
     // TODO
     info_list.addEventListener('click', e => {
         if (e.target.tagName === 'A') {
-            console.log(e.target.dataset.id);
             bindOrderIdToButton(e.target.dataset.id);
             showDetailPanel(e.target.dataset.catagory);
+
             requestOrderDetail(e.target.dataset.id).then(data_obj => {
                 if (data_obj['info']['flag']) {
                     let info_array = data_obj['info']['dataObj'];
@@ -621,7 +587,7 @@ function clickResultHandler() {
                     console.log('获取订单内容失败');
                     console.log(data_obj);
                 }
-            })
+            });
         }
     });
 }
