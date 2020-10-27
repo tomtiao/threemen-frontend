@@ -54,6 +54,14 @@ main {
     margin-top: 64px;
 }
 
+.search {
+    transition: transform 0.3s ease-in-out;
+}
+
+.search.hide {
+    transform: scaleY(0);
+}
+
 .search .search_bar {
     padding: 0.25em;
     border: 0;

@@ -285,12 +285,30 @@ function pageBehaviorHandler() {
 }
 
 function updateListHandler() {
-    function makeRequest() {
-        const stallData = '/static/json/data.json';
+    const location_list = {
+        1: '北苑食堂',
+        2: '北苑食堂',
+        3: '北苑食堂',
+        4: '南苑食堂',
+        5: '南苑食堂'
+    };
 
-        return fetch(stallData).then(res => res.json()).catch(console.log);
+    function makeRequest(location_id) {
+        const requestURL = '/restaurantInfo/showShopsByLocation';
+        // const stallData = '/static/json/data.json';
+
+        let urlParams = new URLSearchParams();
+
+        urlParams.append('locaiton_id', location_id);
+
+        let getURL = requestURL + '?' + urlParams.toString();
+        return fetch(getURL, {
+            method: 'GET',
+            credentials: 'same-origin'
+        }).then(res => res.json()).catch(console.log);
     }
 
+    // img expected base64 string
     function createListItem(stall_img_src, stall_name, stall_desc, stall_position, stall_floor) {
         let cover = document.createElement('a');
         cover.classList.add('cover');
@@ -300,7 +318,7 @@ function updateListHandler() {
         
         let bg_img = new Image();
         bg_img.classList.add('bg_img');
-        bg_img.src = stall_img_src;
+        bg_img.src = 'data:image/png,base64,' + stall_img_src;
         bg_img.alt = stall_name;
 
         bg_block.append(bg_img);
@@ -331,16 +349,32 @@ function updateListHandler() {
     function fillStallList() {
         const content_list = document.querySelector('.content_list');
 
-        return makeRequest().then(data => {
-            data.forEach((stall_obj) => {
-                content_list.append(createListItem('/static/img/order_food.jpg', stall_obj['name'], stall_obj['time'], stall_obj['location'], stall_obj['floor']));
+        const keys = Object.keys(location_list);
+
+        keys.forEach((value) => {
+            makeRequest(value).then(res_obj => {
+                let data_obj = res_obj['info'];
+                let info_array = data_obj['dataObj'];
+                info_array.forEach(o => {
+                    content_list.append(createListItem(o['img'], o['shopName'], '', location_list[value], value));
+                });
             });
         });
+
+        // return makeRequest().then(data => {
+        //     data.forEach((stall_obj) => {
+        //         content_list.append(createListItem(, stall_obj['name'], stall_obj['time'], stall_obj['location'], stall_obj['floor']));
+        //     });
+        // });
     }
     
     fillStallList().then(() => {
         pageBehaviorHandler();
     });
+}
+
+function getStallDishes() {
+    
 }
 
 window.addEventListener('load', e => {

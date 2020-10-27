@@ -11,12 +11,6 @@ function sendOrderHandler() {
         form_data.forEach((value, key) => {
             urlParams.append(key, value);
         });
-        
-        // delete radio group value
-        urlParams.delete('site_custom_choice');
-    
-        // add estimated gold
-        urlParams.append('commCostCoin', parseInt(estimatedPriceInput.value) * 10);
     
         return fetch(requestURL, {
             method: 'POST',

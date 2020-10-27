@@ -13,13 +13,122 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+    height: 48px;
 }
 
 .swapper_list .list_item {
-    display: flex;
-    align-content: center;
-    justify-content: center;
     flex-grow: 1;
+}
+
+.swapper_list .list_item:first-child {
+    border-right: 1px solid #999;
+}
+
+.swapper_list .list_item .item_link {
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 48px;
+    text-align: center;
+    background-color: #eee;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.swapper_list .list_item .item_link:hover {
+    background-color: #71C9CE;
+}
+
+.swapper_list .list_item .item_link.active,
+.swapper_list .list_item .item_link:active {
+    color: #eee;
+    background-color: #52A4B1;
+}
+
+.order_wrapper .order_list_wrapper {
+    display: flex;
+    width: 100%;
+    height: 450px;
+    overflow: hidden scroll;
+    background-color: white;
+}
+
+.order_list_wrapper .order_flow {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.order_flow {
+    list-style-type: none;
+    padding: 1em 0.5em;
+    margin: 0;
+    box-sizing: border-box;
+    /* transform: translateX(0); */
+    transition: transform 0.3s ease-in-out;
+}
+
+.order_flow .list_item {
+    position: relative;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    transition: background-color 0.1s ease;
+}
+
+.order_flow .list_item .item_link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+    outline: none;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+/* 阻止子元素响应事件 */
+.order_flow .list_item .item_link * {
+    pointer-events: none;
+}
+
+.order_flow .list_item:hover,
+.order_flow .list_item:focus {
+    background-color: #eee;
+}
+
+.order_flow .list_item .item_title {
+    width: 45%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    line-height: 1.5;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.order_flow .list_item .item_brief {
+    color: #999;
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 1rem 0;
+    font-size: 14px;
+}
+
+.order_flow .list_item .item_brief .brief_item:last-child::after {
+    content: none;
+}
+
+.order_flow .list_item .item_brief .brief_item .item_label::after {
+    content: "：";
+}
+
+.order_flow .list_item .item_brief .brief_item.indicator {
+    margin-left: auto;
 }
 
 .order_detail_wrapper {
@@ -34,6 +143,7 @@
     flex-direction: column;
     background-color: #95E1DF;
     width: 100%;
+    height: 100%;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
@@ -62,7 +172,7 @@
 
 .info_detail .common_wrapper {
     flex-grow: 1;
-    margin-bottom: 48px;
+    /* margin-bottom: 48px; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -211,69 +321,4 @@
 .info_detail .pick_bar .pick_btn:active {
     color: white;
     background-color: #388094;
-}
-
-.order_flow {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.order_flow .list_item {
-    position: relative;
-    border-bottom: 1px solid #eee;
-    transition: background-color 0.1s ease;
-}
-
-.order_flow .list_item .item_link {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 0.5rem;
-    outline: none;
-    box-sizing: border-box;
-}
-
-/* 阻止子元素响应事件 */
-.order_flow .list_item .item_link * {
-    pointer-events: none;
-}
-
-.order_flow .list_item:hover,
-.order_flow .list_item:focus {
-    background-color: #eee;
-}
-
-.order_flow .list_item .item_title {
-    width: 45%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break: break-all;
-    line-height: 1.5;
-    font-size: 16px;
-    font-weight: normal;
-}
-
-.order_flow .list_item .item_brief {
-    color: #999;
-    display: flex;
-    list-style-type: none;
-    padding: 0;
-    margin: 1rem 0;
-    font-size: 14px;
-}
-
-.order_flow .list_item .item_brief .brief_item:last-child::after {
-    content: none;
-}
-
-.order_flow .list_item .item_brief .brief_item .item_label::after {
-    content: "：";
-}
-
-.order_flow .list_item .item_brief .brief_item.indicator {
-    margin-left: auto;
 }
