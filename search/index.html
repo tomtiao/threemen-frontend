@@ -85,11 +85,11 @@
             <div class="catagory filter_block">
                 <h2 class="area_title block_title">类别</h2>
                 <ul class="catagory_list list">
-                    <li class="list_item"><button type="button" class="list_btn active">所有</button></li>
-                    <li class="list_item"><button type="button" class="list_btn">食堂订餐</button></li>
-                    <li class="list_item"><button type="button" class="list_btn">超市代购</button></li>
-                    <li class="list_item"><button type="button" class="list_btn">快递帮拿</button></li>
-                    <li class="list_item"><button type="button" class="list_btn">勤工俭学</button></li>
+                    <li class="list_item"><button type="button" class="list_btn" data-catagory="shopping">超市代购</button></li>
+                    <li class="list_item"><button type="button" class="list_btn" data-catagory="order_food">食堂订餐</button></li>
+                    <li class="list_item"><button type="button" class="list_btn" data-catagory="logistic">快递帮拿</button></li>
+                    <li class="list_item"><button type="button" class="list_btn" data-catagory="working">勤工俭学</button></li>
+                    <!-- <li class="list_item"><button type="button" class="list_btn active" data-catagory="all">所有</button></li> -->
                 </ul>
                 <button type="button" name="catagory_btn" class="catagory_btn btn">点我显示列表</button>
             </div>
@@ -116,47 +116,7 @@
                                     <li class="brief_item"><span class="item_label">固定岗位</span>整理资料，统计数据</li>
                                     <li class="brief_item"><span class="item_label">临时岗位</span>考场布置，课表粘贴</li>
                                 </ul>
-                                <!-- <div class="revenue"><span class="num_decorated">666</span>金子</div> -->
-                            </a>
-                        </li>
-                        <li class="list_item">
-                            <a href="#" class="item_link">
-                                <h1 class="item_title">教务处</h1>
-                                <ul class="item_brief">
-                                    <li class="brief_item"><span class="item_label">固定岗位</span>整理资料，统计数据</li>
-                                    <li class="brief_item"><span class="item_label">临时岗位</span>考场布置，课表粘贴</li>
-                                </ul>
-                                <!-- <div class="revenue"><span class="num_decorated">666</span>金子</div> -->
-                            </a>
-                        </li>
-                        <li class="list_item">
-                            <a href="#" class="item_link">
-                                <h1 class="item_title">教务处</h1>
-                                <ul class="item_brief">
-                                    <li class="brief_item"><span class="item_label">固定岗位</span>整理资料，统计数据</li>
-                                    <li class="brief_item"><span class="item_label">临时岗位</span>考场布置，课表粘贴</li>
-                                </ul>
-                                <!-- <div class="revenue"><span class="num_decorated">666</span>金子</div> -->
-                            </a>
-                        </li>
-                        <li class="list_item">
-                            <a href="#" class="item_link">
-                                <h1 class="item_title">教务处</h1>
-                                <ul class="item_brief">
-                                    <li class="brief_item"><span class="item_label">固定岗位</span>整理资料，统计数据</li>
-                                    <li class="brief_item"><span class="item_label">临时岗位</span>考场布置，课表粘贴</li>
-                                </ul>
-                                <!-- <div class="revenue"><span class="num_decorated">666</span>金子</div> -->
-                            </a>
-                        </li>
-                        <li class="list_item">
-                            <a href="#" class="item_link">
-                                <h1 class="item_title">教务处</h1>
-                                <ul class="item_brief">
-                                    <li class="brief_item"><span class="item_label">固定岗位</span>整理资料，统计数据</li>
-                                    <li class="brief_item"><span class="item_label">临时岗位</span>考场布置，课表粘贴</li>
-                                </ul>
-                                <!-- <div class="revenue"><span class="num_decorated">666</span>金子</div> -->
+                                <div class="revenue"><span class="num_decorated">666</span>金子</div>
                             </a>
                         </li>
                     </ul>
@@ -241,8 +201,8 @@
         </div>
         <ul class="select_page_list">
             <h1 class="visually_hidden page_list_title">翻页</h1>
-            <li class="list_item prev_page"><button type="button" class="list_btn"><span class="visually_hidden label">前一页</span>←</button></li>
-            <li class="list_item next_page"><button type="button" class="list_btn"><span class="visually_hidden label">后一页</span>→</button></li>
+            <li class="list_item prev_page"><button type="button" class="list_btn" id="prev_page_btn"><span class="visually_hidden label">前一页</span>←</button></li>
+            <li class="list_item next_page"><button type="button" class="list_btn" id="next_page_btn"><span class="visually_hidden label">后一页</span>→</button></li>
         </ul>
     </main>
     <script src="search.js"></script>
