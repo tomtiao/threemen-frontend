@@ -447,8 +447,16 @@ main {
     font-size: 14px;
 }
 
+.info_list .list_item .item_brief .brief_item {
+    max-width: 50%;
+    height: 1rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .info_list .list_item .item_brief .brief_item::after {
-    content: "|";
+    content: " ";
     padding: 0 0.5rem;
 }
 

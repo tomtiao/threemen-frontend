@@ -148,17 +148,20 @@ function pageBehaviourHandler() {
                                 {
                                     "commCostReal": 3848640217912097,
                                     "commAddress": "bqiJpX",
-                                    "address": "o0mI"
+                                    "address": "o0mI",
+                                    "commNum": "114514"
                                 },
                                 {
                                     "commCostReal": -1421611053252940.5,
                                     "commAddress": "Qz25",
-                                    "address": "S#3bQ"
+                                    "address": "S#3bQ",
+                                    "commNum": "114514"
                                 },
                                 {
                                     "commCostReal": -1875752327338940.5,
                                     "commAddress": "69RsC",
-                                    "address": "LVw"
+                                    "address": "LVw",
+                                    "commNum": "114514"
                                 }
                             ]
                         }
@@ -192,7 +195,7 @@ function pageBehaviourHandler() {
         switch (catagory) {
             case 'shopping':
                 info_array.forEach((info_o) => {
-                    info_list.append(createListItem(info_o['commAddress'], info_o['address']));
+                    info_list.append(createListItem(info_o['commAddress'], info_o['address'], info_o['commNum'], catagory));
                 });
                 break;
             case 'working':
@@ -201,13 +204,12 @@ function pageBehaviourHandler() {
                 });
                 break;
             default:
-                console.log(`invalid param ${catagory}`);
-                break;
+                throw (`invalid param ${catagory}`);
         }
     }
 
     // item_content can be Array
-    function createListItem(item_title, item_content) {
+    function createListItem(item_title, item_content, order_id, catagory) {
         let new_info_item = document.createElement('li');
         new_info_item.classList.add('list_item');
 
@@ -218,7 +220,7 @@ function pageBehaviourHandler() {
         let new_second_list = document.createElement('ul');
         new_second_list.classList.add('item_brief');
 
-        // pass plain object, is catagory working
+        // if item_content is plain object, then it is catagory working
         if (item_content.toString() === '[object Object]') {
             let new_second_list_item = document.createElement('li');
             new_second_list_item.classList.add('brief_item');
@@ -233,6 +235,7 @@ function pageBehaviourHandler() {
                 new_second_list_item.append(document.createTextNode(item_content['fixSeat']));
             } else {
                 new_second_list_item.append(document.createTextNode('无'));
+                // new_second_list_item.append(document.createTextNode('foooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'));
             }
 
             new_second_list.append(new_second_list_item);
@@ -247,7 +250,8 @@ function pageBehaviourHandler() {
             if (item_content['temSeat'] !== undefined) {
                 new_second_list_item_copied.append(document.createTextNode(item_content['temSeat']));
             } else {
-                new_second_list_item_copied.append('无');
+                new_second_list_item_copied.append(document.createTextNode('无'));
+                // new_second_list_item_copied.append(document.createTextNode('foooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'));
             }
 
             new_second_list.append(new_second_list_item_copied);
@@ -265,6 +269,12 @@ function pageBehaviourHandler() {
 
         wrapper.append(new_info_title, new_second_list);
 
+        // 非勤工俭学添加订单号、分类
+        if (item_content.toString() !== '[object Object]') {
+            wrapper.dataset.id = order_id;
+            wrapper.dataset.catagory = catagory;
+        }
+
         new_info_item.append(wrapper);
 
         return new_info_item;
@@ -277,7 +287,7 @@ function pageBehaviourHandler() {
                     if (currentPage !== 1) {
                         currentPage--;
                         updateListAndPageSelection(last_time_catagory,
-                            last_time_catagory === 'working' ? getKeyword() : null, false);
+                            last_time_catagory === 'working' ? getKeyword() : undefined, false);
                     } else {
                         alert('已经是第一页了！');
                     }
@@ -286,7 +296,7 @@ function pageBehaviourHandler() {
                     if (currentPage != totalPage) {
                         currentPage++;
                         updateListAndPageSelection(last_time_catagory,
-                            last_time_catagory === 'working' ? getKeyword() : null, false);
+                            last_time_catagory === 'working' ? getKeyword() : undefined, false);
                     } else {
                         setTimeout(alert('已经是最后一页了！'));
                     }
@@ -294,7 +304,7 @@ function pageBehaviourHandler() {
                 default:
                     currentPage = e.target.dataset.page;
                     updateListAndPageSelection(last_time_catagory,
-                        last_time_catagory === 'working' ? getKeyword() : null, false);
+                        last_time_catagory === 'working' ? getKeyword() : undefined, false);
                     break;
             }
         }
@@ -306,7 +316,7 @@ function pageBehaviourHandler() {
         select_page_list.addEventListener('click', clickBtnHandler);
     }
 
-    updateListAndPageSelection('shopping', null, true);
+    updateListAndPageSelection('shopping', undefined, true);
 }
 
 // function displayResult() {
@@ -491,13 +501,161 @@ function pageBehaviourHandler() {
 //     });
 // }
 
+function requestOrderContact(order_id) {
+    const requestURL = '/order/contactUser';
+
+    let urlParams = new URLSearchParams();
+
+    urlParams.append('commNum', order_id);
+
+    return fetch(requestURL, {
+        method: 'POST',
+        body: urlParams,
+        credentials: 'same-origin'
+    }).then(res => res.json()).catch(console.log);
+}
+
+function setDetailPanelContact(item, info_o) {
+    const nickname = document.getElementById('customer_nickname');
+
+    nickname.textContent = info_o['nickname'];
+
+    const phone = document.getElementById('customer_phone');
+
+    phone.textContent = info_o['phone'];
+
+    const address = document.getElementById('customer_address');
+
+    let item_address = item.children[1].children[0].textContent;
+
+    address.textContent = item_address;
+}
+
+// expected get commCostReal, commInfo, commCostCoin, date, status
+function requestOrderDetail(order_id) {
+    const requestURL = '/order/showOneOrderForUserOrWorker';
+
+    let urlParams = new URLSearchParams();
+
+    urlParams.append('commNum', order_id);
+
+    let getURL = new URL(requestURL + '?' + urlParams.toString(), location.origin);
+    return fetch(getURL, {
+        method: 'GET',
+        credentials: 'same-origin'
+    }).then(res => res.json()).catch(console.log);
+}
+
+function setDetailPanelContent(item, info_o) {
+    switch (item.dataset.catagory) {
+        case 'shopping':
+            const buy_address = document.getElementById('buy_address');
+
+            buy_address.textContent = item.children[0].textContent;
+
+            const shopping_info_content = document.querySelector('.shopping_info_content');
+
+            shopping_info_content.textContent = info_o['commInfo'];
+            break;
+        default:
+            throw `unexpected param ${catagory}`;
+    }
+
+    const counter_content = document.querySelector('.counter_content');
+    counter_content.textContent = info_o['commCostCoin'];
+}
+
+function bindOrderIdToButton(order_id) {
+    const submit_btn = document.querySelector('.pick_btn');
+
+    submit_btn.dataset.bindid = order_id;
+}
+
+function showDetailPanel(catagory) {
+    const contact_wrapper = document.querySelector('.customer_wrapper');
+    
+    contact_wrapper.classList.remove('hide');
+
+    const customer_wrapper_empty = document.querySelector('.customer_wrapper_empty');
+
+    customer_wrapper_empty.classList.add('hide');
+
+    const pick_bar = document.querySelector('.pick_bar')
+
+    pick_bar.classList.remove('hide');
+
+    switch (catagory) {
+        case 'shopping':
+            const shopping_wrapper = document.querySelector('.shopping_wrapper');
+            shopping_wrapper.classList.remove('hide');
+            break;
+        default:
+            throw `unexpected param ${catagory}`;
+    }
+}
+
 function clickResultHandler() {
     const info_list = document.querySelector('.info_list');
 
-
     // TODO
     info_list.addEventListener('click', e => {
-        console.log(e.target.children);
+        if (e.target.tagName === 'A') {
+            console.log(e.target.dataset.id);
+            bindOrderIdToButton(e.target.dataset.id);
+            showDetailPanel(e.target.dataset.catagory);
+            requestOrderDetail(e.target.dataset.id).then(data_obj => {
+                if (data_obj['info']['flag']) {
+                    let info_array = data_obj['info']['dataObj'];
+                    setDetailPanelContent(e.target, info_array[0]);
+                } else {
+                    console.log('获取订单内容失败');
+                    console.log(data_obj);
+                }
+            });
+
+            requestOrderContact(e.target.dataset.id).then(data_obj => {
+                if (data_obj['info']['flag']) {
+                    let info_o = data_obj['info']['dataObj'];
+                    setDetailPanelContact(e.target, info_o);
+                } else {
+                    console.log('获取订单内容失败');
+                    console.log(data_obj);
+                }
+            })
+        }
+    });
+}
+
+function sendPickRequest(order_id) {
+    const requestURL = '/order/pickOrder';
+
+    let urlParams = new URLSearchParams();
+
+    urlParams.append('commNum', order_id);
+
+    return fetch(requestURL, {
+        method: 'POST',
+        body: urlParams,
+        credentials: 'same-origin'
+    }).then(res => res.json()).catch(console.log);
+}
+
+function listenOrderSubmit() {
+    const pick_btn = document.querySelector('.pick_btn');
+
+    pick_btn.addEventListener('click', e => {
+        e.preventDefault();
+        sendPickRequest(e.target.dataset.bindid)
+        .then(data_obj => {
+            if (data_obj['info']['flag']) {
+                if (window.confirm('接单成功。是否想要前往个人订单界面？')) {
+                    location.assign('/me/order');
+                } else {
+                    console.log('出现了错误');
+                    console.log(data_obj);
+                }
+            }
+        });
     });
 }
 
@@ -508,4 +666,5 @@ window.addEventListener('load', () => {
     // displayResult();
     pageBehaviourHandler();
     clickResultHandler();
+    listenOrderSubmit();
 });
