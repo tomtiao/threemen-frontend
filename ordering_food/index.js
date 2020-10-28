@@ -373,7 +373,7 @@ function updateListHandler() {
 
         let urlParams = new URLSearchParams();
 
-        urlParams.append('locaiton_id', location_id);
+        urlParams.append('location_id', location_id);
 
         let getURL = requestURL + '?' + urlParams.toString();
         return fetch(getURL, {
