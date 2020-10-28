@@ -57,7 +57,11 @@ function setUserInfo() {
                 switch (value) {
                     case 'phone':
                     case 'address':
-                        doms[value].textContent = user_contact_o[value];
+                        if (user_contact_o) {
+                            doms[value].textContent = user_contact_o[value];
+                        } else {
+                            doms[value].textContent = '';
+                        }
                         break;
                     case 'account':
                     case 'email':
