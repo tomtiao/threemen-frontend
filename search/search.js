@@ -143,22 +143,44 @@ function pageBehaviourHandler() {
 
     function requestPageAndInfo(catagory, currentPage, pageSize, content) {
         const requestURLs = {
-            'shopping': '/order/showAllOrderForWorker',
+            'else': '/order/showAllOrderForWorker',
             'working': '/workStudyServlet/showWorkStudy'
         };
 
-        let urlParams = new URLSearchParams();
-        urlParams.append('currentPage', currentPage);
-        urlParams.append('pageSize', pageSize || 4);
-        if (catagory === 'working') {
-            urlParams.append('content', content || '');
-        }
+        let bodyParams = new URLSearchParams();
+        bodyParams.append('currentPage', currentPage);
+        bodyParams.append('pageSize', pageSize || 4);
 
-        return fetch(requestURLs[catagory], {
-            method: 'POST',
-            body: urlParams,
-            credentials: 'same-origin'
-        }).then(res => res.json()).catch(console.log);
+        let queryParams = new URLSearchParams();
+        switch (catagory) {
+            case 'shopping':
+                queryParams.append('serviceType', 'marketService');
+                break;
+            case 'ordering_food':
+                queryParams.append('serviceType', 'restaurantService');
+                break;
+            case 'working':
+                bodyParams.append('content', content || '');
+                break;
+            default:
+                throw `unexpected param ${catagory}`;
+        }
+        
+        // why this looks weird? check out api docs
+        if (catagory !== 'working') { // if not catagory working
+            let queryURL = requestURLs['else'] + '?' + queryParams.toString();
+            return fetch(queryURL, {
+                method: 'POST',
+                body: bodyParams,
+                credentials: 'same-origin'
+            }).then(res => res.json()).catch(console.log);
+        } else { // is catagory working
+            return fetch(requestURLs['working'], {
+                method: 'POST',
+                body: bodyParams,
+                credentials: 'same-origin'
+            }).then(res => res.json()).catch(console.log);
+        }
     }
 
     let currentPage = 1;
