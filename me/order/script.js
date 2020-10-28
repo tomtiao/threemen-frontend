@@ -115,7 +115,7 @@ function pageHandler() {
         };
 
         // additional 0 added, to show all kinds of list
-    function getNewOrder(isUser, requestStatus, service_type) {
+    function getNewOrder(isUser, requestStatus, catagory) {
         const picked_order_list = document.querySelector('.picked_order_list');
         const my_order_list = document.querySelector('.my_order_list');
     
@@ -171,10 +171,14 @@ function pageHandler() {
             }
         }
 
-        let service_type_keys = Object.keys(service_type_object);
-        service_type_keys.forEach((key) => {
-            requestOrderUsingStatus(key);
-        });
+        if (catagory === 'all') {
+            let service_type_catagory = Object.keys(service_type_object);
+            service_type_catagory.forEach((key) => {
+                requestOrderUsingStatus(key);
+            });
+        } else {
+            requestOrderUsingStatus(catagory);
+        }
     
     }
     
@@ -442,7 +446,7 @@ function pageHandler() {
     listenSwapper();
     listenClickListItem();
     listenOrderSubmit();
-    getNewOrder(1, 0);
+    getNewOrder(1, 0, 'all');
     
 }
 
