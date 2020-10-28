@@ -156,8 +156,11 @@ function pageBehaviourHandler() {
             case 'shopping':
                 queryParams.append('serviceType', 'marketService');
                 break;
-            case 'ordering_food':
+            case 'order_food':
                 queryParams.append('serviceType', 'restaurantService');
+                break;
+            case 'logistic':
+                queryParams.append('serviceType', 'deliveryService');
                 break;
             case 'working':
                 bodyParams.append('content', content || '');
@@ -228,6 +231,8 @@ function pageBehaviourHandler() {
         cleanList();
 
         switch (catagory) {
+            case 'order_food':
+            case 'logistic':
             case 'shopping':
                 info_array.forEach((info_o) => {
                     info_list.append(createListItem(info_o['commAddress'], info_o['address'], info_o['commNum'], catagory));
