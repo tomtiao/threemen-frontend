@@ -429,8 +429,9 @@ function updateListHandler() {
             makeRequest(value).then(res_obj => {
                 let data_obj = res_obj;
                 let info_array = data_obj['dataObj'];
-                info_array.forEach(o => {
-                    content_list.append(createListItem(o['img'], o['shopName'], '', location_list[value], value));
+                // expected item structure: info_sub_array[0]: shop_name, info_sub_array[1]: img in base64
+                info_array.forEach(info_sub_array => {
+                    content_list.append(createListItem(info_sub_array[1], info_sub_array[0], '', location_list[value], value));
                 });
             });
         });
