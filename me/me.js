@@ -205,7 +205,7 @@ function changePasswordHandler() {
         let form_data = new FormData(change_pw_form);
         let urlParams = new URLSearchParams();
         for (let data of form_data) {
-            if (data[0] === 'old' || data[0] === 'new') {
+            if (data[0] === 'oldPassword' || data[0] === 'newPassword') {
                 urlParams.append(data[0], data[1]);
             }
         }
