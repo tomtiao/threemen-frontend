@@ -466,7 +466,7 @@ function clickResultHandler() {
             requestOrderDetail(e.target.dataset.id).then(data_obj => {
                 if (data_obj['flag']) {
                     let info_array = data_obj['dataObj'];
-                    setDetailPanelContent(e.target, info_array[0]);
+                    setDetailPanelContent(e.target, info_array);
                 } else {
                     console.log('获取订单内容失败');
                     console.log(data_obj);
@@ -478,7 +478,7 @@ function clickResultHandler() {
                     let info_o = data_obj['dataObj'];
                     setDetailPanelContact(e.target, info_o);
                 } else {
-                    console.log('获取订单内容失败');
+                    console.log('获取订单联系人失败');
                     console.log(data_obj);
                 }
             }).catch(console.log);
