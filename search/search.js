@@ -192,12 +192,19 @@ function pageBehaviourHandler() {
     }
 
     let currentPage = 1;
-    // if catagory isn't catargory 'working', param content would be ingored.
+    // if catagory isn't catargory 'working', param content would be ignored.
     function updateListAndPageSelection(catagory, content, isInitial) {
         requestPageAndInfo(catagory, currentPage, null, content)
             .then(page_and_info_o => {
-                let totalPage = page_and_info_o['dataObj']['totalPage'];
-                let info_array = page_and_info_o['dataObj']['list'];
+                let totalPage;
+                let info_array;
+                if (catagory === 'working') {
+                    totalPage = page_and_info_o['totalPage'];
+                    info_array = page_and_info_o['list'];
+                } else {
+                    totalPage = page_and_info_o['dataObj']['totalPage'];
+                    info_array = page_and_info_o['dataObj']['list'];
+                }
 
                 initPageList(totalPage);
                 updateList(info_array, catagory);
@@ -287,7 +294,10 @@ function pageBehaviourHandler() {
             let new_second_list_item = document.createElement('li');
             new_second_list_item.classList.add('brief_item');
 
-            new_second_list_item.textContent += item_content;
+            // for now, item_content is address with format of '南#11'
+            let address_array = item_content.split('#');
+            let address = address_array[0] + '苑' + address_array[1] + '栋';
+            new_second_list_item.textContent += address;
 
             new_second_list.append(new_second_list_item);
         }
