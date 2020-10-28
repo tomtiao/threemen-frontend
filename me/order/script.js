@@ -382,8 +382,8 @@ function pageHandler() {
     
                     requestOrderDetail(e.target.dataset.id).then(data_obj => {
                         if (data_obj['flag']) {
-                            let info_array = data_obj['dataObj'];
-                            setDetailPanelContent(e.target, info_array[0]);
+                            let info_o = data_obj['dataObj'];
+                            setDetailPanelContent(e.target, info_o);
                         } else {
                             console.log('获取订单内容失败');
                             console.log(data_obj);
@@ -425,13 +425,6 @@ function pageHandler() {
             e.preventDefault();
             sendPickRequest(e.target.dataset.bindid)
                 .then(data_obj => {
-                    // TEST
-                    data_obj = {
-                        "info": {
-                            "flag": true,
-                            "errorMsg": "cHwMK"
-                        }
-                    };
                     if (data_obj['flag']) {
                         alert('取消订单成功。');
                         location.replace('/me/order');
