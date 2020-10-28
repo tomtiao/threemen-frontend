@@ -59,14 +59,16 @@ function pageHandler() {
     /*
      ** isUser: 1 for user, 0 for worker
      ** requestStatus: 1, 2, 3, 4, 5
+     ** serviceType
      */
-    function getUserOrder(isUser, requestStatus) {
+    function getUserOrder(isUser, requestStatus, service_type) {
         const requestURL = '/order/showMyOrderForUserOrWorker';
     
         const urlParams = new URLSearchParams();
     
         urlParams.append('isUser', isUser);
         urlParams.append('order_status', requestStatus);
+        urlParams.append('serviceType', service_type);
     
         let getURL = requestURL + '?' + urlParams.toString();
         return fetch(getURL, {
@@ -102,12 +104,18 @@ function pageHandler() {
                     break;
                 default:
                     throw `unexpected param ${catagory}`;
+                }
             }
         }
-    }
-    
-    // additional 0 added, to show all kinds of list
-    function getNewOrder(isUser, requestStatus) {
+        
+        const service_type_object = {
+            'shopping': 'marketService',
+            'order_food': 'restaurantService',
+            'logistic': 'deliveryService'
+        };
+
+        // additional 0 added, to show all kinds of list
+    function getNewOrder(isUser, requestStatus, service_type) {
         const picked_order_list = document.querySelector('.picked_order_list');
         const my_order_list = document.querySelector('.my_order_list');
     
@@ -122,44 +130,52 @@ function pageHandler() {
             default:
                 throw `unexpected param ${isUser}`;
         }
-    
-        switch (requestStatus) {
-            // get all kinds of orders
-            case 0:
-                cleanList(target_list);
-                const keys = Object.keys(status_str);
-                keys.forEach((value) => {
-                    if (isUser === 0 && ((value !== '1') && (value !== '5'))) {
-                        return;
-                    }
-                    getUserOrder(isUser, value).then(data_obj => {
+
+        function requestOrderUsingStatus(service_type_content) {
+            switch (requestStatus) {
+                // get all kinds of orders
+                case 0:
+                    cleanList(target_list);
+                    const keys = Object.keys(status_str);
+                    keys.forEach((request_status_number) => {
+                        if (isUser === 0 && ((request_status_number !== '1') && (request_status_number !== '5'))) {
+                            return;
+                        }
+                        getUserOrder(isUser, request_status_number, service_type_content).then(data_obj => {
+                            if (data_obj['flag']) {
+                                updateList(data_obj, target_list, false); // TODO
+                            } else {
+                                console.log(`获取${request_status_number}类型订单信息失败！`);
+                                console.log(data_obj);
+                            }
+                        }).catch(console.log);
+                    })
+                    break;
+                // get specific kind of orders, not used yet
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    getUserOrder(isUser, requestStatus).then(data_obj => {
                         if (data_obj['flag']) {
-                            updateList(data_obj, target_list, false); // TODO
+                            updateList(data_obj, target_list, true);
                         } else {
                             console.log(`获取${value}类型订单信息失败！`);
                             console.log(data_obj);
                         }
                     }).catch(console.log);
-                })
-                break;
-            // get specific kind of orders, not used yet
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-                getUserOrder(isUser, requestStatus).then(data_obj => {
-                    if (data_obj['flag']) {
-                        updateList(data_obj, target_list, true);
-                    } else {
-                        console.log(`获取${value}类型订单信息失败！`);
-                        console.log(data_obj);
-                    }
-                }).catch(console.log);
-                break;
-            default:
-                throw `unexpected param ${requestStatus}`;
+                    break;
+                default:
+                    throw `unexpected param ${requestStatus}`;
+            }
         }
+
+        let service_type_keys = Object.keys(service_type_object);
+        service_type_keys.forEach((key) => {
+            requestOrderUsingStatus(service_type_object[key]);
+        });
+    
     }
     
     function moveList(direction) {
@@ -209,11 +225,11 @@ function pageHandler() {
                 switch (e.target.id) {
                     case 'my_order':
                         moveList('left');
-                        getNewOrder(1, 0);
+                        getNewOrder(1, 0, 'all');
                         break;
                     case 'picked_order':
                         moveList('right');
-                        getNewOrder(0, 0);
+                        getNewOrder(0, 0, 'all');
                         break;
                     default:
                         throw `unexpected param ${e.target.id}`;
