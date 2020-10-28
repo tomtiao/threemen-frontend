@@ -76,9 +76,11 @@ function setUserInfo() {
     }).catch(console.log);
 
     checkIfVerified().then(data => {
+        const not_verified = document.querySelector('.not_verified');
+        const verified_info_wrapper = document.querySelector('.verification_info_list');
         if (data['flag']) {
             getWorkerInfo().then(data => {
-                const worker_obj = data['workderInfo'];
+                const worker_obj = data['dataObj'];
         
                 const doms = {
                     stuId: document.getElementById('id'),
@@ -90,10 +92,11 @@ function setUserInfo() {
                     doms[value].textContent = worker_obj[value];
                 });
             }).catch(console.log);
-            document.querySelector('.not_verified').classList.add('hide');
+            not_verified.classList.add('hide');
+            verified_info_wrapper.classList.remove('hide');
         } else {
-            document.querySelector('.not_verified').classList.remove('hide');
-            document.querySelector('.verification_info_list').classList.add('hide');
+            not_verified.classList.remove('hide');
+            verified_info_wrapper.classList.add('hide');
         }
     }).catch(console.log);
 
