@@ -87,14 +87,14 @@ function pageHandler() {
      ** isUser
      ** clean_list: boolean, whether remove childNodes from target_list
      */
-    function updateList(unwrapped_data_obj, target_list, clean_list) {
+    function updateList(unwrapped_data_obj, target_list, clean_list, catagory) {
         if (clean_list) {
             cleanList(target_list);
         }
     
         // 遍历数组
         for (let data of unwrapped_data_obj['dataObj']) {
-            switch (data['catagory']) {
+            switch (catagory) {
                 case 'shopping':
                     let address_array = data['address'].split('#');
                     let section = address_array[0] + '栋';
@@ -131,7 +131,7 @@ function pageHandler() {
                 throw `unexpected param ${isUser}`;
         }
 
-        function requestOrderUsingStatus(service_type_content) {
+        function requestOrderUsingStatus(catagory) {
             switch (requestStatus) {
                 // get all kinds of orders
                 case 0:
@@ -141,9 +141,9 @@ function pageHandler() {
                         if (isUser === 0 && ((request_status_number !== '1') && (request_status_number !== '5'))) {
                             return;
                         }
-                        getUserOrder(isUser, request_status_number, service_type_content).then(data_obj => {
+                        getUserOrder(isUser, request_status_number, service_type_object[catagory]).then(data_obj => {
                             if (data_obj['flag']) {
-                                updateList(data_obj, target_list, false); // TODO
+                                updateList(data_obj, target_list, false, catagory); // TODO
                             } else {
                                 console.log(`获取${request_status_number}类型订单信息失败！`);
                                 console.log(data_obj);
@@ -173,7 +173,7 @@ function pageHandler() {
 
         let service_type_keys = Object.keys(service_type_object);
         service_type_keys.forEach((key) => {
-            requestOrderUsingStatus(service_type_object[key]);
+            requestOrderUsingStatus(key);
         });
     
     }
