@@ -116,7 +116,7 @@ function accountHandler() {
             e.preventDefault();
             sendLogoutRequest().then(obj => {
                 if (obj['flag']) {
-                    location.replace('/');
+                    location.reload();
                 } else {
                     console.log('something went wrong');
                     console.log(obj);
