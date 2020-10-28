@@ -100,7 +100,7 @@ function pageHandler() {
                     let section = address_array[0] + '栋';
                     let building = address_array[1] + '栋';
                     let final_address = section + building
-                    target_list.append(createListItem(final_address, data['status'], data['commAddress'], data['commNum'], data['catagory']));
+                    target_list.append(createListItem(final_address, data['status'], data['commAddress'], data['commNum'], catagory));
                     break;
                 default:
                     throw `unexpected param ${catagory}`;
