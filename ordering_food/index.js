@@ -223,6 +223,13 @@ function pageBehaviorHandler() {
 
                 list_item.append(img_wrapper, desc);
 
+                // TODO
+                list_item.innerHTML += ` <div class="dishes_add">
+                <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+                <span class="counter invisible">1</span>
+                <button type="button" class="add_dishes dishes_btn">+</button>
+            </div>`;
+
                 return list_item;
             }
 
@@ -261,6 +268,26 @@ function pageBehaviorHandler() {
             setPosition(position);
         }
 
+        function addDishesHandler() {
+            let dishes_add_sections = document.querySelectorAll('.dishes_add');
+
+            dishes_add_sections.forEach(section => {
+                section.addEventListener('click', e => {
+                    if (e.target.tagName === 'A') {
+                        switch (e.target.className) {
+                            case '':
+                                
+                                break;
+                        }
+                    }
+                })
+            })
+            
+            const dishes = [];
+
+
+        }
+
 
         function listenItemHandler() {
             const content_list = document.querySelector('.content_list');
@@ -275,13 +302,12 @@ function pageBehaviorHandler() {
                     let shop_img_base64_with_prefix = e.target.parentElement.children[1].firstElementChild.src;
                     getStallDishes(shop_name);
                     setStallInfo(shop_img_base64_with_prefix, e.target.parentElement.dataset.position);
+                    addDishesHandler();
                 }
             });
         }
 
-        function addDishesHandler() {
-            
-        }
+        
 
         listenListHandler();
         listenItemHandler();

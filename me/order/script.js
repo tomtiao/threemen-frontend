@@ -37,8 +37,8 @@ function pageHandler() {
         wrapper.append(title, brief);
         // 标记是否可以取消
         switch (order_status) {
-            case 1:
-            case 2:
+            case "1":
+            case "2":
                 wrapper.dataset.cancelable = true;
                 break;
             default:
