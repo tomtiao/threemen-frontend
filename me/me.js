@@ -87,7 +87,7 @@ function setUserInfo() {
                     realName: document.getElementById('real_name')
                 };
         
-                const keys = Object.keys(worker_obj);
+                const keys = Object.keys(doms);
                 keys.forEach((value) => {
                     doms[value].textContent = worker_obj[value];
                 });
