@@ -31,7 +31,7 @@ function accountHandler() {
             let data;
             const avatar_header = document.querySelector('.avatar');
             const avatar_panel = document.querySelector('.avatar_img');
-            if (res) {
+            if (res['dataObj']) {
                 data = res['dataObj']; // Base64
                 avatar_header.src = 'data:image/png;base64,' + data;
                 avatar_panel.src = 'data:image/png;base64,' + data;
