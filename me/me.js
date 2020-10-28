@@ -52,16 +52,16 @@ function setUserInfo() {
         const keys = Object.keys(doms);
         keys.forEach((value) => {
             if (doms[value] instanceof Array) {
-                doms[value].forEach((value) => value.textContent = user_contact_o[value]);
+                doms[value].forEach((value) => value.textContent = user_account_o[value]);
             } else {
                 switch (value) {
                     case 'phone':
                     case 'address':
-                        doms[value].textContent = user_account_o[value];
+                        doms[value].textContent = user_contact_o[value];
                         break;
                     case 'account':
                     case 'email':
-                        doms[value].textContent = user_contact_o[value];
+                        doms[value].textContent = user_account_o[value];
                         break;
                     default:
                         console.log(`unexpected value ${value}`);
