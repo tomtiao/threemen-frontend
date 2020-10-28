@@ -271,7 +271,7 @@ function pageBehaviourHandler() {
 
             new_second_list_item.append(new_second_item_label);
 
-            if (item_content['fixSeat'] !== undefined) {
+            if (item_content['fixSeat']) {
                 new_second_list_item.append(document.createTextNode(item_content['fixSeat']));
             } else {
                 new_second_list_item.append(document.createTextNode('无'));
@@ -286,8 +286,8 @@ function pageBehaviourHandler() {
             new_second_item_label_copied.textContent = '临时岗位';
 
             new_second_list_item_copied.append(new_second_item_label_copied);
-
-            if (item_content['temSeat'] !== undefined) {
+            
+            if (item_content['temSeat']) {
                 new_second_list_item_copied.append(document.createTextNode(item_content['temSeat']));
             } else {
                 new_second_list_item_copied.append(document.createTextNode('无'));
