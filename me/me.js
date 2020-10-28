@@ -52,7 +52,7 @@ function setUserInfo() {
         const keys = Object.keys(doms);
         keys.forEach((value) => {
             if (doms[value] instanceof Array) {
-                doms[value].forEach((value) => value.textContent = user_account_o[value]);
+                doms[value].forEach((ele) => ele.textContent = user_account_o[value]);
             } else {
                 switch (value) {
                     case 'phone':
@@ -96,7 +96,11 @@ function setUserInfo() {
     getUserAvatar().then(data => {
         const avatar = document.getElementById('my_avatar');
 
-        avatar.src = 'data:image/png;base64,' + data['dataObj'];
+        if (data['dataObj']) {
+            avatar.src = 'data:image/png;base64,' + data['dataObj'];
+        } else {
+            avatar.src = '/static/img/default_avatar.png';
+        }
     }).catch(console.log);
 }
 
