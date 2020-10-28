@@ -44,7 +44,7 @@ function submitHandler() {
                         // TODO: 重做提醒
                         setTimeout(alert(data['errorMsg']));
                     }
-                }); // TODO: 处理返回值
+                }).catch(console.log); // TODO: 处理返回值
             }
         }
     });

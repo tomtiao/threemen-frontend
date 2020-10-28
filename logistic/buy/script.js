@@ -28,7 +28,7 @@ function sendOrderHandler() {
             } else {
                 alert('很抱歉，出了一些问题');
             }
-        });
+        }).catch(console.log);
     });
 }
 

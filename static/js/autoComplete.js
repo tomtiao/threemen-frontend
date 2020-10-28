@@ -22,7 +22,7 @@ function autoCompleteUserInfo() {
     }
 
     let user_data = fetchUserInfo();
-    user_data.then(setUserInfo);
+    user_data.then(setUserInfo).catch(console.log);
 }
 
 window.addEventListener('load', () => {

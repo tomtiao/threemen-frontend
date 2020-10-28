@@ -42,7 +42,7 @@ function submitHandler() {
                     } else {
                         setTimeout(alert(data['errorMsg'] + " 请重试。"));
                     }
-                }); // TODO: 处理返回值
+                }).catch(console.log); // TODO: 处理返回值
             }
         }
     });

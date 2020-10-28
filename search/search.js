@@ -182,6 +182,14 @@ function pageBehaviourHandler() {
             }).then(res => res.json()).catch(console.log);
         }
     }
+    
+    function listenSearchBtn() {
+        const search_btn = document.querySelector('.search_btn');
+
+        search_btn.addEventListener('click', e => {
+            updateListAndPageSelection('working', getKeyword(), false);
+        });
+    }
 
     let currentPage = 1;
     // if catagory isn't catargory 'working', param content would be ingored.
@@ -198,7 +206,7 @@ function pageBehaviourHandler() {
                     listenFilterList();
                     listenPageList();
                 }
-            });
+            }).catch(console.log);
     }
 
     function updateList(info_array, catagory) {
@@ -318,7 +326,7 @@ function pageBehaviourHandler() {
                         updateListAndPageSelection(last_time_catagory,
                             last_time_catagory === 'working' ? getKeyword() : undefined, false);
                     } else {
-                        setTimeout(alert('已经是最后一页了！'));
+                        alert('已经是最后一页了！');
                     }
                     break;
                 default:
@@ -337,6 +345,7 @@ function pageBehaviourHandler() {
     }
 
     updateListAndPageSelection('shopping', undefined, true);
+    listenSearchBtn();
 }
 
 function requestOrderContact(order_id) {
@@ -452,7 +461,7 @@ function clickResultHandler() {
                     console.log('获取订单内容失败');
                     console.log(data_obj);
                 }
-            });
+            }).catch(console.log);
 
             requestOrderContact(e.target.dataset.id).then(data_obj => {
                 if (data_obj['flag']) {
@@ -462,7 +471,7 @@ function clickResultHandler() {
                     console.log('获取订单内容失败');
                     console.log(data_obj);
                 }
-            });
+            }).catch(console.log);
         }
     });
 }
@@ -496,7 +505,7 @@ function listenOrderSubmit() {
                     console.log(data_obj);
                 }
             }
-        });
+        }).catch(console.log);
     });
 }
 

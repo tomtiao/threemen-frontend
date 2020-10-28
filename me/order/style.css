@@ -2,6 +2,7 @@
     display: flex;
     padding: 1em 2em;
     justify-content: space-between;
+    margin-top: 64px;
 }
 
 .order_wrapper {

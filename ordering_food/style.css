@@ -66,9 +66,10 @@ aside.show {
 }
 
 .stall_avatar_wrapper .stall_avatar {
-    background-color: #999;
+    background-color: white;
     width: 80px;
     height: 80px;
+    border-radius: 100%;
 }
 
 .tab_wrapper {

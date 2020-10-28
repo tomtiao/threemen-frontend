@@ -39,7 +39,7 @@ function accountHandler() {
                 avatar_header.src = default_dir;
                 avatar_panel.src = default_dir;
             }
-        });
+        }).catch(console.log);
     };
 
     function avatar_panel_handler() {
@@ -72,7 +72,7 @@ function accountHandler() {
             } else { // fallback
                 nickname.textContent = '噢，名字走丢了';
             }
-        });
+        }).catch(console.log);
 
         const balance = document.querySelector('.balance');
 
@@ -83,7 +83,7 @@ function accountHandler() {
             } else { // fallback
                 balance.textContent = '噢，金子走丢了';
             }
-        });
+        }).catch(console.log);
 
         // TODO: fix hover on avatar
         avatar.addEventListener('mouseenter', e => {
@@ -121,7 +121,7 @@ function accountHandler() {
                     console.log('something went wrong');
                     console.log(obj);
                 }
-            });
+            }).catch(console.log);
         });
     }
 
@@ -139,7 +139,7 @@ function accountHandler() {
             login_register.classList.remove('hidden');
             with_avatar.classList.add('hidden');
         }
-    });
+    }).catch(console.log);
 }
 
 window.addEventListener('load', e => {

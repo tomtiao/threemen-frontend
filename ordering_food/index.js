@@ -237,10 +237,28 @@ function pageBehaviorHandler() {
                     dishes_array.forEach(o => {
                         dishes_list.append(createListItem(o['dishName'], o['dishPrice'], o['img']));
                     });
-                });
+                }).catch(console.log);
             }
 
             updateDishesList(shop_name);
+        }
+
+        function setStallInfo(shop_img_base64_with_prefix, position) {
+            let setStallAvatar = (shop_img_base64_with_prefix) => {
+                const stall_avatar = document.getElementById('stall_avatar');
+
+                stall_avatar.src = shop_img_base64_with_prefix;
+            };
+
+            setStallAvatar(shop_img_base64_with_prefix);
+
+            let setPosition = (position) => {
+                const position_content = document.getElementById('position');
+
+                position_content.textContent = position;
+            };
+
+            setPosition(position);
         }
 
 
@@ -251,11 +269,18 @@ function pageBehaviorHandler() {
                 if (e.target.tagName === 'A') {
                     e.preventDefault();
                     console.log(e.target.parentElement.dataset.position + " " + e.target.parentElement.dataset.floor);
-                    console.log(e.target.parentElement.children[2].children[0].textContent);
-                    let shop_name = e.target.parentElement.children[2].children[0].textContent;
+                    console.log(e.target.parentElement.children[2].firstElementChild.textContent);
+                    console.log(e.target.parentElement.children[1].firstElementChild.src);
+                    let shop_name = e.target.parentElement.children[2].firstElementChild.textContent;
+                    let shop_img_base64_with_prefix = e.target.parentElement.children[1].firstElementChild.src;
                     getStallDishes(shop_name);
+                    setStallInfo(shop_img_base64_with_prefix, e.target.parentElement.dataset.position);
                 }
             });
+        }
+
+        function addDishesHandler() {
+            
         }
 
         listenListHandler();
@@ -440,7 +465,7 @@ function updateListHandler() {
                     info_array.forEach(info_sub_array => {
                         content_list.append(createListItem(info_sub_array[1], info_sub_array[0], '', location_list[value], value));
                     });
-                })
+                }).catch(console.log)
             );
         });
 

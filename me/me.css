@@ -350,3 +350,31 @@ a.verify:hover {
     color: #eee;
     background-color: #388094;
 }
+
+.reset_passwd.btn {
+    color: #333;
+    display: block;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    margin-left: 40px;
+    border-radius: 16px;
+    border: 0;
+    background-color: #71c9ce;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    outline: none;
+}
+
+.reset_passwd.btn:hover {
+    background-color: #52A4B1;
+}
+
+.reset_passwd.btn:active {
+    color: #eee;
+    background-color: #388094;
+}
+
+.hide {
+    display: none;
+}

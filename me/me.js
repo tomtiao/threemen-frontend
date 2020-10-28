@@ -11,6 +11,15 @@ function setUserInfo() {
         }).then(res => res.json()).catch(console.log);
     }
 
+    function checkIfVerified() {
+        const requestURL = '/workerInfo/isRealize';
+
+        return fetch(requestURL, {
+            method: 'GET',
+            credentials: 'same-origin'
+        }).then(res => res.json()).catch(console.log);
+    }
+
     function getWorkerInfo() {
         const requestURL = '/workerInfo/showInfo';
 
@@ -20,11 +29,20 @@ function setUserInfo() {
         }).then(res => res.json()).catch(console.log);
     }
 
+    function getUserAvatar() {
+        const requestURL = '/userInfo/showImg';
+
+        return fetch(requestURL, {
+            method: 'POST',
+            credentials: 'same-origin'
+        }).then(res => res.json()).catch(console.log);
+    }
+
     getUserInfo().then(data => {
         const user_contact_o = data['dataObj'][0];
         const user_account_o = data['dataObj'][1];
         const doms = {
-            nickname: [ document.getElementById('nickname_avatar'), document.getElementById('nickname_detail') ],
+            nickname: [document.getElementById('nickname_avatar'), document.getElementById('nickname_detail')],
             phone: document.getElementById('phone'),
             account: document.getElementById('account'),
             email: document.getElementById('email'),
@@ -51,21 +69,35 @@ function setUserInfo() {
                 }
             }
         });
-    });
+    }).catch(console.log);
 
-    getWorkerInfo(data => {
-        const worker_obj = data['workderInfo'];
+    checkIfVerified().then(data => {
+        if (data['flag']) {
+            getWorkerInfo().then(data => {
+                const worker_obj = data['workderInfo'];
+        
+                const doms = {
+                    stuId: document.getElementById('id'),
+                    realName: document.getElementById('real_name')
+                };
+        
+                const keys = Object.keys(worker_obj);
+                keys.forEach((value) => {
+                    doms[value].textContent = worker_obj[value];
+                });
+            }).catch(console.log);
+            document.querySelector('.not_verified').classList.add('hide');
+        } else {
+            document.querySelector('.not_verified').classList.remove('hide');
+            document.querySelector('.verification_info_list').classList.add('hide');
+        }
+    }).catch(console.log);
 
-        const doms = {
-            stuId: document.getElementById('id'),
-            realName: document.getElementById('real_name')
-        };
+    getUserAvatar().then(data => {
+        const avatar = document.getElementById('my_avatar');
 
-        const keys = Object.keys(worker_obj);
-        keys.forEach((value) => {
-            doms[value].textContent = worker_obj[value];
-        });
-    });
+        avatar.src = 'data:image/png;base64,' + data['dataObj'];
+    }).catch(console.log);
 }
 
 // 进行信息的获取和DOM修改
@@ -186,7 +218,7 @@ function changePasswordHandler() {
                 } else {
                     alert(data['errorMsg']);
                 }
-            });
+            }).catch(console.log);
         }
     });
 }
@@ -194,23 +226,23 @@ function changePasswordHandler() {
 function verificationHandler() {
     function makeRequest() {
         const requestURL = '/workerInfo/workerRealize';
-        
+
         const form_self = document.querySelector('.verify_form');
-    
+
         const form_data = new FormData(form_self);
-    
+
         let urlParams = new URLSearchParams();
         form_data.forEach((value, key) => {
             urlParams.append(key, value);
         });
-    
+
         return fetch(requestURL, {
             method: 'POST',
             body: urlParams,
             credentials: 'same-origin'
         }).then(res => res.json()).catch(console.log);
     }
-    
+
     function sendRequestHandler() {
         const verify_link = document.getElementById('verify_link');
         const verification_panel = document.querySelector('.verify_wrapper');
@@ -242,16 +274,24 @@ function verificationHandler() {
                     alert('出现了错误！');
                     console.log(data['errorMsg']);
                 }
-            });
+            }).catch(console.log);
         });
     }
 
     sendRequestHandler();
 }
 
-window.addEventListener('load', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        userInfoHandler();
+        uploadAvatarHandler();
+        changePasswordHandler();
+        verificationHandler();
+    });
+} else {
     userInfoHandler();
     uploadAvatarHandler();
     changePasswordHandler();
     verificationHandler();
-});
+}
+
