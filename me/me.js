@@ -224,10 +224,10 @@ function changePasswordHandler() {
         } else {
             makeRequest().then(obj => {
                 if (obj['flag']) {
-                    alert(data['errorMsg']);
+                    alert(obj['errorMsg']);
                     location.replace(location.pathname);
                 } else {
-                    alert(data['errorMsg']);
+                    alert(obj['errorMsg']);
                 }
             }).catch(console.log);
         }
