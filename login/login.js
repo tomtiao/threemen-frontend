@@ -50,6 +50,12 @@ function submitHandler() {
     });
 }
 
-window.addEventListener('load', () => {
+
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        submitHandler();
+    });
+} else {
     submitHandler();
-});
+}

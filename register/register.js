@@ -75,8 +75,15 @@ function fixEmailAnimation() {
     });
 }
 
-addEventListener('load', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        submitHandler();
+        verificationCodeHandler();
+        fixEmailAnimation();
+    });
+} else {
     submitHandler();
     verificationCodeHandler();
     fixEmailAnimation();
-});
+}
+

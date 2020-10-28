@@ -219,8 +219,11 @@ function pageBehaviorHandler() {
 
                 price.append(price_content);
 
-                desc.append(name ,price);
+                desc.append(name, price);
 
+                list_item.append(img_wrapper, desc);
+
+                return list_item;
             }
 
             function updateDishesList(shop_name) {
@@ -228,14 +231,16 @@ function pageBehaviorHandler() {
 
                 cleanList();
 
-                makeRequest(shop_name).then(data_obj => {
+                return makeRequest(shop_name).then(data_obj => {
                     let dishes_array = data_obj['dataObj'];
 
                     dishes_array.forEach(o => {
-                        dishes_list.append(createListItem());
+                        dishes_list.append(createListItem(o['dishName'], o['dishPrice'], o['img']));
                     });
                 });
             }
+
+            updateDishesList(shop_name);
         }
 
 
@@ -425,17 +430,21 @@ function updateListHandler() {
 
         const keys = Object.keys(location_list);
 
+        let promises = [];
         keys.forEach((value) => {
-            makeRequest(value).then(res_obj => {
-                let data_obj = res_obj;
-                let info_array = data_obj['dataObj'];
-                // expected item structure: info_sub_array[0]: shop_name, info_sub_array[1]: img in base64
-                info_array.forEach(info_sub_array => {
-                    content_list.append(createListItem(info_sub_array[1], info_sub_array[0], '', location_list[value], value));
-                });
-            });
+            promises.push(
+                makeRequest(value).then(res_obj => {
+                    let data_obj = res_obj;
+                    let info_array = data_obj['dataObj'];
+                    // expected item structure: info_sub_array[0]: shop_name, info_sub_array[1]: img in base64
+                    info_array.forEach(info_sub_array => {
+                        content_list.append(createListItem(info_sub_array[1], info_sub_array[0], '', location_list[value], value));
+                    });
+                })
+            );
         });
 
+        return Promise.all(promises);
         // return makeRequest().then(data => {
         //     data.forEach((stall_obj) => {
         //         content_list.append(createListItem(, stall_obj['name'], stall_obj['time'], stall_obj['location'], stall_obj['floor']));
@@ -448,8 +457,10 @@ function updateListHandler() {
     });
 }
 
-
-
-window.addEventListener('load', e => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', e => {
+        updateListHandler();
+    });
+} else {
     updateListHandler();
-});
+}

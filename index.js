@@ -173,6 +173,11 @@ function updateListItem() {
     
 }
 
-window.addEventListener('load', e => {
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', e => {
+        pageBehaviorHandler();
+    });
+} else {
     pageBehaviorHandler();
-});
+}
