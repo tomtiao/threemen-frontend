@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改信息</title>
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .item input+label {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            margin: 0.5em;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .change_pw_panel {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            padding: 2em;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+            /* opacity: 0; */
+            /* transform: scale(0.8); */
+            transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+            /* pointer-events: none; */
+        }
+
+        .change_pw_panel.show {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: all;
+        }
+
+        .change_pw_panel .panel_title {
+            color: #52A4B1;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .change_pw_panel .panel_title::after {
+            content: "";
+            display: block;
+            border: 1px solid #CCFAF1;
+            flex-grow: 1;
+            margin-left: 1em;
+        }
+
+        .change_pw_panel .item {
+            position: relative;
+            height: 32px;
+            box-sizing: border-box;
+            margin: 32px 0;
+        }
+
+        .change_pw_panel .item:nth-child(3) {
+            margin-top: 18px;
+        }
+
+        .change_pw_panel .item input[type=text] {
+            border: 0;
+            height: 100%;
+            padding: 0.5em;
+            box-sizing: border-box;
+            border-bottom: 2px solid #eee;
+            transition: border-bottom 0.3s ease-in-out;
+            outline: none;
+        }
+
+        .change_pw_panel .item input[type=text]:focus {
+            border-bottom-color: #71C9CE;
+        }
+
+        .change_pw_panel .item label {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .change_pw_panel .item input[type=text]:focus+label {
+            color: #71c9ce;
+            transform: translateY(-100%);
+        }
+
+        .change_pw_panel .item input[type=text]:invalid+label {
+            transform: translateY(0);
+        }
+
+        .change_pw_panel .item input[type=text]:invalid:focus+label {
+            color: #71c9ce;
+            transform: translateY(-100%);
+        }
+
+        .change_pw_panel .change_pw_btn {
+            color: #333;
+            display: block;
+            width: 60px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            border-radius: 16px;
+            border: 0;
+            background-color: #71c9ce;
+            font-size: 14px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            outline: none;
+        }
+
+        .change_pw_panel .change_pw_btn:hover {
+            background-color: #52A4B1;
+        }
+
+        .change_pw_panel .change_pw_btn:active {
+            color: #eee;
+            background-color: #388094;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header_wrapper">
+            <div class="logo"><a href="/" class="logo_link"><img src="/static/img/three_men_transparent.png" alt="Three men logo"
+                        class="logo_img"></a></div>
+            <ul class="section_list">
+                <h1 class="visually_hidden list_title">区域</h1>
+                <li class="list_item"><a href="/" class="item_link active">首页</a></li>
+                <li class="list_item"><a href="/search" class="item_link">兼职</a></li>
+                <li class="list_item"><a href="/ordering_food" class="item_link">食堂订餐</a></li>
+                <li class="list_item"><a href="/shopping" class="item_link">超市代购</a></li>
+                <li class="list_item"><a href="/logistic" class="item_link">快递帮拿</a></li>
+            </ul>
+            <section class="account_section login_and_register">
+            <!-- <section class="account_section login_and_register hidden"> -->
+                <a href="/login" class="login account_func">登录</a>
+                <a href="/register" class="register account_func">注册</a>
+            </section>
+            <section class="account_section with_avatar hidden">
+            <!-- <section class="account_section with_avatar"> -->
+                <a href="/me" class="account">
+                    <img src="/static/img/default_avatar.png" alt="User avatar" class="avatar">
+                </a>
+                <div class="avatar_panel">
+                <!-- <div class="avatar_panel" style="opacity: 1; pointer-events: all;"> -->
+                    <div class="avatar_name_wrapper">
+                        <a href="/me" class="avatar">
+                            <img src="/static/img/default_avatar.png" alt="User avatar" class="avatar_img">
+                        </a>
+                        <h1 class="nickname">用户名</h1>
+                    </div>
+                    <div class="func_list_wrapper">
+                        <ul class="func_list">
+                            <li class="list_item"><a href="#" class="item_link" id="balance">金子余额<span class="balance">0</span></a></li>
+                            <li class="list_item"><a href="#" class="item_link" id="recharge">金子充值</a></li>
+                            <li class="list_item"><a href="#" class="item_link" id="withdraw">金子提现</a></li>
+                            <li class="list_item"><a href="/me/order" class="item_link" id="order">我的订单</a></li>
+                            <li class="list_item"><a href="/me" class="item_link" id="verify">兼职认证</a></li>
+                            <li class="list_item"><a href="#" class="item_link logout" id="logout">退出登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </header>
+    <div class="change_pw_panel">
+        <h1 class="panel_title">修改信息</h1>
+        <form method="post" class="change_pw" id="change_pw">
+            <div class="item">
+                <input type="text" name="nickname" id="nickname" autocomplete="nickname" required>
+                <label for="nickname">昵称</label>
+            </div>
+            <div class="item">
+                <input type="text" name="department" id="department" autocomplete="off" required>
+                <label for="department">院</label>
+            </div>
+            <div class="item">
+                <input type="text" name="master" id="master" autocomplete="off" required>
+                <label for="master">专业</label>
+            </div>
+            <div class="item">
+                <input type="text" name="yuan" id="section" autocomplete="address-line1" required>
+                <label for="section">苑</label>
+            </div>
+            <div class="item">
+                <input type="text" name="dong" id="building" autocomplete="address-line2" required>
+                <label for="building">栋</label>
+            </div>
+            <div class="item">
+                <input type="text" name="phone" id="phone" autocomplete="tel" required>
+                <label for="phone">手机号</label>
+            </div>
+            <button type="submit" class="change_pw_btn">确认</button>
+        </form>
+    </div>
+    <script>
+        function changePasswordHandler() {
+            const change_pw_panel = document.querySelector('.change_pw_panel');
+
+            change_pw_panel.addEventListener('click', e => {
+                e.stopPropagation();
+            });
+
+            const change_pw_form = document.getElementById('change_pw');
+
+            function makeRequest() {
+                const requestURL = '/userInfo/saveUserInfo';
+
+                let form_data = new FormData(change_pw_form);
+                let urlParams = new URLSearchParams();
+                for (let data of form_data) {
+                    urlParams.append(data[0], data[1]);
+                }
+
+                return fetch(requestURL, {
+                    method: 'POST',
+                    body: urlParams,
+                    credentials: 'same-origin'
+                }).then(res => res.json()).catch(console.log);
+            }
+
+            change_pw_form.addEventListener('submit', e => {
+                e.preventDefault();
+                makeRequest().then(obj => {
+                    if (obj['flag']) {
+                        alert(obj['errorMsg']);
+                        location.replace('/me/');
+                    } else {
+                        alert(obj['errorMsg']);
+                    }
+                }).catch(console.log);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', changePasswordHandler);
+        } else {
+            changePasswordHandler();
+        }
+    </script>
+    <script src="/static/js/account.js"></script>
+</body>
+
+</html>

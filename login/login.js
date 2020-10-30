@@ -35,7 +35,7 @@ function submitHandler() {
             if (submitCheck()) {
                 submit().then(data => {
                     if (data['flag']) {
-                        setTimeout(alert(data['errorMsg']));
+                        // setTimeout(alert(data['errorMsg']));
                         if (document.getElementById('autologin').checked) {
                             fetch('/user/saveLogin', { method: "POST", credentials: "same-origin" });
                         }

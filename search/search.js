@@ -312,10 +312,12 @@ function pageBehaviourHandler() {
 
         wrapper.append(new_info_title, new_second_list);
 
-        // 非勤工俭学添加订单号、分类
+        // 非勤工俭学添加订单号
         if (item_content.toString() !== '[object Object]') {
             wrapper.dataset.id = order_id;
             wrapper.dataset.catagory = catagory;
+        } else {
+            wrapper.dataset.catagory = 'working';
         }
 
         new_info_item.append(wrapper);
@@ -531,6 +533,8 @@ function showDetailPanel(catagory) {
             logistic_wrapper.classList.remove('hide');
 
             break;
+        case 'working':
+            console.log('working')
         default:
             throw `unexpected param ${catagory}`;
     }

@@ -17,7 +17,7 @@ function pageBehaviorHandler() {
 
         let timer;
         let interval = () => {
-            timer = setInterval(changePos, 5000);
+            timer = setInterval(changePos, 3000);
         };
         interval();
 
@@ -166,7 +166,7 @@ function pageBehaviorHandler() {
     sliderHandler();
     hover_main_animate();
     hover_nav_handler();
-    jump_to_section_handler();
+    // jump_to_section_handler();
 }
 
 function updateListItem() {
