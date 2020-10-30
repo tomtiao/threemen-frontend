@@ -142,6 +142,10 @@ function accountHandler() {
     }).catch(console.log);
 }
 
-window.addEventListener('load', e => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', e => {
+        accountHandler();
+    });
+} else {
     accountHandler();
-});
+}

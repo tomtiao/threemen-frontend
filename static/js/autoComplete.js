@@ -25,6 +25,10 @@ function autoCompleteUserInfo() {
     user_data.then(data_obj => setUserInfo(data_obj['dataObj'])).catch(console.log);
 }
 
-window.addEventListener('load', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        autoCompleteUserInfo();
+    });
+} else {
     autoCompleteUserInfo();
-});
+}

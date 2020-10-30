@@ -419,6 +419,10 @@ function setDetailPanelContent(item, info_o) {
 
             shopping_info_content.textContent = info_o['commInfo'];
             break;
+        case 'order_food': // TODO
+            break;
+        case 'logistic':
+            break;
         default:
             throw `unexpected param ${catagory}`;
     }
@@ -452,6 +456,10 @@ function showDetailPanel(catagory) {
 
             shopping_wrapper.classList.remove('hide');
 
+            break;
+        case 'order_food': // TODO
+            break;
+        case 'logistic':
             break;
         default:
             throw `unexpected param ${catagory}`;

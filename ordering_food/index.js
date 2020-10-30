@@ -169,11 +169,11 @@ function pageBehaviorHandler() {
         function getStallDishes(shop_name) {
             function makeRequest(shop_name) {
                 const requestURL = '/restaurantInfo/showDishByShop';
-        
+
                 let urlParams = new URLSearchParams();
-        
+
                 urlParams.append('shopName', shop_name);
-        
+
                 return fetch(requestURL, {
                     method: 'POST',
                     body: urlParams,
@@ -190,7 +190,7 @@ function pageBehaviorHandler() {
             }
 
             // expected base64 string
-            function createListItem(dishes_name, dishes_price, dishes_img_src) {
+            function createListItem(dishes_name, dishes_price, dishes_img_src, dishes_id) {
                 let list_item = document.createElement('dd');
                 list_item.classList.add('dishes_item');
 
@@ -223,12 +223,14 @@ function pageBehaviorHandler() {
 
                 list_item.append(img_wrapper, desc);
 
+                list_item.dataset.name = dishes_name, list_item.dataset.price = dishes_price, list_item.dataset.dishesid = dishes_id;
+
                 // TODO
                 list_item.innerHTML += ` <div class="dishes_add">
                 <button type="button" class="remove_dishes dishes_btn invisible">-</button>
-                <span class="counter invisible">1</span>
+                <span class="counter invisible">0</span>
                 <button type="button" class="add_dishes dishes_btn">+</button>
-            </div>`;
+                </div>`;
 
                 return list_item;
             }
@@ -239,16 +241,49 @@ function pageBehaviorHandler() {
                 cleanList();
 
                 return makeRequest(shop_name).then(data_obj => {
+                    // TEST
+                    data_obj = {
+                        "flag": true,
+                        "eroorMsg": "(LDm",
+                        "dataObj": [
+                            {
+                                "dishName": "t)W",
+                                "dishPrice": 121,
+                                "img": "ly#nK",
+                                "dishId": 1
+                            },
+                            {
+                                "dishName": "t)W",
+                                "dishPrice": 123,
+                                "img": "ly#nK",
+                                "dishId": 2
+                            },
+                            {
+                                "dishName": "t)W",
+                                "dishPrice": 413,
+                                "img": "ly#nK",
+                                "dishId": 3
+                            },
+                            {
+                                "dishName": "t)W",
+                                "dishPrice": 21312,
+                                "img": "ly#nK",
+                                "dishId": 4
+                            }
+                        ]
+                    }
                     let dishes_array = data_obj['dataObj'];
 
                     dishes_array.forEach(o => {
-                        dishes_list.append(createListItem(o['dishName'], o['dishPrice'], o['img']));
+                        dishes_list.append(createListItem(o['dishName'], o['dishPrice'], o['img'], o['dishId']));
                     });
                 }).catch(console.log);
             }
 
-            updateDishesList(shop_name);
+            return updateDishesList(shop_name);
         }
+
+        let dishes = [];
 
         function setStallInfo(shop_img_base64_with_prefix, position) {
             let setStallAvatar = (shop_img_base64_with_prefix) => {
@@ -268,24 +303,111 @@ function pageBehaviorHandler() {
             setPosition(position);
         }
 
-        function addDishesHandler() {
+        function removeAddBtnListner(section, func) {
+            section.removeEventListener('click', func);
+            dishes = [];
+            setPrice(); // reset to 0
+        }
+
+        /*
+         ** dish = { name: '', dish_id: '', counter: 0, price_per: 0 }
+         */
+
+        function addOrRemoveDishes(btn, action) {
+            let dishes_name = btn.parentElement.parentElement.dataset.name;
+            let dishes_id = btn.parentElement.parentElement.dataset.dishesid;
+            let dishes_price_per = Number(btn.parentElement.parentElement.dataset.price);
+            let index = dishes.findIndex(dish => dish['dish_id'] === dishes_id);
+
+            switch (action) {
+                case 'add':
+                    if (index !== -1) {
+                        dishes[index]['counter']++;
+                    } else {
+                        dishes.push({ 'name': dishes_name, 'dish_id': dishes_id, 'counter': 1, 'price_per': dishes_price_per });
+                    }
+                    console.log('dishes pushed.');
+                    break;
+                case 'remove':
+                    if (index !== -1) {
+                        if (dishes[index]['counter'] === 1) {
+                            dishes.splice(index, 1); // remove this dishes
+                        } else {
+                            dishes[index]['counter']--;
+                        }
+                        console.log('dishes popped.')
+                    } else {
+                        throw `illegal action performed. shouldn't be able to remove dishes that doesn't exist.`;
+                    }
+                    break;
+                default:
+                    throw `unexpected param ${action}`;
+            }
+        }
+
+        function setBtnSection(btn, action) {
+            let btn_section = btn.parentElement;
+            let remove_btn = btn_section.children[0];
+            // let add_btn = btn_section.children[2];
+            let counter = btn_section.children[1];
+
+            switch (action) {
+                case 'add':
+                    if (remove_btn.classList.contains('invisible')) {
+                        remove_btn.classList.remove('invisible');
+                        counter.classList.remove('invisible');
+                    }
+                    counter.textContent = parseInt(counter.textContent) + 1;
+                    break;
+                case 'remove':
+                    if (parseInt(counter.textContent) === 1) {
+                        counter.classList.add('invisible');
+                        remove_btn.classList.add('invisible');
+                    }
+                    counter.textContent = parseInt(counter.textContent) - 1;
+                    break;
+                default:
+                    throw `unexpected param ${action}`;
+            }
+            // TEST
+            dishes.forEach(ele => console.log(ele));
+        }
+
+
+        /*
+         ** <button type="button" class="remove_dishes dishes_btn invisible">-</button>
+         ** <span class="counter invisible">1</span>
+         ** <button type="button" class="add_dishes dishes_btn">+</button>
+         */
+        function clickBtnHandler(e) {
+            if (e.target.tagName === 'BUTTON') {
+                if (e.target.classList.contains('remove_dishes')) {
+                    addOrRemoveDishes(e.target, 'remove');
+                    setBtnSection(e.target, 'remove');
+                } else {
+                    addOrRemoveDishes(e.target, 'add');
+                    setBtnSection(e.target, 'add');
+                }
+                setPrice();
+            }
+        }
+
+        function dishesBtnHandler() {
             let dishes_add_sections = document.querySelectorAll('.dishes_add');
 
             dishes_add_sections.forEach(section => {
-                section.addEventListener('click', e => {
-                    if (e.target.tagName === 'A') {
-                        switch (e.target.className) {
-                            case '':
-                                
-                                break;
-                        }
-                    }
-                })
-            })
-            
-            const dishes = [];
+                removeAddBtnListner(section, clickBtnHandler);
+                section.addEventListener('click', clickBtnHandler);
+            });
+        }
 
+        function setPrice() {
+            const total_content = document.querySelector('.total_content');
 
+            let total = 0;
+            dishes.forEach(dish => total += dish['price_per'] * dish['counter']);
+
+            total_content.textContent = total;
         }
 
 
@@ -295,22 +417,146 @@ function pageBehaviorHandler() {
             content_list.addEventListener('click', e => {
                 if (e.target.tagName === 'A') {
                     e.preventDefault();
-                    console.log(e.target.parentElement.dataset.position + " " + e.target.parentElement.dataset.floor);
-                    console.log(e.target.parentElement.children[2].firstElementChild.textContent);
-                    console.log(e.target.parentElement.children[1].firstElementChild.src);
+                    // console.log(e.target.parentElement.dataset.position + " " + e.target.parentElement.dataset.floor);
+                    // console.log(e.target.parentElement.children[2].firstElementChild.textContent);
+                    // console.log(e.target.parentElement.children[1].firstElementChild.src);
                     let shop_name = e.target.parentElement.children[2].firstElementChild.textContent;
                     let shop_img_base64_with_prefix = e.target.parentElement.children[1].firstElementChild.src;
-                    getStallDishes(shop_name);
+                    getStallDishes(shop_name)
+                        .then(() => dishesBtnHandler());
                     setStallInfo(shop_img_base64_with_prefix, e.target.parentElement.dataset.position);
-                    addDishesHandler();
                 }
             });
         }
 
-        
+        function stopConfirmPanelBubbling() {
+            const panel = document.querySelector('.order_confirmation');
 
+            panel.addEventListener('click', e => {
+                e.stopPropagation();
+            });
+        }
+
+        function updateConfirmPanelList(dishes_o_array) {
+            function createListItem(dishes_o) {
+                let list_item = document.createElement('li');
+
+                list_item.classList.add('list_item');
+
+                let name = document.createElement('span');
+                name.classList.add('order_content');
+                name.textContent = dishes_o['name'];
+
+                let counter = document.createElement('span');
+                counter.classList.add('order_number');
+                counter.textContent = dishes_o['counter'];
+
+                let total_price = document.createElement('span');
+                total_price.classList.add('order_reward');
+                total_price.textContent = dishes_o['counter'] * dishes_o['price_per'];
+
+                list_item.append(name, counter, total_price);
+
+                return list_item;
+            }
+
+            const list = document.querySelector('.order_list');
+
+            function cleanList() {
+                while (list.firstChild) {
+                    list.removeChild(list.firstChild);
+                }
+            }
+
+            function updateTotal(dishes_o_array) {
+                const total_content = document.querySelector('.total .total_content');
+
+                let total = 0;
+                dishes_o_array.forEach(o => {
+                    total += o['counter'] * o['price_per'];
+                });
+
+                total_content.textContent = total;
+            }
+
+            cleanList();
+
+            dishes_o_array.forEach(o => {
+                list.append(createListItem(o));
+            });
+
+            updateTotal(dishes_o_array);
+        }
+
+        function popUpConfirmPanelHandler(dishes_o_array) {
+            const panel = document.querySelector('.order_confirmation');
+
+            // show panel
+            panel.classList.remove('hide');
+
+            updateConfirmPanelList(dishes_o_array);
+        }
+
+        function listenMakeOrderBtnHandler() {
+            const buy_btn = document.querySelector('.buy_btn');
+
+            buy_btn.addEventListener('click', e => {
+                let final_dishes = dishes;
+                e.preventDefault();
+                if (dishes[0]) {
+                    popUpConfirmPanelHandler(final_dishes);
+                    bindConfirmedSubmitBtn(final_dishes);
+                } else {
+                    alert('提交前，请选择菜品');
+                }
+            });
+        }
+
+        function bindConfirmedSubmitBtn(dishes_o_array) {
+            function makeRequest(dishes_o_array) {
+                const requestURL = ''; // TODO
+
+                return fetch(requestURL, {
+                    method: 'POST',
+                    body: '',
+                    credentials: "same-origin"
+                }).then(res => res.json()).catch(console.log);
+            }
+
+            function onClickBtn(e) {
+                e.preventDefault();
+                if (dishes[0]) {
+                    makeRequest(dishes_o_array)
+                        .then(data_obj => {
+
+                        }).catch(console.log);
+                } else {
+                    console.log('无菜品');
+                }
+            }
+
+            const checkin_btn = document.querySelector('.checkin_btn');
+
+            checkin_btn.removeEventListener('click', onClickBtn);
+            checkin_btn.addEventListener('click', onClickBtn);
+        }
+
+        function listenCancelBtn() {
+            const cancel_btn = document.querySelector('.cancel_btn');
+            const panel = document.querySelector('.order_confirmation');
+
+            cancel_btn.addEventListener('click', e => {
+                panel.classList.add('hide');
+            });
+        }
+
+
+        stopConfirmPanelBubbling();
         listenListHandler();
         listenItemHandler();
+        listenMakeOrderBtnHandler();
+        bindConfirmedSubmitBtn();
+        listenCancelBtn();
     }
 
     function stopHeaderTriggerEvent() {
@@ -442,10 +688,10 @@ function updateListHandler() {
     function createListItem(stall_img_src, stall_name, stall_desc, stall_position, stall_floor) {
         let cover = document.createElement('a');
         cover.classList.add('cover');
-        
+
         let bg_block = document.createElement('div');
         bg_block.classList.add('bg_block');
-        
+
         let bg_img = new Image();
         bg_img.classList.add('bg_img');
         bg_img.src = 'data:image/png;base64,' + stall_img_src;
@@ -502,7 +748,7 @@ function updateListHandler() {
         //     });
         // });
     }
-    
+
     fillStallList().then(() => {
         pageBehaviorHandler();
     });
