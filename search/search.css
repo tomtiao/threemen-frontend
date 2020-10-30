@@ -50,7 +50,7 @@ main {
     flex-direction: column;
     align-items: center;
     padding-top: 1rem;
-    padding: 1rem;
+    margin: 1rem;
     margin-top: 64px;
 }
 
@@ -206,14 +206,21 @@ main {
     flex-direction: column;
     background-color: #95E1DF;
     width: 22.5%;
-    margin-left: 32px;
+    margin-left: 64px;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    pointer-events: all;
+    transition: opcacity 0.15s cubic-bezier(.08,.82,.17,1);
 }
 
 .info_detail .hide {
     display: none !important;
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+    position: absolute;
 }
 
 .info_detail .customer_wrapper_empty {
@@ -296,6 +303,7 @@ main {
 }
 
 .info_detail .common_wrapper .order_wrapper {
+    margin: 0 1em;
     flex-grow: 1;
     overflow-y: scroll;
     background-color: white;
@@ -316,18 +324,33 @@ main {
 .info_detail .common_wrapper.order_food_wrapper .order_list .list_item {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     height: 48px;
     padding: 0.5em;
     box-sizing: border-box;
     border-bottom: 1px solid #ccc;
 }
 
+.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_content {
+    margin-right: auto;
+    flex: 0 0 50%;
+    width: 50%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_reward {
-    margin-left: auto;
+    width: 3em;
+}
+
+.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_reward::before {
+    content: "¥";
+    margin-right: 0.25em;
 }
 
 .info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_number {
-    margin-left: 1em;
+    margin-right: 2em;
 }
 
 .info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_number::before {
@@ -340,6 +363,9 @@ main {
 
 .info_detail .common_wrapper .note_wrapper .note_content {
     margin: 0 0 0.5em;
+    /* white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; */
 }
 
 .info_detail .pick_bar {

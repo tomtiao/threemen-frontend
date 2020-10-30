@@ -3,6 +3,10 @@ a, a:focus, a:visited {
     text-decoration: none;
 }
 
+body {
+    height: 100vh;
+}
+
 .main_wrapper {
     margin-top: 90px;
 }
@@ -33,7 +37,7 @@ aside {
     height: calc(100vh - 64px);
     background-color: white;
     transform: translateX(360px);
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s cubic-bezier(.08,.82,.17,1);
     box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
 }
 
@@ -248,6 +252,15 @@ aside.show {
     background-color: #71c9ce;
     text-align: center;
     outline: none;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.main_content_wrapper .dishes_list .dishes_item .dishes_add .dishes_btn:hover {
+    background-color: #52A4B1;
+}
+
+.main_content_wrapper .dishes_list .dishes_item .dishes_add .dishes_btn:active {
+    background-color: #388094;
 }
 
 .stall_info_wrapper .contact_list {
@@ -558,7 +571,7 @@ aside.show {
     opacity: 1;
     pointer-events: all;
     transform: scale(1);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: opacity 0.3s cubic-bezier(.08,.82,.17,1), transform 0.3s cubic-bezier(.08,.82,.17,1);
 }
 
 .order_confirmation.hide {

@@ -21,7 +21,7 @@ header {
     height: 64px;
     width: 100%;
     background-color: #71c9ce;
-    box-shadow: 0px 2px 5px 0px #666;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
 }
 
 .header_wrapper {
@@ -81,7 +81,7 @@ header {
     justify-content: center;
     height: 100%;
     width: 100%;
-    transition: background-color 0.1s ease;
+    transition: background-color 0.1s ease, color 0.1s ease;
     font-weight: bold;
     outline: none;
     user-select: none;
@@ -94,9 +94,9 @@ header {
     bottom: 0;
     left: 0;
     height: 4px;
-    background-color: #388094;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    background-color: #52A4B1;
+    /* opacity: 0; */
+    transition: background-color 0.1s ease-in-out;
 }
 
 .section_list .list_item .item_link:focus,
@@ -109,7 +109,8 @@ header {
 .section_list .list_item .item_link:focus::after,
 .section_list .list_item .item_link:hover::after,
 .section_list .list_item .item_link.active::after {
-    opacity: 1;
+    /* opacity: 1; */
+    background-color: #388094;
 }
 
 .account_section {

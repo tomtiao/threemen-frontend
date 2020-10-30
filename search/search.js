@@ -91,14 +91,14 @@ function pageBehaviourHandler() {
 
     function hideDetailPanel() {
         const detail_wrappers = document.querySelectorAll('.info_detail > div');
-    
+
         for (let wrapper of detail_wrappers) {
             if (wrapper.classList.contains('customer_wrapper_empty')) {
                 wrapper.classList.remove('hide');
-                
+
                 continue;
             }
-    
+
             wrapper.classList.add('hide');
         }
     }
@@ -168,7 +168,7 @@ function pageBehaviourHandler() {
             default:
                 throw `unexpected param ${catagory}`;
         }
-        
+
         // why this looks weird? check out api docs
         if (catagory !== 'working') { // if not catagory working
             let queryURL = requestURLs['else'] + '?' + queryParams.toString();
@@ -185,7 +185,7 @@ function pageBehaviourHandler() {
             }).then(res => res.json()).catch(console.log);
         }
     }
-    
+
     function listenSearchBtn() {
         const search_btn = document.querySelector('.search_btn');
 
@@ -286,7 +286,7 @@ function pageBehaviourHandler() {
             new_second_item_label_copied.textContent = '临时岗位';
 
             new_second_list_item_copied.append(new_second_item_label_copied);
-            
+
             if (item_content['temSeat']) {
                 new_second_list_item_copied.append(document.createTextNode(item_content['temSeat']));
             } else {
@@ -408,6 +408,57 @@ function requestOrderDetail(order_id) {
     }).then(res => res.json()).catch(console.log);
 }
 
+function updateOrderFoodList(dishes_o_array) {
+    function createListItem(dishes_o) {
+        let list_item = document.createElement('li');
+
+        list_item.classList.add('list_item');
+
+        let name = document.createElement('span');
+        name.classList.add('order_content');
+        name.textContent = dishes_o['name'];
+
+        let counter = document.createElement('span');
+        counter.classList.add('order_number');
+        counter.textContent = dishes_o['counter'];
+
+        let total_price = document.createElement('span');
+        total_price.classList.add('order_reward');
+        total_price.textContent = dishes_o['counter'] * dishes_o['price_per'];
+
+        list_item.append(name, counter, total_price);
+
+        return list_item;
+    }
+
+    const list = document.querySelector('.order_list');
+
+    function cleanList() {
+        while (list.firstChild) {
+            list.removeChild(list.firstChild);
+        }
+    }
+
+    function updateTotal(dishes_o_array) {
+        const total_content = document.querySelector('.total .total_content');
+
+        let total = 0;
+        dishes_o_array.forEach(o => {
+            total += o['counter'] * o['price_per'];
+        });
+
+        total_content.textContent = total;
+    }
+
+    cleanList();
+
+    dishes_o_array.forEach(o => {
+        list.append(createListItem(o));
+    });
+
+    updateTotal(dishes_o_array);
+}
+
 function setDetailPanelContent(item, info_o) {
     switch (item.dataset.catagory) {
         case 'shopping':
@@ -418,10 +469,21 @@ function setDetailPanelContent(item, info_o) {
             const shopping_info_content = document.querySelector('.shopping_info_content');
 
             shopping_info_content.textContent = info_o['commInfo'];
+
             break;
         case 'order_food': // TODO
+            updateOrderFoodList(info_o);
+
             break;
         case 'logistic':
+            const logistic_address = document.getElementById('logistic_address');
+
+            logistic_address.textContent = item.children[0].textContent;
+
+            const code = document.getElementById('code');
+
+            code.textContent = info_o['commInfo'];
+
             break;
         default:
             throw `unexpected param ${catagory}`;
@@ -439,7 +501,7 @@ function bindOrderIdToButton(order_id) {
 
 function showDetailPanel(catagory) {
     const contact_wrapper = document.querySelector('.customer_wrapper');
-    
+
     contact_wrapper.classList.remove('hide');
 
     const customer_wrapper_empty = document.querySelector('.customer_wrapper_empty');
@@ -458,8 +520,16 @@ function showDetailPanel(catagory) {
 
             break;
         case 'order_food': // TODO
+            const order_food_wrapper = document.querySelector('.order_food_wrapper');
+
+            order_food_wrapper.classList.remove('hide');
+
             break;
         case 'logistic':
+            const logistic_wrapper = document.querySelector('.logistic_wrapper');
+
+            logistic_wrapper.classList.remove('hide');
+
             break;
         default:
             throw `unexpected param ${catagory}`;
@@ -519,24 +589,33 @@ function listenOrderSubmit() {
     pick_btn.addEventListener('click', e => {
         e.preventDefault();
         sendPickRequest(e.target.dataset.bindid)
-        .then(data_obj => {
-            if (data_obj['flag']) {
-                if (window.confirm('接单成功。是否想要前往个人订单界面？')) {
-                    location.assign('/me/order');
-                } else {
-                    console.log('出现了错误');
-                    console.log(data_obj);
+            .then(data_obj => {
+                if (data_obj['flag']) {
+                    if (window.confirm('接单成功。是否想要前往个人订单界面？')) {
+                        location.assign('/me/order');
+                    } else {
+                        console.log('出现了错误');
+                        console.log(data_obj);
+                    }
                 }
-            }
-        }).catch(console.log);
+            }).catch(console.log);
     });
 }
 
-window.addEventListener('load', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        filterHandler();
+        // toTop();
+        // mobi();
+        pageBehaviourHandler();
+        clickResultHandler();
+        listenOrderSubmit();
+    });
+} else {
     filterHandler();
     // toTop();
     // mobi();
     pageBehaviourHandler();
     clickResultHandler();
     listenOrderSubmit();
-});
+}

@@ -124,9 +124,11 @@
             </section>
             <section class="info_detail">
                 <div class="customer_wrapper_empty">
+                <!-- <div class="customer_wrapper_empty hide"> -->
                     <p class="note">还没有选择订单</p>
                 </div>
                 <div class="customer_wrapper hide">
+                <!-- <div class="customer_wrapper"> -->
                     <ul class="customer_info_list">
                         <li class="list_item">
                             <span class="item_label">昵称</span>
@@ -143,17 +145,18 @@
                     </ul>
                 </div>
                 <div class="order_food_wrapper common_wrapper hide">
+                <!-- <div class="order_food_wrapper common_wrapper"> -->
                     <div class="order_wrapper">
                         <ul class="order_list">
                             <li class="list_item">
                                 <span class="order_content">名字</span>
                                 <span class="order_number">1</span>
-                                <span class="order_reward">0金子</span>
+                                <span class="order_reward">0</span>
                             </li>
                             <li class="list_item">
                                 <span class="order_content">名字</span>
                                 <span class="order_number">1</span>
-                                <span class="order_reward">0金子</span>
+                                <span class="order_reward">0</span>
                             </li>
                         </ul>
                     </div>
@@ -163,6 +166,7 @@
                     </div>
                 </div>
                 <div class="shopping_wrapper common_wrapper hide">
+                <!-- <div class="shopping_wrapper common_wrapper"> -->
                     <div class="shopping_info_wrapper">
                         <ul class="shopping_info_list">
                             <li class="list_item"><span class="item_label">购买地址</span><span id="buy_address"></span></li>
@@ -176,24 +180,26 @@
                     </div>
                 </div>
                 <div class="logistic_wrapper common_wrapper hide">
+                <!-- <div class="logistic_wrapper common_wrapper"> -->
                     <div class="logistic_info_wrapper">
                         <ul class="logistic_info_list">
                             <li class="list_item">
                                 <span class="item_label">取件地址</span>
-                                <span class="item_content">北苑18栋负一层</span>
+                                <span class="item_content" id="logistic_address">北苑18栋负一层</span>
                             </li>
                             <li class="list_item">
                                 <span class="item_label">取件码</span>
-                                <span class="item_content">10086</span>
+                                <span class="item_content" id="code">10086</span>
                             </li>
                         </ul>
                     </div>
                     <div class="note_wrapper">
                         <span class="note_label">备注</span>
-                        <p class="note_content">尽快送达</p>
+                        <p class="note_content" id="logistic_note">尽快送达</p>
                     </div>
                 </div>
                 <div class="pick_bar hide">
+                <!-- <div class="pick_bar"> -->
                     <div class="counter"><span class="item_label">跑腿费</span><span class="counter_content">0</span> 金子</div>
                     <button type="button" class="pick_btn">接单</button>
                 </div>

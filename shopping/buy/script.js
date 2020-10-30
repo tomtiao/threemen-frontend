@@ -59,7 +59,8 @@ function sendOrderHandler() {
         // add estimated gold
         urlParams.append('commCostCoin', (parseInt(estimatedPriceInput.value) || 0) * 10);
     
-        return fetch(requestURL, {
+        let getURL = new URLSearchParams([['serviceType', 'marketService']]);
+        return fetch(requestURL + '?' + getURL.toString(), {
             method: 'POST',
             body: urlParams,
             credentials: 'same-origin'
@@ -92,11 +93,15 @@ function estimatedGold() {
     });
 }
 
-
-
-window.addEventListener('load', () => {
+let on_loaded = () => {
     siteCustomHandler();
     suggestionHandler();
-    estimatedGold();
+    // estimatedGold();
     sendOrderHandler();
-});
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', on_loaded);
+} else {
+    on_loaded();
+}

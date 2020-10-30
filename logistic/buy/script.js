@@ -1,7 +1,6 @@
 function sendOrderHandler() {
     function makeRequest() {
         const requestURL = '/order/saveOrder';
-        const estimatedPriceInput = document.getElementById('estimated_price');
     
         const form_self = document.querySelector('form');
     
@@ -12,7 +11,8 @@ function sendOrderHandler() {
             urlParams.append(key, value);
         });
     
-        return fetch(requestURL, {
+        let getURL = new URLSearchParams([['serviceType', 'deliveryService']]);
+        return fetch(requestURL + '?' + getURL.toString(), {
             method: 'POST',
             body: urlParams,
             credentials: 'same-origin'
@@ -32,6 +32,10 @@ function sendOrderHandler() {
     });
 }
 
-window.addEventListener('load', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        sendOrderHandler();
+    });
+} else {
     sendOrderHandler();
-});
+}

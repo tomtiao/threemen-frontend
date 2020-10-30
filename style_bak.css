@@ -99,7 +99,7 @@
 }
 
 .content_flow {
-    flex: 0 0 100%;
+    flex: 0 0 72.5%;
     margin: 20px 0;
 }
 
@@ -117,7 +117,7 @@
 
 .content_flow .content_list {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-content: space-between;
     width: 100%;
@@ -127,8 +127,9 @@
 
 .content_flow .content_list .list_item {
     display: block;
-    flex: 0 1 24%;
-    height: 250px;
+    width: 32%;
+    flex: 0 0 32%;
+    height: 200px;
     background-color: #66ccff;
     border-radius: 16px;
     box-shadow: 0 4px 20px 0 #999;
@@ -210,7 +211,7 @@
 }
 
 .aside_info {
-    flex: 0 1 100%;
+    flex: 0 0 22.5%;
 }
 
 .aside_info.fixed {
@@ -221,19 +222,18 @@
 
 .aside_info .aside_list {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
     list-style-type: none;
     padding: 0;
-    height: 250px;
-    margin-top: 32px;
+    height: 425px;
 }
 
 .aside_info .aside_list .list_item {
     display: block;
     flex: 0 0 22.5%;
-    width: 24%;
+    width: 90%;
     background-color: lightcyan;
     border-radius: 8px;
     box-shadow: 0 4px 20px 0 #999;

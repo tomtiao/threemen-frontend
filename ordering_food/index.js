@@ -166,7 +166,7 @@ function pageBehaviorHandler() {
             listenList(floor_list);
         }
 
-        function getStallDishes(shop_name) {
+        function getStallDishes(shop_name, floor) {
             function makeRequest(shop_name) {
                 const requestURL = '/restaurantInfo/showDishByShop';
 
@@ -190,7 +190,7 @@ function pageBehaviorHandler() {
             }
 
             // expected base64 string
-            function createListItem(dishes_name, dishes_price, dishes_img_src, dishes_id) {
+            function createListItem(dishes_name, dishes_price, dishes_img_src, dishes_id, floor) {
                 let list_item = document.createElement('dd');
                 list_item.classList.add('dishes_item');
 
@@ -223,7 +223,10 @@ function pageBehaviorHandler() {
 
                 list_item.append(img_wrapper, desc);
 
-                list_item.dataset.name = dishes_name, list_item.dataset.price = dishes_price, list_item.dataset.dishesid = dishes_id;
+                list_item.dataset.name = dishes_name;
+                list_item.dataset.price = dishes_price;
+                list_item.dataset.dishesid = dishes_id;
+                list_item.dataset.floor = floor;
 
                 // TODO
                 list_item.innerHTML += ` <div class="dishes_add">
@@ -235,52 +238,21 @@ function pageBehaviorHandler() {
                 return list_item;
             }
 
-            function updateDishesList(shop_name) {
+            function updateDishesList(shop_name, floor) {
                 const dishes_list = document.querySelector('.dishes_list');
 
                 cleanList();
 
                 return makeRequest(shop_name).then(data_obj => {
-                    // TEST
-                    data_obj = {
-                        "flag": true,
-                        "eroorMsg": "(LDm",
-                        "dataObj": [
-                            {
-                                "dishName": "t)W",
-                                "dishPrice": 121,
-                                "img": "ly#nK",
-                                "dishId": 1
-                            },
-                            {
-                                "dishName": "t)W",
-                                "dishPrice": 123,
-                                "img": "ly#nK",
-                                "dishId": 2
-                            },
-                            {
-                                "dishName": "t)W",
-                                "dishPrice": 413,
-                                "img": "ly#nK",
-                                "dishId": 3
-                            },
-                            {
-                                "dishName": "t)W",
-                                "dishPrice": 21312,
-                                "img": "ly#nK",
-                                "dishId": 4
-                            }
-                        ]
-                    }
                     let dishes_array = data_obj['dataObj'];
 
                     dishes_array.forEach(o => {
-                        dishes_list.append(createListItem(o['dishName'], o['dishPrice'], o['img'], o['dishId']));
+                        dishes_list.append(createListItem(o['dishName'], o['dishPrice'], o['img'], o['dishId'], floor));
                     });
                 }).catch(console.log);
             }
 
-            return updateDishesList(shop_name);
+            return updateDishesList(shop_name, floor);
         }
 
         let dishes = [];
@@ -310,13 +282,14 @@ function pageBehaviorHandler() {
         }
 
         /*
-         ** dish = { name: '', dish_id: '', counter: 0, price_per: 0 }
+         ** dish = { name: '', dish_id: '', counter: 0, price_per: 0, floor: 1 }
          */
 
         function addOrRemoveDishes(btn, action) {
             let dishes_name = btn.parentElement.parentElement.dataset.name;
             let dishes_id = btn.parentElement.parentElement.dataset.dishesid;
             let dishes_price_per = Number(btn.parentElement.parentElement.dataset.price);
+            let floor = Number(btn.parentElement.parentElement.dataset.floor);
             let index = dishes.findIndex(dish => dish['dish_id'] === dishes_id);
 
             switch (action) {
@@ -324,7 +297,7 @@ function pageBehaviorHandler() {
                     if (index !== -1) {
                         dishes[index]['counter']++;
                     } else {
-                        dishes.push({ 'name': dishes_name, 'dish_id': dishes_id, 'counter': 1, 'price_per': dishes_price_per });
+                        dishes.push({ 'name': dishes_name, 'dish_id': dishes_id, 'counter': 1, 'price_per': dishes_price_per, 'floor': floor });
                     }
                     console.log('dishes pushed.');
                     break;
@@ -422,7 +395,9 @@ function pageBehaviorHandler() {
                     // console.log(e.target.parentElement.children[1].firstElementChild.src);
                     let shop_name = e.target.parentElement.children[2].firstElementChild.textContent;
                     let shop_img_base64_with_prefix = e.target.parentElement.children[1].firstElementChild.src;
-                    getStallDishes(shop_name)
+                    let floor = e.target.parentElement.dataset.floor;
+                    console.log(floor);
+                    getStallDishes(shop_name, floor)
                         .then(() => dishesBtnHandler());
                     setStallInfo(shop_img_base64_with_prefix, e.target.parentElement.dataset.position);
                 }
@@ -513,12 +488,43 @@ function pageBehaviorHandler() {
         }
 
         function bindConfirmedSubmitBtn(dishes_o_array) {
-            function makeRequest(dishes_o_array) {
-                const requestURL = ''; // TODO
+            function preAddDishesToCart(dishes_o_array) {
+                const requestURL = '/restaurantOrder/addToCart';
 
-                return fetch(requestURL, {
+                let promises = [];
+                dishes_o_array.forEach(dish => {
+                    for (let i = 0; i < dish['counter']; i++) {
+                        let urlParams = new URLSearchParams();
+
+                        urlParams.append('dishId', dish['dish_id']);
+                        urlParams.append('location', dish['floor']);
+
+                        promises.push(fetch(requestURL + '?' + urlParams.toString(), {
+                            method: 'GET',
+                            credentials: 'same-origin'
+                        }).then(res => res.json()).catch(console.log));
+                    }
+                });
+
+                return Promise.all(promises);
+            }
+
+            function sendOrderRequest() {
+                const requestURL = '/order/saveOrder'; // TODO
+                const formSelf = document.querySelector('.order_confirmation form');
+                let formData = new FormData(formSelf);
+
+                let urlParams = new URLSearchParams();
+                for (let data of formData) {
+                    urlParams.append(data[0], data[1]);
+                }
+
+                let getParams = new URLSearchParams();
+                getParams.append('serviceType', 'restaurantService');
+                let getURL = requestURL + '?' + getParams.toString();
+                return fetch(getURL, {
                     method: 'POST',
-                    body: '',
+                    body: urlParams,
                     credentials: "same-origin"
                 }).then(res => res.json()).catch(console.log);
             }
@@ -526,9 +532,16 @@ function pageBehaviorHandler() {
             function onClickBtn(e) {
                 e.preventDefault();
                 if (dishes[0]) {
-                    makeRequest(dishes_o_array)
+                    preAddDishesToCart(dishes_o_array)
+                        .then(sendOrderRequest)
                         .then(data_obj => {
-
+                            if (data_obj['flag']) {
+                                alert('提交成功');
+                                location.reload();
+                            } else {
+                                alert('出现了问题');
+                                console.log(data_obj);
+                            }
                         }).catch(console.log);
                 } else {
                     console.log('无菜品');

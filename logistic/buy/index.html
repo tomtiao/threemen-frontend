@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
@@ -87,7 +87,7 @@
                                 <input type="text" name="dong" id="building" autocomplete="address-line2" required>
                                 <label class="label_wrapper" for="building">
                                     <img src="/static/img/buy/address.png" alt="address" class="item_img address">
-                                    <label class="info_label address_label">栋</label>
+                                    <label for="building" class="info_label address_label">栋</label>
                                 </label>
                             </label>
                         </div>
@@ -99,30 +99,30 @@
                             <img src="/static/img/buy/site.png" alt="site" class="item_img site">
                             <span class="info_label site_label">站点</span>
                             <div class="site_choice_wrapper">
-                                <label class="site_label"><input type="radio" name="site" id="no_20" value="no_20"
+                                <label class="site_label"><input type="radio" name="commAddress" id="no_20" value="北苑20栋"
                                         checked>北苑20栋</label>
-                                <label class="site_label"><input type="radio" name="site" id="no_18"
-                                        value="no_18">北苑18栋</label>
-                                <label class="site_label"><input type="radio" name="site" id="express"
-                                        value="express">校门邮政</label>
-                                <label class="site_label"><input type="radio" name="site" id="outside"
-                                        value="outside">公交站</label>
+                                <label class="site_label"><input type="radio" name="commAddress" id="no_18"
+                                        value="北苑18栋">北苑18栋</label>
+                                <label class="site_label"><input type="radio" name="commAddress" id="express"
+                                        value="校门邮政">校门邮政</label>
+                                <label class="site_label"><input type="radio" name="commAddress" id="outside"
+                                        value="公交站">公交站</label>
                             </div>
                         </div>
                         <div class="info_item">
                             <img src="/static/img/buy/item.png" alt="item" class="item_img item">
                             <span class="info_label size_label">物品大小</span>
                             <div class="size_choice_wrapper">
-                                <label class="size_label"><input type="radio" name="size" id="small" value="small"
+                                <label class="size_label"><input type="radio" name="commCostCoin" id="small" value="20"
                                         checked>小件</label>
-                                <label class="size_label"><input type="radio" name="size" id="medium"
-                                        value="medium">中件</label>
-                                <label class="size_label"><input type="radio" name="size" id="large"
-                                        value="large">大件</label>
+                                <label class="size_label"><input type="radio" name="commCostCoin" id="medium"
+                                        value="40">中件</label>
+                                <label class="size_label"><input type="radio" name="commCostCoin" id="large"
+                                        value="60">大件</label>
                             </div>
                         </div>
                         <div class="info_item">
-                            <input type="text" name="code" id="code" required>
+                            <input type="text" name="commInfo" id="code" required>
                             <div class="label_wrapper">
 
                                 <img src="/static/img/buy/code.png" alt="code" class="item_img code">
@@ -135,9 +135,7 @@
                             <img src="/static/img/buy/note.png" alt="note" class="item_img note">
                             <label for="note" class="info_label note_label">备注</label>
                         </div>
-                        <textarea name="note" id="note" cols="30" rows="10">
-
-                        </textarea>
+                        <textarea name="commLeftMessage" id="note" cols="30" rows="10"></textarea>
                     </div>
                 </div>
             </form>
@@ -151,10 +149,10 @@
             </div> -->
         </div>
         <div class="action_bar">
-            <div class="counter">
+            <!-- <div class="counter">
                 <span class="counter_label">待支付:</span>
                 <p class="total"><span class="total_content">0</span>金子</p>
-            </div>
+            </div> -->
             <div class="checkin">
                 <button class="checkin_btn">提交订单</button>
             </div>
