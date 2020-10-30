@@ -228,7 +228,6 @@ function pageBehaviorHandler() {
                 list_item.dataset.dishesid = dishes_id;
                 list_item.dataset.floor = floor;
 
-                // TODO
                 list_item.innerHTML += ` <div class="dishes_add">
                 <button type="button" class="remove_dishes dishes_btn invisible">-</button>
                 <span class="counter invisible">0</span>
@@ -342,8 +341,6 @@ function pageBehaviorHandler() {
                 default:
                     throw `unexpected param ${action}`;
             }
-            // TEST
-            dishes.forEach(ele => console.log(ele));
         }
 
 
@@ -380,7 +377,7 @@ function pageBehaviorHandler() {
             let total = 0;
             dishes.forEach(dish => total += dish['price_per'] * dish['counter']);
 
-            total_content.textContent = total;
+            total_content.textContent = total.toFixed(1);
         }
 
 
@@ -390,9 +387,6 @@ function pageBehaviorHandler() {
             content_list.addEventListener('click', e => {
                 if (e.target.tagName === 'A') {
                     e.preventDefault();
-                    // console.log(e.target.parentElement.dataset.position + " " + e.target.parentElement.dataset.floor);
-                    // console.log(e.target.parentElement.children[2].firstElementChild.textContent);
-                    // console.log(e.target.parentElement.children[1].firstElementChild.src);
                     let shop_name = e.target.parentElement.children[2].firstElementChild.textContent;
                     let shop_img_base64_with_prefix = e.target.parentElement.children[1].firstElementChild.src;
                     let floor = e.target.parentElement.dataset.floor;
@@ -428,7 +422,7 @@ function pageBehaviorHandler() {
 
                 let total_price = document.createElement('span');
                 total_price.classList.add('order_reward');
-                total_price.textContent = dishes_o['counter'] * dishes_o['price_per'];
+                total_price.textContent = (dishes_o['counter'] * dishes_o['price_per']).toFixed(1);
 
                 list_item.append(name, counter, total_price);
 
@@ -451,7 +445,7 @@ function pageBehaviorHandler() {
                     total += o['counter'] * o['price_per'];
                 });
 
-                total_content.textContent = total;
+                total_content.textContent = total.toFixed(1);
             }
 
             cleanList();
@@ -755,11 +749,6 @@ function updateListHandler() {
         });
 
         return Promise.all(promises);
-        // return makeRequest().then(data => {
-        //     data.forEach((stall_obj) => {
-        //         content_list.append(createListItem(, stall_obj['name'], stall_obj['time'], stall_obj['location'], stall_obj['floor']));
-        //     });
-        // });
     }
 
     fillStallList().then(() => {

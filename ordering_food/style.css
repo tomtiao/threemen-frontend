@@ -799,6 +799,14 @@ aside.show {
     margin-right: 0.25em;
 }
 
+.action_bar .counter .counter_label::after {
+    content: ":";
+}
+
+.action_bar .counter .total .total_content::before {
+    content: "¥";
+}
+
 .action_bar .checkin .checkin_btn {
     color: white;
     border-radius: 32px;
