@@ -803,7 +803,20 @@ aside.show {
     content: ":";
 }
 
-.action_bar .counter .total .total_content::before {
+/* .action_bar .counter .total .total_content::before {
+    content: "¥";
+} */
+
+form > .total {
+    margin: 0;
+    margin-top: 1em;
+    padding: 0 1em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#counter::before {
     content: "¥";
 }
 

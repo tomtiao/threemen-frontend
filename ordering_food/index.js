@@ -438,7 +438,7 @@ function pageBehaviorHandler() {
             }
 
             function updateTotal(dishes_o_array) {
-                const total_content = document.querySelector('.total .total_content');
+                const total_content = document.getElementById('counter')
 
                 let total = 0;
                 dishes_o_array.forEach(o => {
@@ -511,6 +511,16 @@ function pageBehaviorHandler() {
                 return Promise.all(promises);
             }
 
+            function calcReal(dishes_o_array) {
+
+                let result = 0;
+                dishes_o_array.forEach(dish => {
+                    result += dish['price_per'] * dish['counter'];
+                });
+
+                return result;
+            }
+
             function sendOrderRequest() {
                 const requestURL = '/order/saveOrder'; // TODO
                 const formSelf = document.querySelector('.order_confirmation form');
@@ -520,6 +530,10 @@ function pageBehaviorHandler() {
                 for (let data of formData) {
                     urlParams.append(data[0], data[1]);
                 }
+
+                urlParams.append('commAddress', location[parseInt(dishes[0]['floor'])]);
+                urlParams.append('commCostCoin', 20);
+                urlParams.append('commCostReal', calcReal(dishes).toFixed(1));
 
                 let getParams = new URLSearchParams();
                 getParams.append('serviceType', 'restaurantService');
@@ -570,7 +584,7 @@ function pageBehaviorHandler() {
         listenListHandler();
         listenItemHandler();
         listenMakeOrderBtnHandler();
-        bindConfirmedSubmitBtn();
+        bindConfirmedSubmitBtn(dishes);
         listenCancelBtn();
     }
 
