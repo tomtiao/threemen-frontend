@@ -67,6 +67,20 @@ function sendOrderHandler() {
         }).then(res => res.json()).catch(console.log);
     }
 
+    function payOrder(gold, order_id) {
+        const requestURL = '/order/payOrder';
+        let urlParams = new URLSearchParams();
+
+        urlParams.append('commCostCoin', gold);
+        urlParams.append('commNum', order_id);
+
+        return fetch(requestURL, {
+            method: 'POST',
+            body: urlParams,
+            credentials: 'same-origin'
+        }).then(res => res.json()).catch(console.log);
+    }
+
     document.querySelector('.checkin_btn').addEventListener('click', e => {
         e.preventDefault();
         makeRequest().then(data => {
@@ -76,10 +90,18 @@ function sendOrderHandler() {
                 alert('很抱歉，出了一些问题');
             }
         })
-        .then(() => fetch('/order/successForUser', {
-                method: 'POST',
-                credentials: "same-origin"
-            }))
+        .then(data => {
+            if (data['flag']) {
+                alert('订单已发送！');
+            } else {
+                alert('很抱歉，出了一些问题');
+            }
+
+            return data['dataObj'];
+        })
+        .then(num => {
+            payOrder(20, num);
+        })
             .then(data => {
                 if (data['flag']) {
                     location.replace('/me/order');
