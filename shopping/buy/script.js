@@ -94,7 +94,7 @@ function sendOrderHandler() {
             return data['dataObj'];
         })
         .then(num => {
-            payOrder(20, num);
+            return payOrder(20, num);
         })
             .then(data => {
                 if (data['flag']) {

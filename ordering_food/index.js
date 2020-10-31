@@ -575,7 +575,7 @@ function pageBehaviorHandler() {
                             return data_obj['dataObj'];
                         })
                         .then(id => {
-                            payOrder(20, id);
+                            return payOrder(20, id);
                         })
                         .then(data_obj => {
                             if (data_obj['flag']) {
