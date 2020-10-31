@@ -588,6 +588,8 @@ function clickResultHandler() {
             bindOrderIdToButton(e.target.dataset.id);
             if (e.target.dataset.catagory !== 'working') {
                 showDetailPanel(e.target.dataset.catagory);
+            } else {
+                return;
             }
 
             requestOrderDetail(e.target.dataset.id).then(data_obj => {
