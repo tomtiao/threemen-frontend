@@ -9,7 +9,7 @@ function sendOrderHandler() {
         let urlParams = new URLSearchParams();
     
         form_data.forEach((value, key) => {
-            if (key === 'commAddress') {
+            if (key === 'commCostCoin') {
                 gold = Number(value);
             }
             urlParams.append(key, value);
