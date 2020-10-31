@@ -61,6 +61,7 @@ function setUserInfo() {
                         } else {
                             doms[value].textContent = '';
                         }
+                        break;
                     case 'address':
                         if (user_contact_o) { // expected user_contact_o['address'] structure = '南#11'
                             let address_array = user_contact_o[value].split('#');
