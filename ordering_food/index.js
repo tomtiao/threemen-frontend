@@ -499,7 +499,7 @@ function pageBehaviorHandler() {
                         let urlParams = new URLSearchParams();
 
                         urlParams.append('dishId', dish['dish_id']);
-                        urlParams.append('commAddress', location[parseInt(dish['floor'])]);
+                        urlParams.append('location', dish['floor']);
 
                         promises.push(fetch(requestURL + '?' + urlParams.toString(), {
                             method: 'GET',
