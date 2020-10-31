@@ -32,10 +32,27 @@ function sendOrderHandler() {
     });
 }
 
+function listenSizeChange() {
+    const size_choice = document.querySelector('.size_choice_wrapper');
+
+    function changeGold(value) {
+        const total_content = document.getElementById('total_content');
+
+        total_content.textContent = value;
+    }
+
+    size_choice.addEventListener('change', e => {
+        changeGold(e.target.value);
+    });
+}
+
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         sendOrderHandler();
+        listenSizeChange();
     });
 } else {
     sendOrderHandler();
+    listenSizeChange();
 }
