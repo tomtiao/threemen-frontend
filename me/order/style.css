@@ -239,7 +239,7 @@
     height: 120px;
     overflow-y: scroll;
     background-color: #eee;
-    width: 85%;
+    width: initial;
 }
 
 .info_detail .logistic_info_wrapper,
