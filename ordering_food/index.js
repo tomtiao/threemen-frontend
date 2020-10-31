@@ -573,15 +573,14 @@ function pageBehaviorHandler() {
                                 console.log(data_obj);
                             }
 
-                            return data_obj['commNum'];
+                            return data_obj['dataObj'];
                         })
                         .then(id => {
                             payOrder(20, id);
                         })
                         .then(data_obj => {
                             if (data_obj['flag']) {
-                                
-                                location.reload();
+                                location.href = '/me/order';
                             } else {
                                 console.log(data_obj);
                             }
