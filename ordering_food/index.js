@@ -610,7 +610,6 @@ function pageBehaviorHandler() {
         listenListHandler();
         listenItemHandler();
         listenMakeOrderBtnHandler();
-        bindConfirmedSubmitBtn(dishes);
         listenCancelBtn();
     }
 
