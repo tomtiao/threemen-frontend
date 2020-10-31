@@ -389,7 +389,7 @@ function pageHandler() {
             case 'order_food': // TODO
                 const order_food_address = document.getElementById('order_food_address');
     
-                order_food_address.textContent = getLocation(info_o[1][0]['location']);
+                order_food_address.textContent = item.children[0].textContent;
     
                 updateOrderFoodList(info_o[1]);
     
