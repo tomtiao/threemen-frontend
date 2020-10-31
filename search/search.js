@@ -395,7 +395,7 @@ function setDetailPanelContact(item, info_o) {
     address.textContent = item_address;
 }
 
-// expected get commCostReal, commInfo, commCostCoin, date, status
+// expected get [{commCostReal, commInfo, commCostCoin, date, status}, [{dishName, dishPrice}]]
 function requestOrderDetail(order_id) {
     const requestURL = '/order/showOneOrderForUserOrWorker';
 
@@ -418,15 +418,16 @@ function updateOrderFoodList(dishes_o_array) {
 
         let name = document.createElement('span');
         name.classList.add('order_content');
-        name.textContent = dishes_o['name'];
+        name.textContent = dishes_o['dishName'];
 
         let counter = document.createElement('span');
         counter.classList.add('order_number');
-        counter.textContent = dishes_o['counter'];
+        counter.textContent = dishes_o['counter']; // fix ?
 
         let total_price = document.createElement('span');
         total_price.classList.add('order_reward');
-        total_price.textContent = dishes_o['counter'] * dishes_o['price_per'];
+        // total_price.textContent = dishes_o['counter'] * dishes_o['price_per']; // fix
+        total_price.textContent = dishes_o['dishPrice']; // fix
 
         list_item.append(name, counter, total_price);
 
@@ -441,16 +442,16 @@ function updateOrderFoodList(dishes_o_array) {
         }
     }
 
-    function updateTotal(dishes_o_array) {
-        const total_content = document.querySelector('.total .total_content');
+    // function updateTotal(dishes_o_array) {
+    //     const total_content = document.querySelector('.total .total_content');
 
-        let total = 0;
-        dishes_o_array.forEach(o => {
-            total += o['counter'] * o['price_per'];
-        });
+    //     let total = 0;
+    //     dishes_o_array.forEach(o => {
+    //         total += o['counter'] * o['price_per'];
+    //     });
 
-        total_content.textContent = total;
-    }
+    //     total_content.textContent = total;
+    // }
 
     cleanList();
 
@@ -458,7 +459,33 @@ function updateOrderFoodList(dishes_o_array) {
         list.append(createListItem(o));
     });
 
-    updateTotal(dishes_o_array);
+    // updateTotal(dishes_o_array);
+}
+
+// expected param is Number, return '南苑4楼'
+function getLocation(location_num) {
+    let location_str;
+    switch (Number(location_num)) {
+        case 1:
+            location_str = '北苑1楼';
+            break;
+        case 2:
+            location_str = '北苑2楼';
+            break;
+        case 3:
+            location_str = '北苑3楼';
+            break;
+        case 4:
+            location_str = '南苑4楼';
+            break;
+        case 5:
+            location_str = '南苑5楼';
+            break;
+        default:
+            throw `unexpected param ${location_num}`;
+    }
+    
+    return location_str;
 }
 
 function setDetailPanelContent(item, info_o) {
@@ -470,11 +497,20 @@ function setDetailPanelContent(item, info_o) {
 
             const shopping_info_content = document.querySelector('.shopping_info_content');
 
-            shopping_info_content.textContent = info_o['commInfo'];
+            shopping_info_content.textContent = info_o[0]['commInfo'];
 
             break;
         case 'order_food': // TODO
-            updateOrderFoodList(info_o);
+            const order_food_address = document.getElementById('order_food_address');
+
+            order_food_address.textContent = getLocation(info_o[1][0]['location']);
+
+            updateOrderFoodList(info_o[1]);
+
+            // TODO
+            const order_food = document.getElementById('order_food_note');
+
+            order_food.textContent = info_o[0]['commLeftMessage'];
 
             break;
         case 'logistic':
@@ -484,7 +520,12 @@ function setDetailPanelContent(item, info_o) {
 
             const code = document.getElementById('code');
 
-            code.textContent = info_o['commInfo'];
+            code.textContent = info_o[0]['commInfo'];
+
+            // TODO
+            const logistic_note = document.getElementById('logistic_note');
+
+            logistic_note.textContent = info_o[0]['commLeftMessage'];
 
             break;
         default:
@@ -492,7 +533,7 @@ function setDetailPanelContent(item, info_o) {
     }
 
     const counter_content = document.querySelector('.counter_content');
-    counter_content.textContent = info_o['commCostCoin'];
+    counter_content.textContent = info_o[0]['commCostCoin'];
 }
 
 function bindOrderIdToButton(order_id) {
@@ -533,8 +574,6 @@ function showDetailPanel(catagory) {
             logistic_wrapper.classList.remove('hide');
 
             break;
-        case 'working':
-            console.log('working')
         default:
             throw `unexpected param ${catagory}`;
     }

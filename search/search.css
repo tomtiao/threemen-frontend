@@ -305,15 +305,26 @@ main {
 .info_detail .common_wrapper .order_wrapper {
     margin: 0 1em;
     flex-grow: 1;
+    height: 120px;
     overflow-y: scroll;
-    background-color: white;
+    background-color: #eee;
 }
 
 .info_detail .logistic_info_wrapper,
-.info_detail .shopping_info_wrapper {
+.info_detail .shopping_info_wrapper,
+.info_detail .order_food_wrapper {
     background-color: white;
     flex-grow: 1;
 }
+
+.info_detail .common_wrapper.order_food_wrapper .order_address {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em;
+}
+
+
 
 .info_detail .common_wrapper.order_food_wrapper .order_list {
     list-style-type: none;
