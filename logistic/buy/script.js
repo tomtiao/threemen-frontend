@@ -1,4 +1,5 @@
 function sendOrderHandler() {
+    let gold = 0;
     function makeRequest() {
         const requestURL = '/order/saveOrder';
     
@@ -8,11 +9,28 @@ function sendOrderHandler() {
         let urlParams = new URLSearchParams();
     
         form_data.forEach((value, key) => {
+            if (key === 'commAddress') {
+                gold = Number(value);
+            }
             urlParams.append(key, value);
         });
     
         let getURL = new URLSearchParams([['serviceType', 'deliveryService']]);
         return fetch(requestURL + '?' + getURL.toString(), {
+            method: 'POST',
+            body: urlParams,
+            credentials: 'same-origin'
+        }).then(res => res.json()).catch(console.log);
+    }
+
+    function payOrder(gold, order_id) {
+        const requestURL = '/order/payOrder';
+        let urlParams = new URLSearchParams();
+
+        urlParams.append('commCostCoin', gold);
+        urlParams.append('commNum', order_id);
+
+        return fetch(requestURL, {
             method: 'POST',
             body: urlParams,
             credentials: 'same-origin'
@@ -28,12 +46,13 @@ function sendOrderHandler() {
             } else {
                 alert('很抱歉，出了一些问题');
             }
+
+            return data['dataObj'];
         })
-        .then(() => fetch('/order/successForUser', {
-                method: 'POST',
-                credentials: "same-origin"
-            })
-        ).then(data => {
+        .then(num => {
+            payOrder(gold, num);
+        })
+        .then(data => {
             if (data['flag']) {
                 location.replace('/me/order');
             } else {
