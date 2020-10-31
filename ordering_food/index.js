@@ -579,7 +579,7 @@ function pageBehaviorHandler() {
                         })
                         .then(data_obj => {
                             if (data_obj['flag']) {
-                                location.href = '/me/order';
+                                window.location.href = '/me/order';
                             } else {
                                 console.log(data_obj);
                             }
