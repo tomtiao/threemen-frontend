@@ -140,7 +140,7 @@ function pageHandler() {
                     cleanList(target_list);
                     const keys = Object.keys(status_str);
                     keys.forEach((request_status_number) => {
-                        if (isUser === 0 && ((request_status_number !== '1') && (request_status_number !== '5'))) {
+                        if (isUser === 0 && ((request_status_number !== '3') && (request_status_number !== '4'))) {
                             return;
                         }
                         getUserOrder(isUser, request_status_number, service_type_object[catagory]).then(data_obj => {
