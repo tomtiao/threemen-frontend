@@ -434,7 +434,7 @@ aside.show {
     height: 150px;
     margin: 0 1.5rem 3rem 0;
     background-color: #ccc;
-    border-radius: 16px;
+    border-radius: 8px;
     box-shadow: 0 4px 20px 0 #999;
     box-sizing: border-box;
 }
