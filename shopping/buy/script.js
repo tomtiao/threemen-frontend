@@ -30,7 +30,7 @@ function suggestionHandler() {
 
     list.addEventListener('click', e => {
         if (e.target.tagName === 'BUTTON') {
-            textarea.textContent += e.target.textContent + " ";
+            textarea.value += e.target.textContent + " ";
         }
     });
 }
@@ -38,7 +38,7 @@ function suggestionHandler() {
 function sendOrderHandler() {
     function makeRequest() {
         const requestURL = '/order/saveOrder';
-        const estimatedPriceInput = document.getElementById('estimated_price');
+        // const estimatedPriceInput = document.getElementById('estimated_price');
     
         const form_self = document.querySelector('form');
     
@@ -57,7 +57,7 @@ function sendOrderHandler() {
 
     
         // add estimated gold
-        urlParams.append('commCostCoin', (parseInt(estimatedPriceInput.value) || 0) * 10);
+        urlParams.append('commCostCoin', 30); // buy default 20 
     
         let getURL = new URLSearchParams([['serviceType', 'marketService']]);
         return fetch(requestURL + '?' + getURL.toString(), {
@@ -80,18 +80,18 @@ function sendOrderHandler() {
     });
 }
 
-function estimatedGold() {
-    const estimatedPriceInput = document.getElementById('estimated_price');
-    const total_content = document.querySelector('.total_content');
+// function estimatedGold() {
+//     const estimatedPriceInput = document.getElementById('estimated_price');
+//     const total_content = document.querySelector('.total_content');
 
-    estimatedPriceInput.addEventListener('blur', () => {
-        if (estimatedPriceInput.value !== '') {
-            total_content.textContent = parseInt(estimatedPriceInput.value) * 10;
-        } else {
-            total_content.textContent = 0;
-        }
-    });
-}
+//     estimatedPriceInput.addEventListener('blur', () => {
+//         if (estimatedPriceInput.value !== '') {
+//             total_content.textContent = parseInt(estimatedPriceInput.value) * 10;
+//         } else {
+//             total_content.textContent = 0;
+//         }
+//     });
+// }
 
 let on_loaded = () => {
     siteCustomHandler();
