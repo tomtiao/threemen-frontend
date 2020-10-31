@@ -481,6 +481,14 @@ function pageBehaviorHandler() {
             });
         }
 
+        let location = {
+            1: '北苑1楼',
+            2: '北苑2楼',
+            3: '北苑3楼',
+            4: '南苑4楼',
+            5: '南苑5楼'
+        };
+
         function bindConfirmedSubmitBtn(dishes_o_array) {
             function preAddDishesToCart(dishes_o_array) {
                 const requestURL = '/restaurantOrder/addToCart';
@@ -491,7 +499,7 @@ function pageBehaviorHandler() {
                         let urlParams = new URLSearchParams();
 
                         urlParams.append('dishId', dish['dish_id']);
-                        urlParams.append('location', dish['floor']);
+                        urlParams.append('commAddress', location[parseInt(dish['floor'])]);
 
                         promises.push(fetch(requestURL + '?' + urlParams.toString(), {
                             method: 'GET',
