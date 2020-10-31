@@ -51,14 +51,20 @@ function setUserInfo() {
 
         const keys = Object.keys(doms);
         keys.forEach((value) => {
-            if (doms[value] instanceof Array) {
+            if (Array.isArray(doms[value])) {
                 doms[value].forEach((ele) => ele.textContent = user_account_o[value]);
             } else {
                 switch (value) {
                     case 'phone':
-                    case 'address':
                         if (user_contact_o) {
                             doms[value].textContent = user_contact_o[value];
+                        } else {
+                            doms[value].textContent = '';
+                        }
+                    case 'address':
+                        if (user_contact_o) { // expected user_contact_o['address'] structure = '南#11'
+                            let address_array = user_contact_o[value].split('#');
+                            doms[value].textContent = address_array[0] + '苑' + address_array[1] + '栋';
                         } else {
                             doms[value].textContent = '';
                         }
@@ -81,12 +87,12 @@ function setUserInfo() {
         if (data['flag']) {
             getWorkerInfo().then(data => {
                 const worker_obj = data['dataObj'];
-        
+
                 const doms = {
                     stuId: document.getElementById('id'),
                     realName: document.getElementById('real_name')
                 };
-        
+
                 const keys = Object.keys(doms);
                 keys.forEach((value) => {
                     doms[value].textContent = worker_obj[value];
