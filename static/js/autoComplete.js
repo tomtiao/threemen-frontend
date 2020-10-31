@@ -17,8 +17,8 @@ function autoCompleteUserInfo() {
         name_input.value = user['nickname'] || '';
         phone_input.value = userInfo['phone'] || '';
         let address_array = (userInfo['address'] || '').split('#');
-        section_input.value = address_array[0] + '苑';
-        building_input.value = address_array[1] + '栋';
+        section_input.value = address_array[0];
+        building_input.value = address_array[1];
     }
 
     let user_data = fetchUserInfo();
