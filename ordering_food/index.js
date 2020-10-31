@@ -470,11 +470,10 @@ function pageBehaviorHandler() {
             const buy_btn = document.querySelector('.buy_btn');
 
             buy_btn.addEventListener('click', e => {
-                let final_dishes = dishes;
                 e.preventDefault();
                 if (dishes[0]) {
-                    popUpConfirmPanelHandler(final_dishes);
-                    bindConfirmedSubmitBtn(final_dishes);
+                    popUpConfirmPanelHandler(dishes);
+                    bindConfirmedSubmitBtn(dishes);
                 } else {
                     alert('提交前，请选择菜品');
                 }
