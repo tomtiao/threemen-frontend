@@ -22,7 +22,13 @@ function autoCompleteUserInfo() {
     }
 
     let user_data = fetchUserInfo();
-    user_data.then(data_obj => setUserInfo(data_obj['dataObj'])).catch(console.log);
+    user_data.then(data_obj => {
+        if (data_obj['dataObj']) {
+            setUserInfo(data_obj['dataObj']);
+        } else {
+            console.log('user info is empty');
+        }
+    }).catch(console.log);
 }
 
 if (document.readyState === 'loading') {
