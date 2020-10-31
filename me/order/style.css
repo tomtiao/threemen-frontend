@@ -286,9 +286,9 @@
     margin-right: 2em;
 }
 
-.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_number::before {
+/* .info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_number::before {
     content: "x";
-}
+} */
 
 .info_detail .common_wrapper .note_wrapper .note_label {
     margin: 0 0 0.5em;
