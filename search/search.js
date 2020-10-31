@@ -586,7 +586,7 @@ function clickResultHandler() {
     info_list.addEventListener('click', e => {
         if (e.target.tagName === 'A') {
             bindOrderIdToButton(e.target.dataset.id);
-            if (e.target.catagory !== 'working') {
+            if (e.target.dataset.catagory !== 'working') {
                 showDetailPanel(e.target.dataset.catagory);
             }
 
