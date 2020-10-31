@@ -469,6 +469,7 @@ function pageHandler() {
         order_flows.forEach((list) => {
             list.addEventListener('click', e => {
                 if (e.target.tagName === 'A') {
+                    hideDetailPanel();
                     showDetailPanel(e.target.dataset.catagory);
     
                     let cancelable = (e.target.dataset.cancelable === 'true');
@@ -500,7 +501,7 @@ function pageHandler() {
     }
     
     function sendPickRequest(order_id) {
-        const requestURL = '/order/pickOrder'; // TODO
+        const requestURL = '/order/failOrder'; // TODO
     
         let urlParams = new URLSearchParams();
     

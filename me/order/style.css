@@ -234,9 +234,11 @@
 }
 
 .info_detail .common_wrapper .order_wrapper {
+    margin: 0 1em;
     flex-grow: 1;
+    height: 120px;
     overflow-y: scroll;
-    background-color: white;
+    background-color: #eee;
 }
 
 .info_detail .logistic_info_wrapper,
@@ -254,18 +256,33 @@
 .info_detail .common_wrapper.order_food_wrapper .order_list .list_item {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     height: 48px;
     padding: 0.5em;
     box-sizing: border-box;
     border-bottom: 1px solid #ccc;
 }
 
-.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_reward {
-    margin-left: auto;
+.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_content {
+    margin-right: auto;
+    flex: 0 0 50%;
+    width: 50%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
+
+.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_reward {
+    width: 3em;
+}
+
+.info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_reward::before {
+    content: "¥";
+    margin-right: 0.25em;
+}
 .info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_number {
-    margin-left: 1em;
+    margin-right: 2em;
 }
 
 .info_detail .common_wrapper.order_food_wrapper .order_list .list_item .order_number::before {
@@ -278,6 +295,13 @@
 
 .info_detail .common_wrapper .note_wrapper .note_content {
     margin: 0 0 0.5em;
+}
+
+.info_detail .common_wrapper.order_food_wrapper .order_address {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em;
 }
 
 .info_detail .pick_bar {
@@ -300,6 +324,11 @@
     flex: 2 0 auto;
     padding-left: 0.5rem;
     box-sizing: border-box;
+}
+
+.info_detail .logistic_info_wrapper, .info_detail .shopping_info_wrapper, .info_detail .order_food_wrapper {
+    background-color: white;
+    flex-grow: 1;
 }
 
 .info_detail .pick_bar .counter .item_label::after {
