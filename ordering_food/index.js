@@ -695,8 +695,7 @@ function pageBehaviorHandler() {
                     content.classList.add('hide');
                     break;
                 default:
-                    console.log(`unexpected param ${panel}`);
-                    break;
+                    throw `unexpected param ${panel}`;
             }
         };
 

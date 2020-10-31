@@ -422,7 +422,8 @@ function updateOrderFoodList(dishes_o_array) {
 
         let counter = document.createElement('span');
         counter.classList.add('order_number');
-        counter.textContent = dishes_o['counter']; // fix ?
+        // counter.textContent = dishes_o['counter']; // fix ?
+        counter.textContent = 1; // fix ?
 
         let total_price = document.createElement('span');
         total_price.classList.add('order_reward');
@@ -463,32 +464,32 @@ function updateOrderFoodList(dishes_o_array) {
 }
 
 // expected param is Number, return '南苑4楼'
-function getLocation(location_num) {
-    let location_str;
-    switch (Number(location_num)) {
-        case 1:
-            location_str = '北苑1楼';
-            break;
-        case 2:
-            location_str = '北苑2楼';
-            break;
-        case 3:
-            location_str = '北苑3楼';
-            break;
-        case 4:
-            location_str = '南苑4楼';
-            break;
-        case 5:
-            location_str = '南苑5楼';
-            break;
-        default:
-            throw `unexpected param ${location_num}`;
-    }
+// function getLocation(location_num) {
+//     let location_str;
+//     switch (Number(location_num)) {
+//         case 1:
+//             location_str = '北苑1楼';
+//             break;
+//         case 2:
+//             location_str = '北苑2楼';
+//             break;
+//         case 3:
+//             location_str = '北苑3楼';
+//             break;
+//         case 4:
+//             location_str = '南苑4楼';
+//             break;
+//         case 5:
+//             location_str = '南苑5楼';
+//             break;
+//         default:
+//             throw `unexpected param ${location_num}`;
+//     }
     
-    return location_str;
-}
+//     return location_str;
+// }
 
-function setDetailPanelContent(item, info_o) {
+function setDetailPanelContent(item, info_array) {
     switch (item.dataset.catagory) {
         case 'shopping':
             const buy_address = document.getElementById('buy_address');
@@ -497,20 +498,20 @@ function setDetailPanelContent(item, info_o) {
 
             const shopping_info_content = document.querySelector('.shopping_info_content');
 
-            shopping_info_content.textContent = info_o[0]['commInfo'];
+            shopping_info_content.textContent = info_array[0]['commInfo'];
 
             break;
         case 'order_food': // TODO
             const order_food_address = document.getElementById('order_food_address');
 
-            order_food_address.textContent = getLocation(info_o[1][0]['location']);
+            order_food_address.textContent = item.children[0].textContent;
 
-            updateOrderFoodList(info_o[1]);
+            updateOrderFoodList(info_array[1]);
 
             // TODO
             const order_food = document.getElementById('order_food_note');
 
-            order_food.textContent = info_o[0]['commLeftMessage'];
+            order_food.textContent = info_array[0]['commLeftMessage'];
 
             break;
         case 'logistic':
@@ -520,12 +521,12 @@ function setDetailPanelContent(item, info_o) {
 
             const code = document.getElementById('code');
 
-            code.textContent = info_o[0]['commInfo'];
+            code.textContent = info_array[0]['commInfo'];
 
             // TODO
             const logistic_note = document.getElementById('logistic_note');
 
-            logistic_note.textContent = info_o[0]['commLeftMessage'];
+            logistic_note.textContent = info_array[0]['commLeftMessage'];
 
             break;
         default:
@@ -533,7 +534,7 @@ function setDetailPanelContent(item, info_o) {
     }
 
     const counter_content = document.querySelector('.counter_content');
-    counter_content.textContent = info_o[0]['commCostCoin'];
+    counter_content.textContent = info_array[0]['commCostCoin'];
 }
 
 function bindOrderIdToButton(order_id) {
