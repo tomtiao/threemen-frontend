@@ -91,21 +91,12 @@ function sendOrderHandler() {
                 alert('很抱歉，出了一些问题');
             }
         })
-        .then(data => {
-            if (data['flag']) {
-                alert('订单已发送！');
-            } else {
-                alert('很抱歉，出了一些问题');
-            }
-
-            return data['dataObj'];
-        })
         .then(num => {
             payOrder(20, num);
         })
             .then(data => {
                 if (data['flag']) {
-                    location.replace('/me/order');
+                    location.href = '/me/order';
                 } else {
                     console.log(data);
                 }

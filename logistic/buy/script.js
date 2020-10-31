@@ -55,7 +55,7 @@ function sendOrderHandler() {
         })
         .then(data => {
             if (data['flag']) {
-                location.replace('/me/order');
+                location.href = '/me/order';
             } else {
                 console.log(data);
             }
