@@ -545,6 +545,21 @@ function pageBehaviorHandler() {
                 }).then(res => res.json()).catch(console.log);
             }
 
+            function payOrder(gold, order_id) {
+                const requestURL = '/order/payOrder';
+                let urlParams = new URLSearchParams();
+        
+                urlParams.append('commCostCoin', gold);
+                urlParams.append('commNum', order_id);
+                urlParams.append('commReward', 0);
+        
+                return fetch(requestURL, {
+                    method: 'POST',
+                    body: urlParams,
+                    credentials: 'same-origin'
+                }).then(res => res.json()).catch(console.log);
+            }
+
             function onClickBtn(e) {
                 e.preventDefault();
                 if (dishes[0]) {
@@ -553,12 +568,25 @@ function pageBehaviorHandler() {
                         .then(data_obj => {
                             if (data_obj['flag']) {
                                 alert('提交成功');
-                                location.reload();
                             } else {
                                 alert('出现了问题');
                                 console.log(data_obj);
                             }
-                        }).catch(console.log);
+
+                            return data_obj['commNum'];
+                        })
+                        .then(id => {
+                            payOrder(20, id);
+                        })
+                        .then(data_obj => {
+                            if (data_obj['flag']) {
+                                
+                                location.reload();
+                            } else {
+                                console.log(data_obj);
+                            }
+                        })
+                        .catch(console.log);
                 } else {
                     console.log('无菜品');
                 }
