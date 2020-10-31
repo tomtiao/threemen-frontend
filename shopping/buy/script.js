@@ -72,11 +72,22 @@ function sendOrderHandler() {
         makeRequest().then(data => {
             if (data['flag']) {
                 alert('订单已发送！');
-                location.replace(location.pathname);
             } else {
                 alert('很抱歉，出了一些问题');
             }
-        }).catch(console.log);
+        })
+        .then(() => fetch('/order/successForUser', {
+                method: 'POST',
+                credentials: "same-origin"
+            }))
+            .then(data => {
+                if (data['flag']) {
+                    location.replace('/me/order');
+                } else {
+                    console.log(data);
+                }
+            })
+            .catch(console.log);
     });
 }
 

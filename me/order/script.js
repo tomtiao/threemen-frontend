@@ -247,6 +247,58 @@ function pageHandler() {
     
         setActive(swapper_list, swapper_list.firstElementChild.firstElementChild);
     }
+
+    function updateOrderFoodList(dishes_o_array) {
+        function createListItem(dishes_o) {
+            let list_item = document.createElement('li');
+    
+            list_item.classList.add('list_item');
+    
+            let name = document.createElement('span');
+            name.classList.add('order_content');
+            name.textContent = dishes_o['dishName'];
+    
+            let counter = document.createElement('span');
+            counter.classList.add('order_number');
+            counter.textContent = dishes_o['counter']; // fix ?
+    
+            let total_price = document.createElement('span');
+            total_price.classList.add('order_reward');
+            // total_price.textContent = dishes_o['counter'] * dishes_o['price_per']; // fix
+            total_price.textContent = dishes_o['dishPrice']; // fix
+    
+            list_item.append(name, counter, total_price);
+    
+            return list_item;
+        }
+    
+        const list = document.querySelector('.order_list');
+    
+        function cleanList() {
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
+        }
+    
+        // function updateTotal(dishes_o_array) {
+        //     const total_content = document.querySelector('.total .total_content');
+    
+        //     let total = 0;
+        //     dishes_o_array.forEach(o => {
+        //         total += o['counter'] * o['price_per'];
+        //     });
+    
+        //     total_content.textContent = total;
+        // }
+    
+        cleanList();
+    
+        dishes_o_array.forEach(o => {
+            list.append(createListItem(o));
+        });
+    
+        // updateTotal(dishes_o_array);
+    }
     
     function showDetailPanel(catagory) {
         const customer_wrapper_empty = document.querySelector('.customer_wrapper_empty');
@@ -262,6 +314,18 @@ function pageHandler() {
         pick_bar.classList.remove('hide');
     
         switch (catagory) {
+            case 'order_food': // TODO
+                const order_food_wrapper = document.querySelector('.order_food_wrapper');
+    
+                order_food_wrapper.classList.remove('hide');
+    
+                break;
+            case 'logistic':
+                const logistic_wrapper = document.querySelector('.logistic_wrapper');
+    
+                logistic_wrapper.classList.remove('hide');
+    
+                break;
             case 'shopping':
                 const shopping_wrapper = document.querySelector('.shopping_wrapper');
                 shopping_wrapper.classList.remove('hide');
@@ -319,7 +383,36 @@ function pageHandler() {
     
                 const shopping_info_content = document.querySelector('.shopping_info_content');
     
-                shopping_info_content.textContent = info_o['commInfo'];
+                shopping_info_content.textContent = info_o[0]['commInfo'];
+    
+                break;
+            case 'order_food': // TODO
+                const order_food_address = document.getElementById('order_food_address');
+    
+                order_food_address.textContent = getLocation(info_o[1][0]['location']);
+    
+                updateOrderFoodList(info_o[1]);
+    
+                // TODO
+                const order_food = document.getElementById('order_food_note');
+    
+                order_food.textContent = info_o[0]['commLeftMessage'];
+    
+                break;
+            case 'logistic':
+                const logistic_address = document.getElementById('logistic_address');
+    
+                logistic_address.textContent = item.children[0].textContent;
+    
+                const code = document.getElementById('code');
+    
+                code.textContent = info_o[0]['commInfo'];
+    
+                // TODO
+                const logistic_note = document.getElementById('logistic_note');
+    
+                logistic_note.textContent = info_o[0]['commLeftMessage'];
+    
                 break;
             default:
                 throw `unexpected param ${catagory}`;
