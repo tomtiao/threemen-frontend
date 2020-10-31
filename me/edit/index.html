@@ -81,6 +81,7 @@
             border-bottom: 2px solid #eee;
             transition: border-bottom 0.3s ease-in-out;
             outline: none;
+            width: 80%;
         }
 
         .change_pw_panel .item input[type=text]:focus {
@@ -185,8 +186,8 @@
         <h1 class="panel_title">修改信息</h1>
         <form method="post" class="change_pw" id="change_pw">
             <div class="item">
-                <input type="text" name="nickname" id="nickname" autocomplete="nickname" required>
-                <label for="nickname">昵称</label>
+                <input type="text" name="nickname" id="name" autocomplete="nickname" required>
+                <label for="name">昵称</label>
             </div>
             <div class="item">
                 <input type="text" name="department" id="department" autocomplete="off" required>
@@ -257,6 +258,7 @@
         }
     </script>
     <script src="/static/js/account.js"></script>
+    <script src="/static/js/autoComplete.js"></script>
 </body>
 
 </html>
