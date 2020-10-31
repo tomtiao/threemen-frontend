@@ -95,9 +95,11 @@ function pageHandler() {
         // 遍历数组
         for (let data of unwrapped_data_obj['dataObj']) {
             switch (catagory) {
+                case 'order_food':
+                case 'logistic':
                 case 'shopping':
                     let address_array = data['address'].split('#');
-                    let section = address_array[0] + '栋';
+                    let section = address_array[0] + '苑';
                     let building = address_array[1] + '栋';
                     let final_address = section + building
                     target_list.append(createListItem(final_address, data['status'], data['commAddress'], data['commNum'], catagory));
