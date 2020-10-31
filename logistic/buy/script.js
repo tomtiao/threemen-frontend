@@ -29,6 +29,7 @@ function sendOrderHandler() {
 
         urlParams.append('commCostCoin', gold);
         urlParams.append('commNum', order_id);
+        urlParams.append('commReward', 0);
 
         return fetch(requestURL, {
             method: 'POST',
