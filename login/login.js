@@ -8,7 +8,7 @@ function submitHandler() {
             && document.getElementById('password').value != '') {
             return true;
         } else {
-            setTimeout(alert('账号和密码不能为空！'));
+            alert('账号和密码不能为空！');
             return false;
         }
     }
@@ -42,7 +42,7 @@ function submitHandler() {
                         location.replace('/');
                     } else {
                         // TODO: 重做提醒
-                        setTimeout(alert(data['errorMsg']));
+                        alert(data['errorMsg']);
                     }
                 }).catch(console.log); // TODO: 处理返回值
             }

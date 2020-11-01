@@ -600,7 +600,7 @@ function pageBehaviorHandler() {
             const cancel_btn = document.querySelector('.cancel_btn');
             const panel = document.querySelector('.order_confirmation');
 
-            cancel_btn.addEventListener('click', e => {
+            cancel_btn.addEventListener('click', () => {
                 panel.classList.add('hide');
             });
         }
@@ -623,7 +623,7 @@ function pageBehaviorHandler() {
         const aside = document.querySelector('aside');
         const mask = document.querySelector('.go_dark');
 
-        document.body.addEventListener('click', e => {
+        document.body.addEventListener('click', () => {
             aside.classList.remove('show');
             mask.classList.remove('active');
         });
@@ -803,7 +803,7 @@ function updateListHandler() {
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', e => {
+    document.addEventListener('DOMContentLoaded', () => {
         updateListHandler();
     });
 } else {

@@ -86,7 +86,7 @@ function accountHandler() {
         }).catch(console.log);
 
         // TODO: fix hover on avatar
-        avatar.addEventListener('mouseenter', e => {
+        avatar.addEventListener('mouseenter', () => {
             avatar.classList.add('hide');
             avatar_panel.classList.add('show');
         });
@@ -96,7 +96,7 @@ function accountHandler() {
             avatar.classList.remove('hide');
             avatar_panel.classList.remove('show');
         });
-    };
+    }
 
     function setLogoutBtn() {
         const logout_btn = document.querySelector('.logout');
@@ -143,7 +143,7 @@ function accountHandler() {
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', e => {
+    document.addEventListener('DOMContentLoaded', () => {
         accountHandler();
     });
 } else {

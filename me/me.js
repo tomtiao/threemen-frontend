@@ -128,7 +128,7 @@ function uploadAvatarHandler() {
         const preview = document.getElementById('preview');
         const input = document.getElementById('upload');
 
-        input.addEventListener('change', e => {
+        input.addEventListener('change', () => {
             preview.src = URL.createObjectURL(input.files[0]);
         });
     }
@@ -188,7 +188,7 @@ function uploadAvatarHandler() {
 function changePasswordHandler() {
     const show_change_btn = document.querySelector('.reset_passwd');
     const change_pw_panel = document.querySelector('.change_pw_panel');
-    show_change_btn.addEventListener('click', e => {
+    show_change_btn.addEventListener('click', () => {
         change_pw_panel.classList.toggle('show');
     });
 

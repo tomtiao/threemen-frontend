@@ -123,7 +123,7 @@ function pageBehaviourHandler() {
         let btns = document.querySelectorAll('.catagory_list .list_btn');
 
         btns.forEach((btn) => {
-            btn.addEventListener('click', e => {
+            btn.addEventListener('click', () => {
                 // 点击的是新分类
                 if (!btn.classList.contains('active')) {
                     last_time_catagory = btn.dataset.catagory;
@@ -189,17 +189,17 @@ function pageBehaviourHandler() {
     function listenSearchBtn() {
         const search_btn = document.querySelector('.search_btn');
 
-        search_btn.addEventListener('click', e => {
+        search_btn.addEventListener('click', () => {
             updateListAndPageSelection('working', getKeyword(), false);
         });
     }
 
     let currentPage = 1;
+    let totalPage;
     // if catagory isn't catargory 'working', param content would be ignored.
     function updateListAndPageSelection(catagory, content, isInitial) {
         requestPageAndInfo(catagory, currentPage, null, content)
             .then(page_and_info_o => {
-                let totalPage;
                 let info_array;
                 if (catagory === 'working') {
                     totalPage = page_and_info_o['totalPage'];
@@ -208,7 +208,7 @@ function pageBehaviourHandler() {
                     totalPage = page_and_info_o['dataObj']['totalPage'];
                     info_array = page_and_info_o['dataObj']['list'];
                 }
-                
+
                 currentPage = 1;
 
                 initPageList(totalPage);
@@ -467,7 +467,7 @@ function updateOrderFoodList(dishes_o_array) {
 
 function setDetailPanelContent(item, info_array) {
     switch (item.dataset.catagory) {
-        case 'shopping':
+        case 'shopping': {
             const buy_address = document.getElementById('buy_address');
 
             buy_address.textContent = item.children[0].textContent;
@@ -477,7 +477,8 @@ function setDetailPanelContent(item, info_array) {
             shopping_info_content.textContent = info_array[0]['commInfo'];
 
             break;
-        case 'order_food': // TODO
+        }
+        case 'order_food': {// TODO
             const order_food_address = document.getElementById('order_food_address');
 
             order_food_address.textContent = item.children[0].textContent;
@@ -490,7 +491,8 @@ function setDetailPanelContent(item, info_array) {
             order_food.textContent = info_array[0]['commLeftMessage'];
 
             break;
-        case 'logistic':
+        }
+        case 'logistic': {
             const logistic_address = document.getElementById('logistic_address');
 
             logistic_address.textContent = item.children[0].textContent;
@@ -505,8 +507,9 @@ function setDetailPanelContent(item, info_array) {
             logistic_note.textContent = info_array[0]['commLeftMessage'];
 
             break;
+        }
         default:
-            throw `unexpected param ${catagory}`;
+            throw `unexpected param ${item.dataset.catagory}`;
     }
 
     const counter_content = document.querySelector('.counter_content');
@@ -533,24 +536,27 @@ function showDetailPanel(catagory) {
     pick_bar.classList.remove('hide');
 
     switch (catagory) {
-        case 'shopping':
+        case 'shopping': {
             const shopping_wrapper = document.querySelector('.shopping_wrapper');
 
             shopping_wrapper.classList.remove('hide');
 
             break;
-        case 'order_food': // TODO
+        }
+        case 'order_food': {
             const order_food_wrapper = document.querySelector('.order_food_wrapper');
 
             order_food_wrapper.classList.remove('hide');
 
             break;
-        case 'logistic':
+        }// TODO 
+        case 'logistic': {
             const logistic_wrapper = document.querySelector('.logistic_wrapper');
 
             logistic_wrapper.classList.remove('hide');
 
             break;
+        }
         default:
             throw `unexpected param ${catagory}`;
     }

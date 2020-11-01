@@ -120,7 +120,7 @@ function pageBehaviorHandler() {
 
         let last_known_scroll_position = 0;
         let ticking = false;
-        let change_by_animation = e => {
+        let change_by_animation = () => {
             last_known_scroll_position = window.scrollY;
 
             if (!ticking) {
@@ -137,31 +137,31 @@ function pageBehaviorHandler() {
     }
 
     // can be rewritten using scrollIntoView()
-    function jump_to_section_handler() {
-        const sections = document.querySelectorAll('.section');
-        const header = document.querySelector('header');
+    // function jump_to_section_handler() {
+    //     const sections = document.querySelectorAll('.section');
+    //     const header = document.querySelector('header');
 
-        const nav_items = document.querySelectorAll('.aside_list .list_item');
-        sections.forEach((ele, i) => {
-            nav_items[i].dataset.pos = ele.offsetTop - parseInt(window.getComputedStyle(header)['height']);
-        });
+    //     const nav_items = document.querySelectorAll('.aside_list .list_item');
+    //     sections.forEach((ele, i) => {
+    //         nav_items[i].dataset.pos = ele.offsetTop - parseInt(window.getComputedStyle(header)['height']);
+    //     });
 
-        const content_wrapper = document.querySelector('.content_wrapper');
-        let data_top;
-        // e.target 应是 aside_list 中元素的 a.cover
-        let clicked = e => {
-            if (e.target.parentElement.parentElement.classList.contains('aside_list')) {
-                e.preventDefault();
-                data_top = e.target.parentElement.dataset.pos;
-                scrollTo({
-                    top: data_top,
-                    behavior: 'smooth'
-                });
-            }
-        };
+    //     const content_wrapper = document.querySelector('.content_wrapper');
+    //     let data_top;
+    //     // e.target 应是 aside_list 中元素的 a.cover
+    //     let clicked = e => {
+    //         if (e.target.parentElement.parentElement.classList.contains('aside_list')) {
+    //             e.preventDefault();
+    //             data_top = e.target.parentElement.dataset.pos;
+    //             scrollTo({
+    //                 top: data_top,
+    //                 behavior: 'smooth'
+    //             });
+    //         }
+    //     };
 
-        content_wrapper.addEventListener('click', clicked);
-    }
+    //     content_wrapper.addEventListener('click', clicked);
+    // }
 
     sliderHandler();
     hover_main_animate();
@@ -169,13 +169,8 @@ function pageBehaviorHandler() {
     // jump_to_section_handler();
 }
 
-function updateListItem() {
-    // TODO
-}
-
-
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', e => {
+    document.addEventListener('DOMContentLoaded', () => {
         pageBehaviorHandler();
     });
 } else {
