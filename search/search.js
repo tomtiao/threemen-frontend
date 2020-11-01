@@ -208,6 +208,8 @@ function pageBehaviourHandler() {
                     totalPage = page_and_info_o['dataObj']['totalPage'];
                     info_array = page_and_info_o['dataObj']['list'];
                 }
+                
+                currentPage = 1;
 
                 initPageList(totalPage);
                 updateList(info_array, catagory);
@@ -462,32 +464,6 @@ function updateOrderFoodList(dishes_o_array) {
 
     // updateTotal(dishes_o_array);
 }
-
-// expected param is Number, return '南苑4楼'
-// function getLocation(location_num) {
-//     let location_str;
-//     switch (Number(location_num)) {
-//         case 1:
-//             location_str = '北苑1楼';
-//             break;
-//         case 2:
-//             location_str = '北苑2楼';
-//             break;
-//         case 3:
-//             location_str = '北苑3楼';
-//             break;
-//         case 4:
-//             location_str = '南苑4楼';
-//             break;
-//         case 5:
-//             location_str = '南苑5楼';
-//             break;
-//         default:
-//             throw `unexpected param ${location_num}`;
-//     }
-    
-//     return location_str;
-// }
 
 function setDetailPanelContent(item, info_array) {
     switch (item.dataset.catagory) {
