@@ -21,7 +21,6 @@
 @media (max-width: 1000px) {
     .card {
         max-width: 800px;
-        font-size: 14px;
     }
 
     .register_panel {
@@ -35,9 +34,18 @@
 }
 
 @media (max-width: 800px) {
+    .logo {
+        height: 64px;
+        margin-top: 0;
+    }
+
+    .logo .logo_img {
+        height: 64px;
+    }
+
     .card {
         max-width: 480px;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .register_panel {
@@ -52,8 +60,8 @@
 
 @media (max-width: 480px) {
     .card {
-        max-width: 320px;
-        font-size: 8px;
+        min-width: 320px;
+        font-size: 12px;
     }
 
     .register_panel {
