@@ -21,7 +21,7 @@ function pageBehaviorHandler() {
 
         let timer;
         let interval = () => {
-            timer = setInterval(changePos, 1000);
+            timer = setInterval(changePos, 3000);
         };
         interval();
 
