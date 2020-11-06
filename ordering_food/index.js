@@ -45,47 +45,34 @@ function pageBehaviorHandler() {
             const pos_list = document.querySelector('.position_selection_list');
             const floor_list = document.querySelector('.floor_selection_list');
 
-            // expected A element
-            let setItemStyle = (item_link, list) => {
-                for (let ele of list.children) {
-                    if (ele.classList.contains('current_active')) {
-                        ele.classList.remove('current_active');
-                    }
-                }
-                item_link.parentElement.classList.add('current_active');
-            };
-
-
-            // if param is south, then hide north, vice versa
-            let manipulateTaggedItem = (tag, action) => {
-                let hide = (tag) => {
-                    let targets = document.querySelectorAll('.floor_selection_list .list_item.' + tag);
-
-                    for (let t of targets) {
-                        t.classList.add('hide');
-                    }
+            function activeListItem(item_link, list) {
+                const active_token = 'current_active';
+                const resetListItem = (...rest) => {
+                    rest.forEach(list => {
+                        for (const li of list.children) {
+                            li.classList.remove(active_token);
+                        }
+                    });
                 };
-
-                let show = (tag) => {
-                    let targets = document.querySelectorAll('.floor_selection_list .list_item.' + tag);
-
-                    for (let t of targets) {
-                        t.classList.remove('hide');
-                    }
-                };
-
+                resetListItem(list);
+                const link_parent = item_link.parentElement;
+                link_parent.classList.add(active_token);
+            }
+            function controlListButton(catagory, action) {
+                const list_items = document.querySelectorAll(`.floor_selection_list .list_item[data-position=${catagory}]`);
                 switch (action) {
-                    case 'show':
-                        show(tag);
+                    case 'show': {
+                        list_items.forEach(item => item.classList.remove('hide'));
                         break;
-                    case 'hide':
-                        hide(tag);
+                    }
+                    case 'hide': {
+                        list_items.forEach(item => item.classList.add('hide'));
                         break;
+                    }
                     default:
-                        console.log(`unexpected param ${action}`);
-                        break;
+                        throw `unexpected param ${action}`;
                 }
-            };
+            }
 
             // 控制内容显示
             let updateContentList = (position, floor) => {
@@ -126,17 +113,17 @@ function pageBehaviorHandler() {
 
             let changeFloorList = (position) => {
                 switch (position) {
-                    case 'south':
-                        manipulateTaggedItem('south', 'show');
-                        manipulateTaggedItem('north', 'hide');
+                    case '南苑食堂':
+                        controlListButton('南苑食堂', 'show');
+                        controlListButton('北苑食堂', 'hide');
                         break;
-                    case 'north':
-                        manipulateTaggedItem('north', 'show');
-                        manipulateTaggedItem('south', 'hide');
+                    case '北苑食堂':
+                        controlListButton('北苑食堂', 'show');
+                        controlListButton('南苑食堂', 'hide');
                         break;
                     case 'all':
-                        manipulateTaggedItem('north', 'show');
-                        manipulateTaggedItem('south', 'show');
+                        controlListButton('北苑食堂', 'show');
+                        controlListButton('南苑食堂', 'show');
                         break;
                     default:
                         console.log(`unexpected param ${position}`);
@@ -150,9 +137,9 @@ function pageBehaviorHandler() {
                 list.addEventListener('click', e => {
                     if (e.target.tagName === 'A') {
                         e.preventDefault();
-                        setItemStyle(e.target, list); // 控制列表样式
+                        activeListItem(e.target, list); // 控制列表样式
                         if (list === pos_list) {
-                            setItemStyle(all, all.parentElement.parentElement);
+                            activeListItem(all, all.parentElement.parentElement);
                             changeFloorList(e.target.parentElement.dataset.position); // 控制楼层列表项显示
                             updateContentList(e.target.parentElement.dataset.position); // 控制内容显示
                         } else {

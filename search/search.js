@@ -326,6 +326,17 @@ function pageBehaviourHandler() {
 
         return new_info_item;
     }
+    
+    function setPageBtn(currentPage) {
+        const seletion_page = document.querySelector('select_page_list');
+        for (const li of seletion_page.children) {
+            // first element child is button
+            if (parseInt(li.firstElementChild.dataset.page) === currentPage) {
+                li.firstElementChild.classList.add('active');
+            }
+        }
+    }
+    
 
     function clickBtnHandler(e) {
         if (e.target.tagName === 'BUTTON') {
@@ -354,6 +365,7 @@ function pageBehaviourHandler() {
                         last_time_catagory === 'working' ? getKeyword() : undefined, false);
                     break;
             }
+            setPageBtn(currentPage);
         }
     }
 
@@ -365,6 +377,7 @@ function pageBehaviourHandler() {
 
     updateListAndPageSelection('shopping', undefined, true);
     listenSearchBtn();
+    setPageBtn(currentPage);
 }
 
 function requestOrderContact(order_id) {
