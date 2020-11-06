@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/normalize.css">
     <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/header_mobi.css" media="(max-width: 750px)">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_mobi.css" media="(max-width: 1200px)">
     <title>首页</title>
 </head>
 
 <body>
     <header>
         <div class="header_wrapper">
+            <input type="checkbox" name="show_list" id="show_list" class="show_list visually_hidden">
+            <label for="show_list" class="show_list_label">展开列表</label>
             <div class="logo"><a href="/" class="logo_link"><img src="/static/img/three_men_transparent.png" alt="Three men logo"
                         class="logo_img"></a></div>
             <ul class="section_list">

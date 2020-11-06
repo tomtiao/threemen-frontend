@@ -6,18 +6,22 @@ function pageBehaviorHandler() {
 
         let list_item_width = parseInt(getComputedStyle(list_item).width);
         let pixel = 0;
+        let multiplier = 0;
         let changePos = () => {
-            if (pixel <= list_item_width * -2) {
+            list_item_width = parseInt(getComputedStyle(list_item).width);
+            if (pixel <= list_item_width * -2 && multiplier >= 2) {
                 pixel = 0;
+                multiplier = 0;
             } else {
                 pixel -= list_item_width;
+                multiplier++;
             }
-            slider_list.style.transform = `translate(${pixel}px)`;
+            slider_list.style.transform = `translate(calc(-100% * ${multiplier} / 3))`;
         };
 
         let timer;
         let interval = () => {
-            timer = setInterval(changePos, 3000);
+            timer = setInterval(changePos, 1000);
         };
         interval();
 
@@ -38,12 +42,15 @@ function pageBehaviorHandler() {
         wrapper.addEventListener('mouseleave', resume);
 
         let go_back = () => {
-            if (pixel < 0) {
+            list_item_width = parseInt(getComputedStyle(list_item).width);
+            if (pixel < 0 && multiplier <= 2) {
                 pixel += list_item_width;
+                multiplier--;
             } else {
                 pixel = list_item_width * -2;
+                multiplier = 2;
             }
-            slider_list.style.transform = `translate(${pixel}px)`;
+            slider_list.style.transform = `translate(calc(-100% * ${multiplier} / 3))`;
         };
 
         wrapper.addEventListener('click', e => {
@@ -59,6 +66,19 @@ function pageBehaviorHandler() {
                         console.log('invalid btn clicked');
                         break;
                 }
+            }
+        });
+
+        let ticking = false;
+        window.addEventListener('resize', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    pause();
+                    resume();
+                    ticking = false;
+                });
+
+                ticking = true;
             }
         });
     }

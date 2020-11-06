@@ -20,6 +20,7 @@ header {
     top: 0;
     height: 64px;
     width: 100%;
+    min-width: 320px;
     background-color: #71c9ce;
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
 }
@@ -38,6 +39,11 @@ header {
 
 .page_title {
     margin: 0;
+}
+
+.show_list_label,
+input.show_list {
+    display: none;
 }
 
 .logo {
@@ -289,3 +295,4 @@ header {
 .account_section.with_avatar .account .avatar {
     height: 100%;
 }
+
