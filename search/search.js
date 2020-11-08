@@ -90,6 +90,10 @@ function pageBehaviourHandler() {
     }
 
     function hideDetailPanel() {
+        const detail_panel = document.querySelector('.info_detail');
+
+        detail_panel.classList.add('swapped_right');
+
         const detail_wrappers = document.querySelectorAll('.info_detail > div');
 
         for (let wrapper of detail_wrappers) {
@@ -328,11 +332,19 @@ function pageBehaviourHandler() {
     }
     
     function setPageBtn(currentPage) {
-        const seletion_page = document.querySelector('select_page_list');
-        for (const li of seletion_page.children) {
+        // helper to find out if is swap page button
+        function isArrowButton(ele) {
+            if (ele.tagName === 'LI' && (ele.classList.contains('prev_page') || ele.classList.contains('next_page'))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        const seletion_page = document.querySelector('.select_page_list');
+        for (const child of seletion_page.children) {
             // first element child is button
-            if (parseInt(li.firstElementChild.dataset.page) === currentPage) {
-                li.firstElementChild.classList.add('active');
+            if (isArrowButton(child) && (parseInt(child.firstElementChild.dataset.page) === currentPage)) {
+                child.firstElementChild.classList.add('active');
             }
         }
     }
@@ -643,6 +655,14 @@ function listenOrderSubmit() {
     });
 }
 
+function hideDetail() {
+    var arrow = document.querySelector('.info_detail .arrow');
+    arrow.addEventListener('click', function (e) {
+        e.target.parentElement.classList.toggle('swapped_right');
+    });
+}
+
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         filterHandler();
@@ -651,6 +671,7 @@ if (document.readyState === 'loading') {
         pageBehaviourHandler();
         clickResultHandler();
         listenOrderSubmit();
+        hideDetail();
     });
 } else {
     filterHandler();
@@ -659,4 +680,5 @@ if (document.readyState === 'loading') {
     pageBehaviourHandler();
     clickResultHandler();
     listenOrderSubmit();
+    hideDetail();
 }

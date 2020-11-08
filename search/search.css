@@ -136,7 +136,7 @@ main {
     align-items: flex-start;
     align-content: space-between;
     flex-wrap: wrap;
-    margin: 1rem;
+    margin: 0 1rem;
     padding: 0;
     width: auto;
     list-style-type: none;
@@ -145,6 +145,7 @@ main {
 
 .list .list_item {
     margin-right: 3rem;
+    margin: 0.5rem 3rem 0.5rem 0;
 }
 
 .list .list_item .list_btn {
@@ -212,10 +213,14 @@ main {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
     opacity: 1;
     pointer-events: all;
-    transition: opcacity 0.15s cubic-bezier(.08,.82,.17,1);
+    transition: opcacity 0.15s cubic-bezier(.08,.82,.17,1), transform 0.3s cubic-bezier(0, 0, 0, 1);
 }
 
-.info_detail .hide {
+.info_detail .arrow {
+    display: none;
+}
+
+.info_detail .hide:not(button) {
     display: none !important;
     opacity: 0;
     z-index: -1;
