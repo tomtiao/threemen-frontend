@@ -1,4 +1,29 @@
-const header = `<header>
+"use strict";
+function showListMobi() {
+    const show_list_checkbox = document.querySelector('.show_list');
+    const section_list = document.querySelector('.section_list');
+    const removeClass = () => {
+        section_list.classList.remove('animated');
+        section_list.removeEventListener('transitionend', removeClass);
+    };
+    const removeClassCanceled = () => {
+        if (show_list_checkbox.checked) {
+            section_list.removeEventListener('transitionend', removeClass);
+        }
+    };
+    show_list_checkbox.addEventListener('change', () => {
+        if (show_list_checkbox.checked) {
+            section_list.classList.add('animated');
+        }
+        else {
+            section_list.addEventListener('transitionend', removeClass);
+        }
+    });
+    section_list.addEventListener('transitioncancel', removeClassCanceled);
+}
+// insert header to body, and set link style
+function insertHeader() {
+    const header = `<header>
 <div class="header_wrapper">
     <input type="checkbox" name="show_list" id="show_list" class="show_list visually_hidden">
     <label for="show_list" class="show_list_label">展开列表</label>
@@ -6,7 +31,7 @@ const header = `<header>
                 class="logo_img"></a></div>
     <ul class="section_list">
         <h1 class="visually_hidden list_title">区域</h1>
-        <li class="list_item"><a href="/" class="item_link active">首页</a></li>
+        <li class="list_item"><a href="/" class="item_link">首页</a></li>
         <li class="list_item"><a href="/search" class="item_link">兼职</a></li>
         <li class="list_item"><a href="/ordering_food" class="item_link">食堂订餐</a></li>
         <li class="list_item"><a href="/shopping/buy/" class="item_link">超市代购</a></li>
@@ -44,4 +69,53 @@ const header = `<header>
     </section>
 </div>
 </header>
-`
+`;
+    document.body.innerHTML = header + document.body.innerHTML;
+    const section_links = document.querySelectorAll('.section_list .item_link');
+    section_links.forEach((ele) => {
+        if (window.location.pathname.includes(ele.href)) {
+            ele.classList.add('active');
+        }
+    });
+}
+function insertStyleSheet(path, css) {
+    if (!path.endsWith('/')) {
+        path += '/';
+    }
+    const link_css = document.querySelector('link[rel=stylesheet]');
+    for (const str of css) {
+        const item = document.createElement('link');
+        item.rel = 'stylesheet';
+        item.href = path + str + '.css';
+        document.head.insertBefore(item, link_css);
+    }
+}
+function insertScript(path, js) {
+    if (!path.endsWith('/')) {
+        path += '/';
+    }
+    for (const str of js) {
+        const item = document.createElement('script');
+        item.src = path + str + '.js';
+        document.body.appendChild(item);
+    }
+}
+function insert(resource_path, resource_name, func) {
+    func(resource_path, resource_name);
+}
+function init_page() {
+    insert('', [], insertHeader);
+    const STATIC_CSS_PATH = '/static/css/';
+    const css = ['normalize', 'header', 'header_mobi'];
+    insert(STATIC_CSS_PATH, css, insertStyleSheet);
+    const STATIC_JS_PATH = '/static/js/';
+    const js = ['account'];
+    insert(STATIC_JS_PATH, js, insertScript);
+    showListMobi();
+}
+init_page();
+// if (document.readyState === 'loading') {
+//     document.addEventListener('DOMContentLoaded', init_page);
+// } else {
+//     init_page();
+// }
