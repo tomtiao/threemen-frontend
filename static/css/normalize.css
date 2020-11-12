@@ -352,6 +352,7 @@ template {
  * Custom style.
  * Remove box-shadow when inputs are invalid in Firefox.
  */
+
 :-moz-submit-invalid {
   box-shadow: none;
 }
@@ -375,4 +376,13 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+/**
+ * Custom style.
+ * Global font setting
+ */
+
+html {
+    font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
