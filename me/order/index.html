@@ -113,6 +113,46 @@
                         <p class="note_content" id="logistic_note">尽快送达</p>
                     </div>
                 </div>
+                <div class="status_indicator">
+                    <ul class="status_info_list info_list">
+                        <li class="list_item">
+                            <span class="item_label" id="status_time_label">时间</span>
+                            <span class="item_content" id="status_time">2020.12.02</span>
+                        </li>
+                        <li class="list_item">
+                            <span class="item_label">订单状态</span>
+                            <span class="item_content" id="order_status">已送达</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="picker_info">
+                    <ul class="picker_info_list info_list">
+                        <li class="list_item">
+                            <span class="item_label">接单者昵称</span>
+                            <span class="item_content" id="picker_name">Tom</span>
+                        </li>
+                        <li class="list_item">
+                            <span class="item_label">接单者手机号</span>
+                            <span class="item_content" id="picker_phone">110</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="comment">
+                    <ul class="comment_list info_list">
+                        <form method="post" id="comment_form">
+                            <li class="list_item">
+                                <span class="item_label">评价</span>
+                                <div class="item_content" id="comment_content">
+                                    <span class="rate good"><input type="radio" name="evaluate" id="good" class="visually_hidden" value="1" checked><label for="good">推荐</label></span>
+                                    <span class="rate bad"><input type="radio" name="evaluate" id="bad" class="visually_hidden" value="0"><label for="bad">不推荐</label></span>
+                                </div>
+                            </li>
+                            <li class="list_item">
+                                <textarea name="comment" id="comment_textarea" cols="30" rows="5" placeholder="评价内容"></textarea>
+                            </li>
+                        </form>
+                    </ul>
+                </div>
                 <div class="pick_bar hide">
                     <!-- <div class="counter"><span class="item_label">跑腿费</span><span class="counter_content">0</span> 金子</div> -->
                     <button type="button" class="pick_btn">取消订单</button>

@@ -49,7 +49,7 @@
 .order_wrapper .order_list_wrapper {
     display: flex;
     width: 100%;
-    height: 450px;
+    height: 550px;
     overflow: hidden scroll;
     background-color: white;
 }
@@ -142,12 +142,14 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #95E1DF;
+    background-color: white;
     width: 100%;
     height: 100%;
+    padding-bottom: 48px;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
 }
 
 .info_detail .hide {
@@ -155,12 +157,12 @@
 }
 
 .info_detail .customer_wrapper_empty {
-    color: white;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    margin-bottom: 48px;
+    /* margin-bottom: 48px; */
 }
 
 .info_detail .customer_wrapper_empty .note {
@@ -169,10 +171,11 @@
 
 .info_detail .customer_wrapper {
     flex: 0 0 25%;
+    border-bottom: 1px solid #eee;
 }
 
 .info_detail .common_wrapper {
-    flex-grow: 1;
+    /* flex-grow: 1; */
     /* margin-bottom: 48px; */
     display: flex;
     flex-direction: column;
@@ -330,6 +333,73 @@
 .info_detail .logistic_info_wrapper, .info_detail .shopping_info_wrapper, .info_detail .order_food_wrapper {
     background-color: white;
     flex-grow: 1;
+}
+
+.info_detail .info_list {
+    list-style-type: none;
+    margin: 1em;
+    padding: 0;
+}
+
+.info_detail .info_list .list_item {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em 0;
+}
+
+.info_detail .info_list .list_item {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em 0;
+}
+
+.info_detail .info_list.comment_list .list_item form {
+    width: 100%;
+}
+
+.info_detail .info_list.comment_list .list_item textarea {
+    resize: none;
+    width: 100%;
+    font-size: 14px;
+    outline: none;
+    padding: 0.5em;
+    border-radius: 4px;
+    border: 0;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.info_detail .info_list.comment_list .list_item textarea:hover,
+.info_detail .info_list.comment_list .list_item textarea:focus {
+    border-color: #71c9ce;
+}
+
+.info_detail .info_list.comment_list .list_item textarea.readonly {
+    border: 0;
+    padding: 0;
+}
+
+
+.info_detail .info_list.comment_list .list_item .rate label {
+    line-height: 1em;
+}
+
+.info_detail .info_list.comment_list .list_item .rate label::before {
+    display: inline-block;
+    content: "";
+    width: 0.75em;
+    height: 0.75em;
+    margin-right: 0.25em;
+    background: no-repeat center/1em url('/static/img/like_select.svg');
+}
+
+.info_detail .info_list.comment_list .list_item .rate input[type = radio]:checked + label::before {
+    background-image: url('/static/img/like.svg');    
+}
+
+.info_detail .info_list.comment_list .list_item .rate.bad label::before {
+    transform: rotate(180deg);
 }
 
 .info_detail .pick_bar .counter .item_label::after {
