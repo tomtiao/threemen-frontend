@@ -1,10 +1,19 @@
 function pageHandler() {
+    //  unpaid, unpicked, unreceived, finished, failed
     const status_str = {
         1: '待支付',
         2: '待接单',
         3: '待收货',
         4: '订单完成',
         5: '订单关闭'
+    };
+
+    const status_wrap = {
+        'unpaid': '1',
+        'unpicked': '2',
+        'unreceived': '3',
+        'finished': '4',
+        'failed': '5'
     };
 
     function createListItem(customer_address, order_status, order_address, order_id, catagory) {
@@ -61,7 +70,7 @@ function pageHandler() {
 
     /*
      ** isUser: 1 for user, 0 for worker
-     ** requestStatus: 1, 2, 3, 4, 5
+     ** requestStatus: 1, 2, 3, 4, 5;
      ** serviceType
      */
     function getUserOrder(isUser, requestStatus, service_type) {
@@ -703,35 +712,7 @@ function pageHandler() {
 
                     let hasComment;
                     requestOrderDetail(e.target.dataset.id).then(data_obj => {
-                        // TEST
-                        data_obj = {
-                            "flag": true,
-                            "errorMsg": "yN%(we[",
-                            "dataObj": [
-                                {
-                                    "commCostReal": 4585116371761189,
-                                    "commInfo": "Wh(G$d",
-                                    "commCostCoin": 3792581444874556,
-                                    "date": "OK1K",
-                                    "status": 1,
-                                    "commLeftMessage": "2%8IL)",
-                                    "pickTime": "d9jCcF",
-                                    "comment": null
-                                }, [
-                                    {
-                                        "dishName": "(L5Q)R",
-                                        "dishPrice": 8564520389920117,
-                                        "shopName": "qi0",
-                                        "phone": "g%U%Ud",
-                                        "school": "Mw#g*Fz",
-                                        "time": "7iuxC@T",
-                                        "location": 628887974501656,
-                                        "dishId": 773768956318804,
-                                        "img": "zeS!"
-                                    }
-                                ]
-                            ]
-                        }
+                        data_obj['dataObj']['status'] = status_wrap[data_obj['dataObj']['status']]; // convert 'unpaid' to '1'
                         if (data_obj['flag']) {
                             let info_o = data_obj['dataObj'];
 
