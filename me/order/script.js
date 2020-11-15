@@ -157,53 +157,6 @@ function pageHandler() {
                             return;
                         }
                         getUserOrder(isUser, request_status_number, service_type_object[catagory]).then(data_obj => {
-                            // TEST
-                            data_obj = {
-                                "flag": true,
-                                "errorMsg": "vr@%MX",
-                                "dataObj": [
-                                    {
-                                        "commCostReal": 123,
-                                        "commInfo": "bVuS(",
-                                        "commCostCoin": 1230,
-                                        "date": "3(t",
-                                        "status": 2,
-                                        "commAddress": "87g1%",
-                                        "address": "a7(qhb",
-                                        "commNum": "xM8d*X"
-                                    },
-                                    {
-                                        "commCostReal": 123,
-                                        "commInfo": "bVuS(",
-                                        "commCostCoin": 1230,
-                                        "date": "3(t",
-                                        "status": "2",
-                                        "commAddress": "87g1%",
-                                        "address": "a7(qhb",
-                                        "commNum": "a*X"
-                                    },
-                                    {
-                                        "commCostReal": 313763534525852,
-                                        "commInfo": "bVuS(",
-                                        "commCostCoin": 1230,
-                                        "date": "3(t",
-                                        "status": "3",
-                                        "commAddress": "87g1%",
-                                        "address": "a7(qhb",
-                                        "commNum": "b*X"
-                                    },
-                                    {
-                                        "commCostReal": 123,
-                                        "commInfo": "bVuS(",
-                                        "commCostCoin": 1230,
-                                        "date": "3(t",
-                                        "status": "4",
-                                        "commAddress": "87g1%",
-                                        "address": "a7(qhb",
-                                        "commNum": "c*X"
-                                    }
-                                ]
-                            }
                             if (data_obj['flag']) { 
                                 updateList(data_obj, target_list, false, catagory);
                             } else { // 为空时也为false，暂时禁用
@@ -566,16 +519,6 @@ function pageHandler() {
                 status_time.textContent = info_o[0]['date'];
 
                 getPickerInfo(item.dataset.id).then(data_obj => {
-                    // TEST
-                    data_obj = {
-                            "flag": true,
-                            "errorMsg": "GgP(u",
-                            "dataObj": {
-                                "phone": "ITnz",
-                                "email": "GA)(x",
-                                "nickname": "HtpaD"
-                            }
-                    }
                     if (data_obj['flag']) {
                         const picker_info = document.querySelector('.picker_info');
 
@@ -609,16 +552,6 @@ function pageHandler() {
                 status_time.textContent = info_o[0]['date'];
 
                 getPickerInfo(item.dataset.id).then(data_obj => {
-                    // TEST
-                    data_obj = {
-                            "flag": true,
-                            "errorMsg": "GgP(u",
-                            "dataObj": {
-                                "phone": "ITnz",
-                                "email": "GA)(x",
-                                "nickname": "HtpaD"
-                            }
-                    }
                     if (data_obj['flag']) {
                         const picker_info = document.querySelector('.picker_info');
 
