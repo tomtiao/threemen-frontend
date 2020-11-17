@@ -241,75 +241,75 @@ function changePasswordHandler() {
     });
 }
 
-function verificationHandler() {
-    function makeRequest() {
-        const requestURL = '/workerInfo/workerRealize';
+// function verificationHandler() {
+//     function makeRequest() {
+//         const requestURL = '/workerInfo/workerRealize';
 
-        const form_self = document.querySelector('.verify_form');
+//         const form_self = document.querySelector('.verify_form');
 
-        const form_data = new FormData(form_self);
+//         const form_data = new FormData(form_self);
 
-        let urlParams = new URLSearchParams();
-        form_data.forEach((value, key) => {
-            urlParams.append(key, value);
-        });
+//         let urlParams = new URLSearchParams();
+//         form_data.forEach((value, key) => {
+//             urlParams.append(key, value);
+//         });
 
-        return fetch(requestURL, {
-            method: 'POST',
-            body: urlParams,
-            credentials: 'same-origin'
-        }).then(res => res.json()).catch(console.log);
-    }
+//         return fetch(requestURL, {
+//             method: 'POST',
+//             body: urlParams,
+//             credentials: 'same-origin'
+//         }).then(res => res.json()).catch(console.log);
+//     }
 
-    function sendRequestHandler() {
-        const verify_link = document.getElementById('verify_link');
-        const verification_panel = document.querySelector('.verify_wrapper');
+//     function sendRequestHandler() {
+//         const verify_link = document.getElementById('verify_link');
+//         const verification_panel = document.querySelector('.verify_wrapper');
 
-        verify_link.addEventListener('click', e => {
-            e.preventDefault();
-            verification_panel.classList.toggle('show');
-        });
+//         verify_link.addEventListener('click', e => {
+//             e.preventDefault();
+//             verification_panel.classList.toggle('show');
+//         });
 
-        verification_panel.addEventListener('click', e => {
-            e.stopPropagation();
-        });
+//         verification_panel.addEventListener('click', e => {
+//             e.stopPropagation();
+//         });
 
-        document.body.addEventListener('click', e => {
-            if (e.target !== verify_link && verification_panel.classList.contains('show')) {
-                verification_panel.classList.remove('show');
-            }
-        });
+//         document.body.addEventListener('click', e => {
+//             if (e.target !== verify_link && verification_panel.classList.contains('show')) {
+//                 verification_panel.classList.remove('show');
+//             }
+//         });
 
-        const form_self = document.querySelector('.verify_form');
+//         const form_self = document.querySelector('.verify_form');
 
-        form_self.addEventListener('submit', e => {
-            e.preventDefault();
-            makeRequest().then(data => {
-                if (data['flag']) {
-                    alert('认证成功');
-                    location.replace('/me');
-                } else {
-                    alert('出现了错误！');
-                    console.log(data['errorMsg']);
-                }
-            }).catch(console.log);
-        });
-    }
+//         form_self.addEventListener('submit', e => {
+//             e.preventDefault();
+//             makeRequest().then(data => {
+//                 if (data['flag']) {
+//                     alert('认证成功');
+//                     location.replace('/me');
+//                 } else {
+//                     alert('出现了错误！');
+//                     console.log(data['errorMsg']);
+//                 }
+//             }).catch(console.log);
+//         });
+//     }
 
-    sendRequestHandler();
-}
+//     sendRequestHandler();
+// }
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         userInfoHandler();
         uploadAvatarHandler();
         changePasswordHandler();
-        verificationHandler();
+        // verificationHandler();
     });
 } else {
     userInfoHandler();
     uploadAvatarHandler();
     changePasswordHandler();
-    verificationHandler();
+    // verificationHandler();
 }
 
