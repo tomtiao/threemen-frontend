@@ -70,7 +70,7 @@ function pageHandler() {
 
     /*
      ** isUser: 1 for user, 0 for worker
-     ** requestStatus: 1, 2, 3, 4, 5;
+     ** requestStatus: unpaid, unpicked, unreceived, finished, failed;
      ** serviceType
      */
     function getUserOrder(isUser, requestStatus, service_type) {
@@ -129,34 +129,24 @@ function pageHandler() {
         'logistic': 'deliveryService'
     };
 
-    // additional 0 added, to show all kinds of list
+    // additional 'all' added, to show all kinds of list
     function getNewOrder(isUser, requestStatus, catagory) {
         const picked_order_list = document.querySelector('.picked_order_list');
         const my_order_list = document.querySelector('.my_order_list');
 
-        let target_list;
-        switch (isUser) {
-            case 0:
-                target_list = picked_order_list;
-                break;
-            case 1:
-                target_list = my_order_list;
-                break;
-            default:
-                throw `unexpected param ${isUser}`;
-        }
+        const target_list = isUser ? my_order_list : picked_order_list;
 
         function requestOrderUsingStatus(catagory) {
             switch (requestStatus) {
                 // get all kinds of orders
-                case 0: {
+                case 'all': {
                     cleanList(target_list);
-                    const keys = Object.keys(status_str);
-                    keys.forEach((request_status_number) => {
-                        if (isUser === 0 && ((request_status_number !== '3') && (request_status_number !== '4'))) {
+                    const keys = Object.keys(status_wrap);
+                    keys.forEach((request_status_key) => {
+                        if (isUser === 0 && ((request_status_key !== 'unreceived') && (request_status_key !== 'finished'))) {
                             return;
                         }
-                        getUserOrder(isUser, request_status_number, service_type_object[catagory]).then(data_obj => {
+                        getUserOrder(isUser, request_status_key, service_type_object[catagory]).then(data_obj => {
                             if (data_obj['flag']) { 
                                 updateList(data_obj, target_list, false, catagory);
                             } else { // 为空时也为false，暂时禁用
@@ -168,11 +158,11 @@ function pageHandler() {
                     break;
                 }
                 // get specific kind of orders; not yet used
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
+                case 'unpaid':
+                case 'unpicked':
+                case 'unreceived':
+                case 'finished':
+                case 'failed':
                     getUserOrder(isUser, requestStatus).then(data_obj => {
                         if (data_obj['flag']) {
                             updateList(data_obj, target_list, true);
@@ -245,11 +235,11 @@ function pageHandler() {
                 switch (e.target.id) {
                     case 'my_order':
                         moveList('left');
-                        getNewOrder(1, 0, 'all');
+                        getNewOrder(true, 'all', 'all');
                         break;
                     case 'picked_order':
                         moveList('right');
-                        getNewOrder(0, 0, 'all');
+                        getNewOrder(false, 'all', 'all');
                         break;
                     default:
                         throw `unexpected param ${e.target.id}`;
@@ -740,7 +730,7 @@ function pageHandler() {
     listenSwapper();
     listenClickListItem();
     listenOrderSubmit();
-    getNewOrder(1, 0, 'all');
+    getNewOrder(true, 'all', 'all');
 
 }
 
