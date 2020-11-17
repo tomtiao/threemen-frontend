@@ -61,17 +61,19 @@ function verificationCodeHandler() {
     getVerificationCode(verificationCodeImg);
 }
 
-function fixEmailAnimation() {
-    const input = document.querySelector('.email_input');
-    const text = document.querySelector('.email_label .inline_text');
-    input.addEventListener('focus', () => {
-        text.classList.add('active');
-    });
+function animation() {
+    const inputs = document.querySelectorAll('input');
 
-    input.addEventListener('blur', () => {
-        if (input.value === '') {
-            text.classList.remove('active');
-        }
+    inputs.forEach(input => {
+        const text = input.nextElementSibling;
+        input.addEventListener('focus', () => {
+            text.classList.add('active');
+        });
+        input.addEventListener('blur', () => {
+            if (input.value === '') {
+                text.classList.remove('active');
+            }
+        });
     });
 }
 
@@ -79,11 +81,11 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         submitHandler();
         verificationCodeHandler();
-        fixEmailAnimation();
+        animation();
     });
 } else {
     submitHandler();
     verificationCodeHandler();
-    fixEmailAnimation();
+    animation();
 }
 

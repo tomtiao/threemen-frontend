@@ -27,7 +27,10 @@ function submitHandler() {
             credentials: 'same-origin'
         }).then(res => res.json()).catch(console.log);
     }
+
+    // use JSEncrypt Library
     function encryptString(public_key, str) {
+        // eslint-disable-next-line no-undef
         const encrypt = new JSEncrypt();
     
         encrypt.setPublicKey(public_key);
@@ -57,42 +60,61 @@ function submitHandler() {
         }).then(res => res.json()).catch(console.log);
     }
 
-    form_self.addEventListener('click', async e => {
+    form_self.addEventListener('click', e => {
         if (e.target === submit_btn) {
             e.preventDefault();
             if (submitCheck()) {
                 const username = document.getElementById('account');
                 const password = document.getElementById('password');
-                const data_obj = await getNonceAndPubkey();
-                const nonce = data_obj['dataObj'][0];
-                const pubkey = data_obj['dataObj'][1];
-
-                makeRequest(username.value, password.value, nonce, pubkey).then(data => {
-                    if (data['flag']) {
-                        const autologin = document.getElementById('autologin');
-                        if (!autologin) {
-                            throw Error(`could not found autologin`);
+                getNonceAndPubkey().then(data_obj => {
+                    const nonce = data_obj['dataObj'][0];
+                    const pubkey = data_obj['dataObj'][1];
+    
+                    makeRequest(username.value, password.value, nonce, pubkey).then(data => {
+                        if (data['flag']) {
+                            const autologin = document.getElementById('autologin');
+                            if (!autologin) {
+                                throw Error(`could not found autologin`);
+                            }
+                            // setTimeout(alert(data['errorMsg']));
+                            if (autologin.checked) {
+                                fetch('/user/saveLogin', { method: "POST", credentials: "same-origin" });
+                            }
+                            window.location.replace('/');
                         }
-                        // setTimeout(alert(data['errorMsg']));
-                        if (autologin.checked) {
-                            fetch('/user/saveLogin', { method: "POST", credentials: "same-origin" });
+                        else {
+                            // TODO: 重做提醒
+                            alert(data['errorMsg']);
                         }
-                        window.location.replace('/');
-                    }
-                    else {
-                        // TODO: 重做提醒
-                        alert(data['errorMsg']);
-                    }
-                }).catch(console.log); // TODO: 处理返回值
+                    }).catch(console.log); // TODO: 处理返回值
+                }).catch(console.log);
             }
         }
+    });
+}
+
+function animation() {
+    const inputs = document.querySelectorAll('input');
+
+    inputs.forEach(input => {
+        const text = input.nextElementSibling;
+        input.addEventListener('focus', () => {
+            text.classList.add('active');
+        });
+        input.addEventListener('blur', () => {
+            if (input.value === '') {
+                text.classList.remove('active');
+            }
+        });
     });
 }
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         submitHandler();
+        animation();
     });
 }
 else {
+    animation();
     submitHandler();
 }

@@ -127,6 +127,10 @@ a:focus, a:hover {
     height: 32px;
 }
 
+.inline_text.active {
+    transform: translateY(-60%) !important;
+}
+
 .inline_text .text_icon {
     height: 50%;
     margin-right: 0.25em;
@@ -142,6 +146,7 @@ a:focus, a:hover {
     box-sizing: border-box;
     transition: border-color 0.3s cubic-bezier(0.4,0,0.2,1);
     outline: none;
+    position: relative;
 }
 
 .input:focus {
