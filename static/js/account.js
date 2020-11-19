@@ -147,7 +147,7 @@ function accountHandler() {
                 }
             });
             if (need_login) {
-                window.location.href = '/login/';
+                window.location.href = `/login/#${window.location.pathname}`;
             }
         }
     }).catch(console.log);

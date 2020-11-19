@@ -80,7 +80,11 @@ function submitHandler() {
                             if (autologin.checked) {
                                 fetch('/user/saveLogin', { method: "POST", credentials: "same-origin" });
                             }
-                            window.location.replace('/');
+                            if (window.location.hash) {
+                                window.location.replace(window.location.hash.substr(1));
+                            } else {
+                                window.location.replace('/');
+                            }
                         }
                         else {
                             // TODO: 重做提醒
@@ -108,13 +112,43 @@ function animation() {
         });
     });
 }
+
+function noLoginNote() {
+    const no_login_note = `
+    <style>
+        @keyframes fadein {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            10% {
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+    <div class="no_login" style="display: flex; align-items: center; position: fixed; z-index: 2; top: 50px; right: 50px; padding: 0 0.5em; background-color: white; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3); border-radius: 4px; animation-name: fadein; animation-duration: .5s;">
+        <p><img src="/static/img/note.svg" alt="note" style="height: 1em; width: 1em; margin-right: 0.25em;">请先登录以便继续使用服务。</p>
+    </div>`;
+
+    if (window.location.hash) {
+        document.body.innerHTML += no_login_note;
+    }
+}
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         submitHandler();
         animation();
+        noLoginNote();
     });
 }
 else {
     animation();
     submitHandler();
+    noLoginNote();
 }
