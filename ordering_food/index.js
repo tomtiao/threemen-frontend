@@ -243,7 +243,7 @@ function pageBehaviorHandler() {
 
         let dishes = [];
 
-        function setStallInfo(shop_img_base64_with_prefix, position) {
+        function setStallInfo(shop_img_base64_with_prefix, shop_name, position) {
             let setStallAvatar = (shop_img_base64_with_prefix) => {
                 const stall_avatar = document.getElementById('stall_avatar');
 
@@ -251,6 +251,14 @@ function pageBehaviorHandler() {
             };
 
             setStallAvatar(shop_img_base64_with_prefix);
+
+            let setStallName = (shop_name) => {
+                const stall_name = document.getElementById('stall_name');
+
+                stall_name.textContent = shop_name;
+            }
+
+            setStallName(shop_name);
 
             let setPosition = (position) => {
                 const position_content = document.getElementById('position');
@@ -261,10 +269,9 @@ function pageBehaviorHandler() {
             setPosition(position);
         }
 
-        function removeAddBtnListner(section, func) {
+
+        function removeAddBtnListener(section, func) {
             section.removeEventListener('click', func);
-            dishes = [];
-            setPrice(); // reset to 0
         }
 
         /*
@@ -345,16 +352,22 @@ function pageBehaviorHandler() {
                     addOrRemoveDishes(e.target, 'add');
                     setBtnSection(e.target, 'add');
                 }
-                setPrice();
             }
         }
 
-        function dishesBtnHandler() {
+        let last_time_stall = '';
+        function dishesBtnHandler(shop_name) {
             let dishes_add_sections = document.querySelectorAll('.dishes_add');
 
             dishes_add_sections.forEach(section => {
-                removeAddBtnListner(section, clickBtnHandler);
+                removeAddBtnListener(section, clickBtnHandler);
                 section.addEventListener('click', clickBtnHandler);
+                if (last_time_stall === shop_name) {
+                    dishes = [];
+                    setPrice(); // reset to 0
+                } else {
+                    last_time_stall = shop_name;
+                }
             });
         }
 
@@ -379,8 +392,8 @@ function pageBehaviorHandler() {
                     let floor = e.target.parentElement.dataset.floor;
                     console.log(floor);
                     getStallDishes(shop_name, floor)
-                        .then(() => dishesBtnHandler());
-                    setStallInfo(shop_img_base64_with_prefix, e.target.parentElement.dataset.position);
+                        .then(() => dishesBtnHandler(shop_name));
+                    setStallInfo(shop_img_base64_with_prefix, shop_name, e.target.parentElement.dataset.position);
                 }
             });
         }
