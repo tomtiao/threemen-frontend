@@ -127,6 +127,7 @@ function accountHandler() {
 
     const login_register = document.querySelector('.login_and_register');
     const with_avatar = document.querySelector('.with_avatar');
+    const urls_no_login = [ '/', '/ordering_food/' ];
     checkIfLogon().then(flag => {
         if (flag) {
             swap_img().then(() => {
@@ -138,6 +139,16 @@ function accountHandler() {
         } else {
             login_register.classList.remove('hidden');
             with_avatar.classList.add('hidden');
+
+            let need_login = true;
+            urls_no_login.forEach(pathname => {
+                if (pathname === window.location.pathname) {
+                    need_login = false;
+                }
+            });
+            if (need_login) {
+                window.location.href = '/login/';
+            }
         }
     }).catch(console.log);
 }
