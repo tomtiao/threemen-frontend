@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: #e1f5f6;
+    background-color: white;
 }
 
 main {
@@ -15,8 +15,6 @@ main {
 .wrapper {
     width: 1200px;
     padding: 0.5rem;
-    background-color: white;
-    height: calc(100vh - 64px - 64px);
     margin-bottom: 64px;
 }
 
@@ -188,6 +186,7 @@ main {
     flex-grow: 1;
     margin-left: auto;
     height: 32px;
+    width: 100%;
     padding: 0.5em 0.5em;
     border-radius: 0;
     border: 0;

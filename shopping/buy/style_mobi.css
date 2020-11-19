@@ -1,0 +1,68 @@
+body {
+    min-width: 320px;
+}
+
+@media (max-width: 1200px) {
+    .wrapper {
+        width: 100%;
+    }
+
+    .action_bar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 980px) {
+    .note_wrapper .suggestion {
+        width: 320px;
+    }
+}
+
+@media (max-width: 740px) {
+    .info_wrapper {
+        flex-wrap: wrap;
+    }
+
+    .note_wrapper {
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .info_item {
+        height: 55px;
+    }
+    .address_section {
+        padding: 10px 5px 0;
+    }
+
+    .address_section .detail_address {
+        flex-wrap: wrap;
+    }
+
+    .note_wrapper {
+        padding: 0.5em;
+        width: 100%;
+    }
+
+    .note_wrapper textarea {
+        height: 90px;
+    }
+
+    .note_wrapper .suggestion {
+        width: 100%;
+    }
+
+    .note_wrapper .suggestion .suggestion_list {
+        margin: 0.5em 0;
+    }
+
+    .additional_info {
+        padding: 0.5em 0;
+        width: 100%;
+    }
+    
+    .additional_info .info_item {
+        width: initial;
+    }
+}
