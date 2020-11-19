@@ -125,6 +125,18 @@ function accountHandler() {
         });
     }
 
+    function loginRedirect() {
+        let need_login = true;
+        urls_no_login.forEach(pathname => {
+            if (pathname === window.location.pathname) {
+                need_login = false;
+            }
+        });
+        if (need_login) {
+            window.location.href = `/login/#${window.location.pathname}`;
+        }
+    }
+
     const login_register = document.querySelector('.login_and_register');
     const with_avatar = document.querySelector('.with_avatar');
     const urls_no_login = [ '/', '/ordering_food/' ];
@@ -140,15 +152,7 @@ function accountHandler() {
             login_register.classList.remove('hidden');
             with_avatar.classList.add('hidden');
 
-            let need_login = true;
-            urls_no_login.forEach(pathname => {
-                if (pathname === window.location.pathname) {
-                    need_login = false;
-                }
-            });
-            if (need_login) {
-                window.location.href = `/login/#${window.location.pathname}`;
-            }
+            loginRedirect();
         }
     }).catch(console.log);
 }
