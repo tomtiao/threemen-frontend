@@ -134,7 +134,7 @@ function noLoginNote() {
     </div>`;
 
     if (window.location.search) {
-        document.body.insertAdjacentHTML('beforeend', no_login_note) += no_login_note;
+        document.body.insertAdjacentHTML('beforeend', no_login_note);
     }
 }
 if (document.readyState === 'loading') {
