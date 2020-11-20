@@ -133,7 +133,7 @@ function noLoginNote() {
         <p><img src="/static/img/note.svg" alt="note" style="height: 1em; width: 1em; margin-right: 0.25em;">请先登录以便继续使用服务。</p>
     </div>`;
 
-    if (window.location.hash) {
+    if (window.location.search) {
         document.body.innerHTML += no_login_note;
     }
 }
