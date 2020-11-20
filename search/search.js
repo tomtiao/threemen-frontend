@@ -658,7 +658,7 @@ function listenOrderSubmit() {
             .then(data_obj => {
                 if (data_obj['flag']) {
                     if (window.confirm('接单成功。是否想要前往个人订单界面？')) {
-                        location.assign('/me/order');
+                        window.location.assign('/me/order');
                     } else {
                         console.log('出现了错误');
                         console.log(data_obj);
