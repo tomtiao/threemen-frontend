@@ -51,8 +51,9 @@
     .account_section,
     .account_section.with_avatar {
         position: absolute;
-        right: 5%;
+        right: 2%;
         transition: opacity 0.3s ease-in-out;
+        width: 100px;
     }
 
     .account_section.login_and_register {
