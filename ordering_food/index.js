@@ -353,6 +353,7 @@ function pageBehaviorHandler() {
                     setBtnSection(e.target, 'add');
                 }
             }
+            setPrice();
         }
 
         let last_time_stall = '';
@@ -362,13 +363,13 @@ function pageBehaviorHandler() {
             dishes_add_sections.forEach(section => {
                 removeAddBtnListener(section, clickBtnHandler);
                 section.addEventListener('click', clickBtnHandler);
-                if (last_time_stall === shop_name) {
-                    dishes = [];
-                    setPrice(); // reset to 0
-                } else {
-                    last_time_stall = shop_name;
-                }
             });
+            if (last_time_stall !== shop_name) { // won't clear dishes if clicked recent stall
+                dishes = [];
+                setPrice(); // reset to 0
+            } else {
+                last_time_stall = shop_name;
+            }
         }
 
         function setPrice() {
