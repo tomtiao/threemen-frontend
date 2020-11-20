@@ -81,7 +81,7 @@ function pageHandler() {
     }
 
     /*
-     ** isUser: 1 for user, 0 for worker
+     ** isUser: true for user, false for worker
      ** requestStatus: unpaid, unpicked, unreceived, finished, failed;
      ** serviceType
      */
@@ -703,7 +703,7 @@ function pageHandler() {
             }
             case 4: { // 已完成订单，可评价, POST, commNum, comment
                 requestURL = '/order/successForWorker';
-                const comment_form = document.getElementById('comment_from');
+                const comment_form = document.getElementById('comment_form');
                 const formData = new FormData(comment_form);
 
                 for (const data of formData) {
