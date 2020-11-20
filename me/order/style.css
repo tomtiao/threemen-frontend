@@ -3,6 +3,7 @@
     padding: 1em 2em;
     justify-content: space-between;
     margin-top: 64px;
+    flex-wrap: wrap;
 }
 
 .order_wrapper {
@@ -422,4 +423,35 @@
 .info_detail .pick_bar .pick_btn:active {
     color: white;
     background-color: #388094;
+}
+
+.indicator_note {
+    margin: 1rem 0;
+    display: flex;
+}
+
+.indicator_note span.indicator_text::before {
+    content: "";
+    display: inline-block;
+    background-color: grey;
+    width: 10px;
+    height: 10px;
+    margin-right: 0.25em;
+    border-radius: 100%;
+}
+
+.indicator_note span.indicator_text {
+    margin-right: 0.5em;
+}
+
+.indicator_note span.indicator_text#shopping::before {
+    background-color: #f44336;
+}
+
+.indicator_note span.indicator_text#logistic::before {
+    background-color: #ffeb3b;
+}
+
+.indicator_note span.indicator_text#order_food::before {
+    background-color: #4caf50;
 }

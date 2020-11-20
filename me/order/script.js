@@ -16,6 +16,12 @@ function pageHandler() {
         'failed': '5'
     };
 
+    const indicator_colors = {
+        'shopping': '#f44336',
+        'logistic': '#ffeb3b',
+        'order_food': '#4caf50'
+    };
+
     function createListItem(customer_address, order_status, order_address, order_id, catagory) {
         let brief = document.createElement('ul');
         brief.classList.add('item_brief');
@@ -37,9 +43,15 @@ function pageHandler() {
 
         brief.append(address_list_item, indicator_list_item);
 
+        let indicator = document.createElement('span');
+        let indicator_color = indicator_colors[catagory];
+        indicator.style = `display: inline-block; background-color: ${indicator_color}; width: 8px; height: 8px; margin-right: 0.5em; border-radius:: 100%`;
+
         let title = document.createElement('h1');
         title.classList.add('item_title');
         title.textContent = order_address;
+
+        title.insertAdjacentElement('afterbegin', indicator);
 
         let wrapper = document.createElement('a');
         wrapper.classList.add('item_link');
