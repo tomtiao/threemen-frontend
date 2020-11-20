@@ -106,6 +106,10 @@
             transform: translateY(-100%);
         }
 
+        input#section, input#building {
+            width: 25%;
+        }
+
         .edit_panel .change_pw_btn {
             color: #333;
             display: block;

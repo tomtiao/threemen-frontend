@@ -95,7 +95,6 @@ function checkIfIsFromRegisterationPage(): void {
     const verify_panel = document.querySelector('.verify_panel') as HTMLDivElement;
     const edit_panel = document.querySelector('.change_pw_panel') as HTMLDivElement;
 
-
     if (window.location.hash.substring(1) === 'register') {
         // check if user is verified
         checkIfVerified()
