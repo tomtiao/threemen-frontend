@@ -1,6 +1,6 @@
 "use strict";
 function submitHandler() {
-    const form_self = document.querySelector('.form');
+    const form_self = document.querySelector('form');
     if (!form_self) {
         throw Error(`could not found form_self`);
     }
@@ -78,8 +78,8 @@ function submitHandler() {
                         if (autologin.checked) {
                             fetch('/user/saveLogin', { method: "POST", credentials: "same-origin" });
                         }
-                        if (window.location.hash) {
-                            window.location.replace(window.location.hash.substr(1));
+                        if (window.location.search) {
+                            window.location.replace(window.location.search.split('=')[1]);
                         } else {
                             window.location.replace('/');
                         }

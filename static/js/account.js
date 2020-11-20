@@ -128,12 +128,12 @@ function accountHandler() {
     function loginRedirect() {
         let need_login = true;
         urls_no_login.forEach(pathname => {
-            if (pathname === window.location.pathname) {
+            if (pathname.includes(window.location.pathname)) {
                 need_login = false;
             }
         });
         if (need_login) {
-            window.location.href = `/login/#${window.location.pathname}`;
+            window.location.href = `/login/?referrer=${window.location.pathname}`;
         }
     }
 
@@ -152,7 +152,7 @@ function accountHandler() {
             login_register.classList.remove('hidden');
             with_avatar.classList.add('hidden');
 
-            // loginRedirect();
+            loginRedirect();
         }
     }).catch(console.log);
 }
