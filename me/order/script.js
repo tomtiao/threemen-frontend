@@ -155,7 +155,7 @@ function pageHandler() {
                     cleanList(target_list);
                     const keys = Object.keys(status_wrap);
                     keys.forEach((request_status_key) => {
-                        if (isUser === 0 && ((request_status_key !== 'unreceived') && (request_status_key !== 'finished'))) {
+                        if (!isUser && ((request_status_key !== 'unreceived') && (request_status_key !== 'finished'))) {
                             return;
                         }
                         getUserOrder(isUser, request_status_key, service_type_object[catagory]).then(data_obj => {
