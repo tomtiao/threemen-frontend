@@ -364,7 +364,7 @@ function pageBehaviorHandler() {
                 removeAddBtnListener(section, clickBtnHandler);
                 section.addEventListener('click', clickBtnHandler);
             });
-            if (last_time_stall !== shop_name) { // won't clear dishes if clicked recent stall
+            if (last_time_stall !== shop_name) { // clear dishes only if user clicked different stall
                 dishes = [];
                 setPrice(); // reset to 0
             } else {
@@ -625,6 +625,12 @@ function pageBehaviorHandler() {
         const mask = document.querySelector('.go_dark');
 
         document.body.addEventListener('click', () => {
+            aside.classList.remove('show');
+            mask.classList.remove('active');
+        });
+
+        const hide_aside_btn = document.querySelector('.hide_aside_btn');
+        hide_aside_btn.addEventListener('click', () => {
             aside.classList.remove('show');
             mask.classList.remove('active');
         });

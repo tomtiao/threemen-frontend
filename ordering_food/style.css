@@ -46,6 +46,10 @@ aside.show {
     transform: translateX(0);
 }
 
+.hide_aside_btn {
+    display: none;
+}
+
 .aside_wrapper {
     position: relative;
     display: flex;
