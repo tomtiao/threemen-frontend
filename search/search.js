@@ -122,7 +122,7 @@ function pageBehaviourHandler() {
         }
     }
 
-    let last_time_catagory;
+    let last_time_catagory = '';
     function listenFilterList() {
         let btns = document.querySelectorAll('.catagory_list .list_btn');
 
@@ -130,7 +130,6 @@ function pageBehaviourHandler() {
             btn.addEventListener('click', () => {
                 // 点击的是新分类
                 if (!btn.classList.contains('active')) {
-                    last_time_catagory = btn.dataset.catagory;
                     if (last_time_catagory !== 'working') {
                         updateListAndPageSelection(last_time_catagory, null, false);
                         controlSearchBlock('hide');
@@ -138,6 +137,7 @@ function pageBehaviourHandler() {
                         updateListAndPageSelection(last_time_catagory, getKeyword(), false);
                         controlSearchBlock('show');
                     }
+                    last_time_catagory = btn.dataset.catagory;
                     hideDetailPanel();
                 }
             });
