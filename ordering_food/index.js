@@ -603,6 +603,9 @@ function pageBehaviorHandler() {
                         .then(id => {
                             return [id, getNonceAndPubkey()];
                         })
+                        .then(([id, res]) => {
+                            return [id, res.json()];
+                        })
                         .then(([id, NonceAndPubKeyDataObj]) => {
                             return payOrder(20, id,
                                 NonceAndPubKeyDataObj['dataObj'][0],
@@ -610,7 +613,7 @@ function pageBehaviorHandler() {
                         })
                         .then(data_obj => {
                             if (data_obj['flag']) {
-                                window.location.href = '/me/order';
+                                window.location.reload();
                             } else {
                                 console.log(data_obj);
                             }
