@@ -152,7 +152,7 @@ function accountHandler() {
             login_register.classList.remove('hidden');
             with_avatar.classList.add('hidden');
 
-            // loginRedirect();
+            loginRedirect();
         }
     }).catch(console.log);
 }
