@@ -22,14 +22,35 @@ function sendOrderHandler() {
             credentials: 'same-origin'
         }).then(res => res.json()).catch(console.log);
     }
+    function getNonceAndPubkey() {
+        const requestURL = '/saveServlet/getNonceAndPublicKey';
 
-    function payOrder(gold, order_id) {
+        return fetch(requestURL, {
+            credentials: 'same-origin'
+        }).then(res => res.json()).catch(console.log);
+    }
+
+    // use JSEncrypt Library
+    function encryptString(public_key, str) {
+        // eslint-disable-next-line no-undef
+        const encrypt = new JSEncrypt();
+
+        encrypt.setPublicKey(public_key);
+
+        return encrypt.encrypt(str);
+    }
+
+    function payOrder(gold, order_id, nonce, pubkey) {
         const requestURL = '/order/payOrder';
         let urlParams = new URLSearchParams();
 
         urlParams.append('commCostCoin', gold);
         urlParams.append('commNum', order_id);
-        urlParams.append('commReward', 0);
+        urlParams.append('commReward', 0)
+        
+        const pendingEncryptString = `${gold}&${0}&${order_id}&${nonce}`;
+        urlParams.append('nonce', nonce);
+        urlParams.append('sign', encryptString(pubkey, pendingEncryptString));
 
         return fetch(requestURL, {
             method: 'POST',
@@ -51,11 +72,16 @@ function sendOrderHandler() {
             return data['dataObj'];
         })
         .then(num => {
-            return payOrder(gold, num);
+            return getNonceAndPubkey().then(res => [num, res]);
+        })
+        .then(([num, NonceAndPubKeyDataObj]) => {
+            return payOrder(gold, num,
+                NonceAndPubKeyDataObj['dataObj'][0],
+                NonceAndPubKeyDataObj['dataObj'][1]);
         })
         .then(data => {
             if (data['flag']) {
-                location.href = '/me/order';
+                window.location.href = '/me/order';
             } else {
                 console.log(data);
             }

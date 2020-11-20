@@ -57,7 +57,7 @@ function sendOrderHandler() {
 
     
         // add estimated gold
-        urlParams.append('commCostCoin', 30); // buy default 20 
+        urlParams.append('commCostCoin', 20); // buy default 20 
     
         let getURL = new URLSearchParams([['serviceType', 'marketService']]);
         return fetch(requestURL + '?' + getURL.toString(), {
@@ -67,13 +67,35 @@ function sendOrderHandler() {
         }).then(res => res.json()).catch(console.log);
     }
 
-    function payOrder(gold, order_id) {
+    function getNonceAndPubkey() {
+        const requestURL = '/saveServlet/getNonceAndPublicKey';
+
+        return fetch(requestURL, {
+            credentials: 'same-origin'
+        }).then(res => res.json()).catch(console.log);
+    }
+
+    // use JSEncrypt Library
+    function encryptString(public_key, str) {
+        // eslint-disable-next-line no-undef
+        const encrypt = new JSEncrypt();
+
+        encrypt.setPublicKey(public_key);
+
+        return encrypt.encrypt(str);
+    }
+
+    function payOrder(gold, order_id, nonce, pubkey) {
         const requestURL = '/order/payOrder';
         let urlParams = new URLSearchParams();
 
         urlParams.append('commCostCoin', gold);
         urlParams.append('commNum', order_id);
         urlParams.append('commReward', 0);
+        
+        const pendingEncryptString = `${gold}&${0}&${order_id}&${nonce}`;
+        urlParams.append('nonce', nonce);
+        urlParams.append('sign', encryptString(pubkey, pendingEncryptString));
 
         return fetch(requestURL, {
             method: 'POST',
@@ -94,9 +116,14 @@ function sendOrderHandler() {
             return data['dataObj'];
         })
         .then(num => {
-            return payOrder(20, num);
+            return getNonceAndPubkey().then(res => [num, res]);
         })
-            .then(data => {
+        .then(([num, NonceAndPubKeyDataObj]) => {
+            return payOrder(20, num,
+                NonceAndPubKeyDataObj['dataObj'][0],
+                NonceAndPubKeyDataObj['dataObj'][1]);
+        })
+        .then(data => {
                 if (data['flag']) {
                     location.href = '/me/order';
                 } else {
