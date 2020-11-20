@@ -1,9 +1,8 @@
 "use strict";
 function submitHandler() {
     const form_self = document.querySelector('.form');
-    const submit_btn = document.querySelector('.submit_btn');
-    if (!form_self || !submit_btn) {
-        throw Error(`could not found form_self or submit_btn`);
+    if (!form_self) {
+        throw Error(`could not found form_self`);
     }
     function submitCheck() {
         const username = document.getElementById('account');
@@ -22,7 +21,7 @@ function submitHandler() {
     }
     function getNonceAndPubkey() {
         const requestURL = '/saveServlet/getNonceAndPublicKey';
-    
+
         return fetch(requestURL, {
             credentials: 'same-origin'
         }).then(res => res.json()).catch(console.log);
@@ -32,27 +31,27 @@ function submitHandler() {
     function encryptString(public_key, str) {
         // eslint-disable-next-line no-undef
         const encrypt = new JSEncrypt();
-    
+
         encrypt.setPublicKey(public_key);
-    
+
         return encrypt.encrypt(str);
     }
-    
+
     function makeRequest(username, password, nonce, pubkey) {
         const requestURL = '/user/login';
-    
+
         const urlParams = new URLSearchParams();
-    
+
         urlParams.append('account', username);
         urlParams.append('password', password);
         urlParams.append('nonce', nonce);
-    
+
         const stringPendingEncrypt = `${username}&${password}&${nonce}`;
-    
+
         const sign = encryptString(pubkey, stringPendingEncrypt);
-        
+
         urlParams.append('sign', sign);
-        
+
         return fetch(requestURL, {
             method: 'POST',
             body: urlParams,
@@ -60,39 +59,37 @@ function submitHandler() {
         }).then(res => res.json()).catch(console.log);
     }
 
-    form_self.addEventListener('click', e => {
-        if (e.target === submit_btn) {
-            e.preventDefault();
-            if (submitCheck()) {
-                const username = document.getElementById('account');
-                const password = document.getElementById('password');
-                getNonceAndPubkey().then(data_obj => {
-                    const nonce = data_obj['dataObj'][0];
-                    const pubkey = data_obj['dataObj'][1];
-    
-                    makeRequest(username.value, password.value, nonce, pubkey).then(data => {
-                        if (data['flag']) {
-                            const autologin = document.getElementById('autologin');
-                            if (!autologin) {
-                                throw Error(`could not found autologin`);
-                            }
-                            // setTimeout(alert(data['errorMsg']));
-                            if (autologin.checked) {
-                                fetch('/user/saveLogin', { method: "POST", credentials: "same-origin" });
-                            }
-                            if (window.location.hash) {
-                                window.location.replace(window.location.hash.substr(1));
-                            } else {
-                                window.location.replace('/');
-                            }
+    form_self.addEventListener('submit', e => {
+        e.preventDefault();
+        if (submitCheck()) {
+            const username = document.getElementById('account');
+            const password = document.getElementById('password');
+            getNonceAndPubkey().then(data_obj => {
+                const nonce = data_obj['dataObj'][0];
+                const pubkey = data_obj['dataObj'][1];
+
+                makeRequest(username.value, password.value, nonce, pubkey).then(data => {
+                    if (data['flag']) {
+                        const autologin = document.getElementById('autologin');
+                        if (!autologin) {
+                            throw Error(`could not found autologin`);
                         }
-                        else {
-                            // TODO: 重做提醒
-                            alert(data['errorMsg']);
+                        // setTimeout(alert(data['errorMsg']));
+                        if (autologin.checked) {
+                            fetch('/user/saveLogin', { method: "POST", credentials: "same-origin" });
                         }
-                    }).catch(console.log); // TODO: 处理返回值
-                }).catch(console.log);
-            }
+                        if (window.location.hash) {
+                            window.location.replace(window.location.hash.substr(1));
+                        } else {
+                            window.location.replace('/');
+                        }
+                    }
+                    else {
+                        // TODO: 重做提醒
+                        alert(data['errorMsg']);
+                    }
+                }).catch(console.log); // TODO: 处理返回值
+            }).catch(console.log);
         }
     });
 }
