@@ -457,7 +457,7 @@ function pageHandler() {
         }
 
         switch (info_o[0]['status']) {
-            case 1: {
+            case 'unpaid': {
                 const status_info = document.querySelector('.status_indicator');
 
                 status_info.classList.remove('hide');
@@ -476,7 +476,7 @@ function pageHandler() {
 
                 break;
             }
-            case 2: {
+            case 'unpicked': {
                 const status_info = document.querySelector('.status_indicator');
 
                 status_info.classList.remove('hide');
@@ -495,7 +495,7 @@ function pageHandler() {
 
                 break;
             }
-            case 3: {
+            case 'unreceived': {
                 const status_info = document.querySelector('.status_indicator');
 
                 status_info.classList.remove('hide');
@@ -528,7 +528,7 @@ function pageHandler() {
                 }).catch(console.log);
                 break;
             }
-            case 4: {
+            case 'finished': {
                 const status_info = document.querySelector('.status_indicator');
 
                 status_info.classList.remove('hide');
@@ -587,7 +587,7 @@ function pageHandler() {
                 }
                 break;
             }
-            case 5: // reserved
+            case 'failed': // status 'failed', reserved
                 break;
             default:
                 throw Error(`unexpected param ${info_o[0]['status']}`);
