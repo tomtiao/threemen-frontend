@@ -1,0 +1,9 @@
+body {
+    min-width: 320px;
+}
+
+@media (max-width: 400px) {
+    .edit_panel {
+        width: 100%;
+    }
+}

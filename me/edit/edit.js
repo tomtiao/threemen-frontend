@@ -66,6 +66,14 @@ function hideVerifyAndShowInfoPanel() {
     verify_panel.classList.add('hide');
     edit_panel.classList.remove('hide');
 }
+// check if user is verified
+function checkIfVerified() {
+    const requestURL = '/workerInfo/isRealize';
+    return fetch(requestURL, {
+        method: 'GET',
+        credentials: 'same-origin'
+    }).then(res => res.json()).catch(console.log);
+}
 // check if redirected from registeration page
 // if true, hide edit panel and show verify panel
 // else hide verify_panel and show edit panel
@@ -75,8 +83,18 @@ function checkIfIsFromRegisterationPage() {
     const verify_panel = document.querySelector('.verify_panel');
     const edit_panel = document.querySelector('.change_pw_panel');
     if (window.location.hash.substring(1) === 'register') {
-        verify_panel.classList.remove('hide');
-        verificationHandler();
+        // check if user is verified
+        checkIfVerified()
+            .then(data_obj => {
+            if (data_obj['flag']) {
+                alert('已经认证过了！');
+                window.location.replace('/me/');
+            }
+            else {
+                verify_panel.classList.remove('hide');
+                verificationHandler();
+            }
+        }).catch(console.log);
     }
     else {
         edit_panel.classList.remove('hide');
