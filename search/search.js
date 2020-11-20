@@ -59,7 +59,7 @@ function pageBehaviourHandler() {
         const prev_page_btn_item = document.querySelector('.select_page_list .list_item.prev_page');
 
         let cleanList = () => {
-            while (select_page_list.childElementCount > 3) {
+            while (select_page_list.childElementCount > 2) {
                 select_page_list.removeChild(prev_page_btn_item.nextElementSibling);
             }
         };
