@@ -213,7 +213,10 @@ function pageBehaviourHandler() {
                     info_array = page_and_info_o['dataObj']['list'];
                 }
 
-                currentPage = 1;
+                // click new catagory, reset current page
+                if (last_time_catagory !== catagory) {
+                    currentPage = 1;
+                }
 
                 initPageList(totalPage);
                 updateList(info_array, catagory);
