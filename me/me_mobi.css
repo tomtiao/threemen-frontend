@@ -1,0 +1,36 @@
+body {
+    min-width: 320px;
+}
+
+@media (max-width: 1200px) {
+    .content_wrapper {
+        width: 100%;
+    }
+}
+
+@media (max-width: 610px) {
+    .info_wrapper ul,
+    .not_verified {
+        padding-left: 1em;
+    }
+
+    .reset_passwd.btn {
+        margin-left: 1em;
+    }
+
+    .verify_wrapper, .change_pw_panel, .upload_avatar {
+        width: 200px;
+        left: calc(50vw - 200px / 2);
+    }
+
+    .change_pw_panel .item input[type="password"] {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .verify_wrapper, .change_pw_panel, .upload_avatar {
+        width: 200px;
+        left: calc(50vw - 150px);
+    }
+}
