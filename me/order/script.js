@@ -45,7 +45,7 @@ function pageHandler() {
         wrapper.classList.add('item_link');
         wrapper.append(title, brief);
         // 标记是否可以进行操作
-        switch (order_status) {
+        switch (parseInt(order_status)) {
             case 1:
             case 2:
             case 3:
