@@ -130,7 +130,7 @@ function pageBehaviourHandler() {
             btn.addEventListener('click', () => {
                 // 点击的是新分类
                 if (!btn.classList.contains('active')) {
-                    if (last_time_catagory !== 'working') {
+                    if (btn.dataset.catagory !== 'working') {
                         updateListAndPageSelection(btn.dataset.catagory, null, false);
                         controlSearchBlock('hide');
                     } else {
