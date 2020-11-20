@@ -545,14 +545,36 @@ function pageBehaviorHandler() {
                 }).then(res => res.json()).catch(console.log);
             }
 
-            function payOrder(gold, order_id) {
+            function getNonceAndPubkey() {
+                const requestURL = '/saveServlet/getNonceAndPublicKey';
+
+                return fetch(requestURL, {
+                    credentials: 'same-origin'
+                }).then(res => res.json()).catch(console.log);
+            }
+
+            // use JSEncrypt Library
+            function encryptString(public_key, str) {
+                // eslint-disable-next-line no-undef
+                const encrypt = new JSEncrypt();
+
+                encrypt.setPublicKey(public_key);
+
+                return encrypt.encrypt(str);
+            }
+
+            function payOrder(gold, order_id, nonce, pubkey) {
                 const requestURL = '/order/payOrder';
                 let urlParams = new URLSearchParams();
-        
+
                 urlParams.append('commCostCoin', gold);
                 urlParams.append('commNum', order_id);
                 urlParams.append('commReward', 0);
-        
+
+                const pendingEncryptString = `${gold}&${0}&${order_id}&${nonce}`;
+                urlParams.append('nonce', nonce);
+                urlParams.append('sign', encryptString(pubkey, pendingEncryptString));
+
                 return fetch(requestURL, {
                     method: 'POST',
                     body: urlParams,
@@ -560,7 +582,10 @@ function pageBehaviorHandler() {
                 }).then(res => res.json()).catch(console.log);
             }
 
+            const checkin_btn = document.querySelector('.checkin_btn');
+
             function onClickBtn(e) {
+                checkin_btn.removeEventListener('click', onClickBtn);
                 e.preventDefault();
                 if (dishes[0]) {
                     preAddDishesToCart(dishes_o_array)
@@ -576,7 +601,12 @@ function pageBehaviorHandler() {
                             return data_obj['dataObj'];
                         })
                         .then(id => {
-                            return payOrder(20, id);
+                            return [id, getNonceAndPubkey()];
+                        })
+                        .then(([id, NonceAndPubKeyDataObj]) => {
+                            return payOrder(20, id,
+                                NonceAndPubKeyDataObj['dataObj'][0],
+                                NonceAndPubKeyDataObj['dataObj'][1]);
                         })
                         .then(data_obj => {
                             if (data_obj['flag']) {
@@ -591,9 +621,7 @@ function pageBehaviorHandler() {
                 }
             }
 
-            const checkin_btn = document.querySelector('.checkin_btn');
 
-            checkin_btn.removeEventListener('click', onClickBtn);
             checkin_btn.addEventListener('click', onClickBtn);
         }
 
