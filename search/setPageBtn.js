@@ -1,3 +1,4 @@
+"use strict";
 function setPageBtn(currentPage) {
     // helper to find out if is swap page button
     function isArrowButton(list_item) {
@@ -8,12 +9,20 @@ function setPageBtn(currentPage) {
             return false;
         }
     }
-    var seletion_page = document.querySelector('.select_page_list');
-    for (var _i = 0, _a = seletion_page.children; _i < _a.length; _i++) {
-        var li = _a[_i];
+    const seletion_page = document.querySelector('.select_page_list');
+    for (const li of seletion_page.children) {
         // first element child is button
-        if (!isArrowButton(li) && (parseInt(li.firstElementChild.dataset.page) === currentPage)) {
-            li.firstElementChild.classList.add('active');
+        if (!li) {
+            throw Error('empty list');
+        }
+        if (!isArrowButton(li)) {
+            if (!li.firstElementChild) {
+                throw Error('no first element child');
+            }
+            const li_page = li.firstElementChild.dataset.page;
+            if (parseInt(li_page) === currentPage) {
+                li.firstElementChild.classList.add('active');
+            }
         }
     }
 }
