@@ -45,7 +45,7 @@ function pageHandler() {
 
         let indicator = document.createElement('span');
         let indicator_color = indicator_colors[catagory];
-        indicator.style = `display: inline-block; background-color: ${indicator_color}; width: 8px; height: 8px; margin-right: 0.5em; border-radius:: 100%`;
+        indicator.style = `display: inline-block; background-color: ${indicator_color}; width: 8px; height: 8px; margin-right: 0.5em; border-radius: 100%;`;
 
         let title = document.createElement('h1');
         title.classList.add('item_title');
