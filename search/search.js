@@ -59,7 +59,7 @@ function pageBehaviourHandler() {
         const prev_page_btn_item = document.querySelector('.select_page_list .list_item.prev_page');
 
         let cleanList = () => {
-            while (select_page_list.childElementCount > 3) {
+            while (!select_page_list.nextElementSibling.firstElementChild.type) {
                 select_page_list.removeChild(prev_page_btn_item.nextElementSibling);
             }
         };
@@ -202,7 +202,7 @@ function pageBehaviourHandler() {
     let totalPage;
     // if catagory isn't catargory 'working', param content would be ignored.
     function updateListAndPageSelection(catagory, content, isInitial) {
-        return requestPageAndInfo(catagory, currentPage, null, content)
+        requestPageAndInfo(catagory, currentPage, null, content)
             .then(page_and_info_o => {
                 let info_array;
                 if (catagory === 'working') {
@@ -219,6 +219,7 @@ function pageBehaviourHandler() {
                 }
 
                 initPageList(totalPage);
+                setPageBtn(currentPage);
                 updateList(info_array, catagory);
 
                 if (isInitial) {
@@ -370,8 +371,7 @@ function pageBehaviourHandler() {
                     if (currentPage !== 1) {
                         currentPage--;
                         updateListAndPageSelection(last_time_catagory,
-                            last_time_catagory === 'working' ? getKeyword() : undefined, false)
-                            .then(() => setPageBtn(currentPage)).catch(console.log);
+                            last_time_catagory === 'working' ? getKeyword() : undefined, false);
                     } else {
                         alert('已经是第一页了！');
                     }
@@ -380,8 +380,7 @@ function pageBehaviourHandler() {
                     if (currentPage != totalPage) {
                         currentPage++;
                         updateListAndPageSelection(last_time_catagory,
-                            last_time_catagory === 'working' ? getKeyword() : undefined, false)
-                            .then(() => setPageBtn(currentPage)).catch(console.log);
+                            last_time_catagory === 'working' ? getKeyword() : undefined, false);
                     } else {
                         alert('已经是最后一页了！');
                     }
@@ -389,8 +388,7 @@ function pageBehaviourHandler() {
                 default:
                     currentPage = parseInt(e.target.dataset.page);
                     updateListAndPageSelection(last_time_catagory,
-                        last_time_catagory === 'working' ? getKeyword() : undefined, false)
-                        .then(() => setPageBtn(currentPage)).catch(console.log);
+                        last_time_catagory === 'working' ? getKeyword() : undefined, false);
                     break;
             }
         }
