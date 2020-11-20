@@ -202,7 +202,7 @@ function pageBehaviourHandler() {
     let totalPage;
     // if catagory isn't catargory 'working', param content would be ignored.
     function updateListAndPageSelection(catagory, content, isInitial) {
-        requestPageAndInfo(catagory, currentPage, null, content)
+        return requestPageAndInfo(catagory, currentPage, null, content)
             .then(page_and_info_o => {
                 let info_array;
                 if (catagory === 'working') {
@@ -370,7 +370,8 @@ function pageBehaviourHandler() {
                     if (currentPage !== 1) {
                         currentPage--;
                         updateListAndPageSelection(last_time_catagory,
-                            last_time_catagory === 'working' ? getKeyword() : undefined, false);
+                            last_time_catagory === 'working' ? getKeyword() : undefined, false)
+                            .then(() => setPageBtn(currentPage)).catch(console.log);
                     } else {
                         alert('已经是第一页了！');
                     }
@@ -379,7 +380,8 @@ function pageBehaviourHandler() {
                     if (currentPage != totalPage) {
                         currentPage++;
                         updateListAndPageSelection(last_time_catagory,
-                            last_time_catagory === 'working' ? getKeyword() : undefined, false);
+                            last_time_catagory === 'working' ? getKeyword() : undefined, false)
+                            .then(() => setPageBtn(currentPage)).catch(console.log);
                     } else {
                         alert('已经是最后一页了！');
                     }
@@ -387,10 +389,10 @@ function pageBehaviourHandler() {
                 default:
                     currentPage = parseInt(e.target.dataset.page);
                     updateListAndPageSelection(last_time_catagory,
-                        last_time_catagory === 'working' ? getKeyword() : undefined, false);
+                        last_time_catagory === 'working' ? getKeyword() : undefined, false)
+                        .then(() => setPageBtn(currentPage)).catch(console.log);
                     break;
             }
-            setPageBtn(currentPage);
         }
     }
 
