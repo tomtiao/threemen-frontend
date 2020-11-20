@@ -601,10 +601,7 @@ function pageBehaviorHandler() {
                             return data_obj['dataObj'];
                         })
                         .then(id => {
-                            return [id, getNonceAndPubkey()];
-                        })
-                        .then(([id, res]) => {
-                            return [id, res.json()];
+                            return getNonceAndPubkey().then(res => [id, res.json()]);
                         })
                         .then(([id, NonceAndPubKeyDataObj]) => {
                             return payOrder(20, id,
