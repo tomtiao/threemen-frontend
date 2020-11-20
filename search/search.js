@@ -131,10 +131,10 @@ function pageBehaviourHandler() {
                 // 点击的是新分类
                 if (!btn.classList.contains('active')) {
                     if (last_time_catagory !== 'working') {
-                        updateListAndPageSelection(last_time_catagory, null, false);
+                        updateListAndPageSelection(btn.dataset.catagory, null, false);
                         controlSearchBlock('hide');
                     } else {
-                        updateListAndPageSelection(last_time_catagory, getKeyword(), false);
+                        updateListAndPageSelection(btn.dataset.catagory, getKeyword(), false);
                         controlSearchBlock('show');
                     }
                     last_time_catagory = btn.dataset.catagory;
