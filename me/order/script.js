@@ -520,6 +520,10 @@ function pageHandler() {
 
                 status_time.textContent = info_o[0]['date'];
 
+                const order_status = document.getElementById('order_status');
+
+                order_status.textContent = status_str[3];
+
                 getPickerInfo(item.dataset.id).then(data_obj => {
                     if (data_obj['flag']) {
                         const picker_info = document.querySelector('.picker_info');
@@ -552,6 +556,10 @@ function pageHandler() {
                 const status_time = document.getElementById('status_time');
 
                 status_time.textContent = info_o[0]['date'];
+
+                const order_status = document.getElementById('order_status');
+
+                order_status.textContent = status_str[4];
 
                 getPickerInfo(item.dataset.id).then(data_obj => {
                     if (data_obj['flag']) {
